@@ -5,12 +5,12 @@ test:
 
 cover:
 	coverage3 erase
-	coverage3 run --branch tests/test_spelllistprepared.py
-	coverage3 run --branch tests/test_spell.py
-	coverage3 run --branch tests/test_spelltriggergesture.py
-	coverage3 run --branch tests/test_spelltrigger.py
-	coverage3 run --branch tests/test_staffevent.py
-	coverage3 run --branch tests/test_staff.py
+	coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
+	coverage3 run --branch --append --source=brain tests/test_spell.py
+	coverage3 run --branch --append --source=brain tests/test_spelltriggergesture.py
+	coverage3 run --branch --append --source=brain tests/test_spelltrigger.py
+	coverage3 run --branch --append --source=brain tests/test_staffevent.py
+	coverage3 run --branch --append --source=brain tests/test_staff.py
 	coverage3 report -m --skip-covered
 
 lint:
