@@ -2,7 +2,7 @@
 """Sample script to run a few colour tests on the strip.
 
 
-PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py --sprite=sprite/lightningX_30x100.png
+PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py --sprite=sprite/lightningX_3x100_10.png
 
 
 
@@ -19,8 +19,8 @@ class SpritePlayerDemo:
 
         print ('Sprite')
 
-        sprite_player = SpritePlayer(num_led=num_led, pause_value=9.050,
-                               num_steps_per_cycle=1, num_cycles=1, # 10
+        sprite_player = SpritePlayer(num_led=num_led, pause_value=0.0, # 9.050,
+                               num_steps_per_cycle=1, num_cycles=10,
                                global_brightness=2)
         sprite_player.set_x(x_size)
         sprite_player.set_y(y_size)
