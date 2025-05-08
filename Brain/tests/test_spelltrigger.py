@@ -49,8 +49,8 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_is_triggerd_by(self):
         """ test """
-        spell_trigger = SpellTrigger('Button1')
-        staff_event = StaffEvent(spell_trigger, gmtime())
+        spell_trigger = SpellTrigger(SpellTriggerTypeConst.Test01)
+        staff_event = StaffEvent(SpellTriggerTypeConst.Test01, gmtime())
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
 
 
