@@ -14,9 +14,9 @@ class ButtonEventGenerator():
     When hardware buttons are pressed send StaffEvent objects to
     listeners that have been previously setup.
 
-    An example, each listener will be called with the following.
+    Example.  Each listener will be called with the following.
 
-    listener.recieve_event(StaffEventButton(the_channel, now)
+    listener.recieve_event(StaffEventButton(the_channel, now))
 
     '''
 
