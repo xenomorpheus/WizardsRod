@@ -182,6 +182,6 @@ The thinkgeek wizard robe solved this with a reset action (starting position
                     spell_trigger_sequence_all[spell_name].append(
                         {"trigger_wanted_idx": 1,
                          "timeout": event_created_time +
-                         spell.get_trigger_timeout()})
+                                    spell.get_trigger_timeout()})
 
         return triggered_spells_list
