@@ -24,10 +24,10 @@ Events are immutable
 
     """
 
-    def __init__(self, name, created=gmtime(), type='none') -> None:
+    def __init__(self, name, created=gmtime(), staffevent_type='none') -> None:
         self.name = name
         self.created = created
-        self.type = type
+        self.staffevent_type = staffevent_type
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, StaffEvent):
@@ -35,7 +35,7 @@ Events are immutable
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.name, self.created, self.type))
+        return hash((self.name, self.created, self.staffevent_type))
 
     def get_name(self) -> str:
         """ get name """
@@ -45,6 +45,6 @@ Events are immutable
         """ get time/date event was created """
         return self.created
 
-    def get_type(self) -> str:
-        """ get type """
-        return self.type
+    def get_staffevent_type(self) -> str:
+        """ get staffevent_type """
+        return self.staffevent_type
