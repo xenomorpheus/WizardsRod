@@ -40,7 +40,15 @@ Perhaps the timeout will take care of that.
 
 The thinkgeek wizard robe solved this with a reset action (starting position "mana")
 
-    """
+"""
+    name: str
+    spell_trigger_event_timeout: int
+    spell_map: dict
+    spell_hardware: dict
+    spell_triggers_permitted: dict
+    event_pending_list: list
+    spell_trigger_sequence_all: dict
+
 
     def __init__(self, name: str) -> None:
         self.name = name

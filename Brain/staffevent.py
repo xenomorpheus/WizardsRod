@@ -22,6 +22,7 @@ Events - Spells will be triggered by a sequence of these events.
 
     """
     event_type: SpellTriggerType
+    created: int
 
     def __init__(self, event_type, created) -> None:
         self.event_type = event_type
@@ -37,6 +38,6 @@ Events - Spells will be triggered by a sequence of these events.
         """ get event_type """
         return self.event_type
 
-    def get_created(self):
+    def get_created(self) -> int:
         """ get time/date event was created """
         return self.created
