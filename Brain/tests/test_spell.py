@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 import unittest
 
-from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
+from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
 from const.spellhardwareconst import SpellHardwareConst as hw
 from spell import Spell
 

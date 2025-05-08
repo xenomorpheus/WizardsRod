@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from staffevent import StaffEvent
 
 
-class SpellTrigger():
+class SpellTriggerType():
 
     """ Each trigger looks at events and determines if the trigger condition
     is met. """
@@ -15,7 +15,7 @@ class SpellTrigger():
     def __key(self) -> str:
         return self.name
 
-    def __eq__(self, other: 'SpellTrigger'):
+    def __eq__(self, other: 'SpellTriggerType'):
         return (type(self) is type(other)) and (self.get_name() == other.get_name())
 
     def __hash__(self):

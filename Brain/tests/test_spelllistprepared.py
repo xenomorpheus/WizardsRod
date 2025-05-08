@@ -7,7 +7,7 @@ from spelllistprepared import SpellListPrepared
 from spell import Spell
 from staffevent import StaffEvent
 from const.spellbookmaster import SpellBookMaster
-from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
+from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
 from const.staffeventconst import StaffEventConst as event
 
 

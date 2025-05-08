@@ -3,7 +3,7 @@
   for in order to trigger spells """
 
 from staffevent import StaffEvent
-from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
+from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
 
 
 class StaffEventConst():

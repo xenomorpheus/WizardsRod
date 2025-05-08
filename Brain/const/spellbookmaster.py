@@ -2,7 +2,7 @@
 """ A master list of spells """
 
 from spell import Spell
-from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
+from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
 from const.spellhardwareconst import SpellHardwareConst as hw
 
 
