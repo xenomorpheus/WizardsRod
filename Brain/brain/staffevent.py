@@ -7,6 +7,7 @@ An event that occurs on the staff.
 
 from time import gmtime
 
+
 class StaffEvent():
 
     """

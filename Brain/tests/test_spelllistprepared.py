@@ -14,7 +14,6 @@ import tests
 class TestSpellListPrepared(unittest.TestCase):
     """ test """
 
-
     def setUp(self):
         """ setup all tests """
         self.perform_action_calls = set()

@@ -129,7 +129,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
 
         spells_triggered = []
         event_created_time = event.get_created()
-        for spell_name, sequence_list in self.spell_trigger_sequence_all.items():
+        for spell_name, sequence_list \
+                in self.spell_trigger_sequence_all.items():
             spell = self.spell_dict[spell_name]
 
             # Delete partially completed spell sequences if they timeout.
@@ -162,7 +163,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                 self.spell_trigger_sequence_all[spell_name].append(
                     {'trigger_wanted_idx': 1,
                      'timeout': event_created_time +
-                    spell.get_trigger_timeout()})
+                        spell.get_trigger_timeout()})
 
         # Triggered spells now perform their actions
         for spell in spells_triggered:

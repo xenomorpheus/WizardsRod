@@ -64,5 +64,6 @@ class TestStaff(unittest.TestCase):
         staff.spell_add(spell)
         staff.end()
 
+
 if __name__ == '__main__':
     unittest.main()
