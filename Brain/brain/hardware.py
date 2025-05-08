@@ -32,4 +32,3 @@ class Hardware():
     def deactivate(self) -> None:
         """ finish using hardware """
         pass
-

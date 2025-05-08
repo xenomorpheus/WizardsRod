@@ -7,8 +7,8 @@ class SpellTrigger():
 
     """ Each trigger looks at events and determines if the trigger condition
     is met. """
-    name =""  # type: str
-    type =""  # type: str
+    name = ""  # type: str
+    type = ""  # type: str
 
     def __init__(self, name: str, type='none') -> None:
         self.name = name
