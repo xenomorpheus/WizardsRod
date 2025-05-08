@@ -33,9 +33,12 @@ class TestSpellTriggerType(unittest.TestCase):
         spell_trigger2 = SpellTriggerType('Abracadabra')
         spell_trigger3 = SpellTriggerType('Abracadabra2')
         self.assertEqual(spell_trigger1.__hash__(),
-                         spell_trigger2.__hash__(), 'hash spell_trigger1 and spell_trigger2')
+                         spell_trigger2.__hash__(),
+                         'hash spell_trigger1 and spell_trigger2')
         self.assertNotEqual(spell_trigger1.__hash__(),
-                            spell_trigger3.__hash__(), 'hash spell_trigger1 and spell_trigger3')
+                            spell_trigger3.__hash__(),
+                            'hash spell_trigger1 and spell_trigger3')
+
 
 if __name__ == '__main__':
     unittest.main()

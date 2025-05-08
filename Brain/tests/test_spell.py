@@ -16,7 +16,8 @@ class TestSpellTrigger(unittest.TestCase):
         cls.spell_trigger_list = [const.ST_GESTURE['POINTING_UPWARDS'],
                                   const.ST_GESTURE['LEANING_FORWARDS_UPWARDS'],
                                   const.ST_GESTURE['HORIZONTAL'],
-                                  const.ST_GESTURE['LEANING_FORWARDS_DOWNWARDS'],
+                                  const.
+                                  ST_GESTURE['LEANING_FORWARDS_DOWNWARDS'],
                                   const.ST_GESTURE['POINTING_DOWNWARDS']]
         cls.spell_trigger_timeout = 6
 
@@ -66,6 +67,7 @@ class TestSpellTrigger(unittest.TestCase):
         spell.set_perform_actions(self.spell_callback)
         staff = Staff("some staff")
         spell.perform_actions(staff)
+
 
 if __name__ == '__main__':
     unittest.main()

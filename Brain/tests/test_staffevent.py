@@ -17,7 +17,8 @@ class TestStaffEvent(unittest.TestCase):
     def test_get_event_type(self):
         """ test """
         staff_event = StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_01'], 0)
-        self.assertEqual(const.SPELL_TRIGGER_TYPE['TEST_01'], staff_event.get_event_type())
+        self.assertEqual(const.SPELL_TRIGGER_TYPE['TEST_01'], staff_event.
+                         get_event_type())
 
     def test_get_created(self):
         """ test """

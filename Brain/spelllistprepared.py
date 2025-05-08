@@ -131,13 +131,13 @@ The thinkgeek wizard robe solved this with a reset action (starting position
                 count += 1
         return count
 
-    # consume staff events. Work out if any spells have hit all the triggers in sequence.
     # TODO not finished
     def get_triggered_spells(self):
         """ return a list of spells that have been triggered.
 
-        Consume staff events. Determine which, if any, spells have had all triggers in sequence,
-        within the timeout period.
+        TODO not finished
+        Consume staff events. Determine which, if any, spells have had all
+        triggers in sequence, within the timeout period.
         """
 
         triggered_spells_list = []
@@ -149,21 +149,24 @@ The thinkgeek wizard robe solved this with a reset action (starting position
             event = event_pending_list.pop(0)
 
             event_created_time = event.get_created()
-            for spell_name, sequence_list in spell_trigger_sequence_all.items():
+            for spell_name, sequence_list in spell_trigger_sequence_all.
+            items():
                 spell = self.spell_map[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
                 sequence_list[:] = [sequence for sequence in sequence_list
-                                    if event_created_time <= sequence["timeout"]]
+                                    if event_created_time <=
+                                    sequence["timeout"]]
 
-                # If spell is waiting for that trigger next, then progress the spell to the next
-                # event or mark as complete.
+                # If spell is waiting for that trigger next, then progress the
+                # spell to the next event or mark as complete.
                 trigger_list = spell.get_trigger_sequence()
                 for sequence in sequence_list:
                     trigger_wanted_idx = sequence["trigger_wanted_idx"]
                     if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
                         if (len(trigger_list) - 1) < trigger_wanted_idx:
-                            # progress to waiting for next event in trigger sequence
+                            # progress to waiting for next event in trigger
+                            # sequence
                             trigger_wanted_idx += 1
                         else:
                             # all triggers matched
@@ -178,7 +181,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position
                     if spell_name not in spell_trigger_sequence_all:
                         spell_trigger_sequence_all[spell_name] = []
                     spell_trigger_sequence_all[spell_name].append(
-                        {"trigger_wanted_idx" : 1,
-                         "timeout" : event_created_time + spell.get_trigger_timeout()})
+                        {"trigger_wanted_idx": 1,
+                         "timeout": event_created_time +
+                         spell.get_trigger_timeout()})
 
         return triggered_spells_list

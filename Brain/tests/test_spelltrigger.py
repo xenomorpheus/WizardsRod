@@ -26,7 +26,8 @@ class TestSpellTrigger(unittest.TestCase):
         """ test """
         spell_trigger_type = const.SPELL_TRIGGER_TYPE['TEST_01']
         spell_trigger = SpellTrigger(spell_trigger_type)
-        self.assertEqual(spell_trigger_type.get_name(), spell_trigger.get_name())
+        self.assertEqual(spell_trigger_type.get_name(), spell_trigger.
+                         get_name())
 
     def test_equal(self):
         """ test """
@@ -43,9 +44,11 @@ class TestSpellTrigger(unittest.TestCase):
         spell_trigger2 = SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01'])
         spell_trigger3 = SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])
         self.assertEqual(spell_trigger1.__hash__(),
-                         spell_trigger2.__hash__(), 'hash spell_trigger1 and spell_trigger2')
+                         spell_trigger2.__hash__(),
+                         'hash spell_trigger1 and spell_trigger2')
         self.assertNotEqual(spell_trigger1.__hash__(),
-                            spell_trigger3.__hash__(), 'hash spell_trigger1 and spell_trigger3')
+                            spell_trigger3.__hash__(),
+                            'hash spell_trigger1 and spell_trigger3')
 
     def test_is_triggerd_by(self):
         """ test """
