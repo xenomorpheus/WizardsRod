@@ -1,4 +1,4 @@
-all: test cover lint mypy checkstyle doco
+all: test cover lint mypy checkstyle docs
 
 test:
 	PYTHONPATH=brain python3 -m pytest tests/*.py
@@ -22,5 +22,5 @@ pycodestyle:
 mypy:
 	mypy brain/ tests/
 
-doco:
-	PYTHONPATH=brain pdoc3 --html -o doc/ brain/ tests/
+docs:
+	PYTHONPATH=brain pdoc3 --force --html -o doc/ brain/ tests/

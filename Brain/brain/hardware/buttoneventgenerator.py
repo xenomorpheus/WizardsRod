@@ -60,7 +60,7 @@ class ButtonEventGenerator():
                                   bouncetime=200)
 
     def channel_remove(self, channel: int) -> None:
-        ''' remove a button to those being listened to '''
+        ''' remove a button from those being listened to '''
         self.channels.remove(channel)
         GPIO.remove_event_detect(channel)
 

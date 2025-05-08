@@ -1,5 +1,10 @@
 """
-A specific Spell's definition.
+The definition of a spell.
+
+- Name
+- Trigger_Sequence
+- Trigger_Timeout
+- Hardware_Set
 
 """
 
