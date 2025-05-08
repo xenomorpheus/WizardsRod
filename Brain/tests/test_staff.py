@@ -51,6 +51,18 @@ class TestStaff(unittest.TestCase):
         staff.spell_add(spell)
         # TODO lots
 
+    def test_end(self):
+        """ end """
+        staff = Staff(name=self.staff_name)
+        staff.end()
+
+    def test_end_with_hardware(self):
+        """ end """
+        staff = Staff(name=self.staff_name)
+        spell = Spell(name="spell name 01")
+        spell.set_hardware_set(['BUTTON'])
+        staff.spell_add(spell)
+        staff.end()
 
 if __name__ == '__main__':
     unittest.main()

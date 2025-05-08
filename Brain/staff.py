@@ -13,8 +13,11 @@ class Staff():
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_list_prepared = SpellListPrepared(self)
-        self.hardware_hints = set()
+        """ a list of spells we are waiting looking for events in order to activate the spell """
         self.hwf = HardwareFetch()
+        """ object for fetching hardware interfaces """
+        self.hardware = {}
+        """ hardware inteface objects. keyed by hardware hint string """
 
     def get_name(self) -> str:
         """ get the name """
@@ -23,24 +26,26 @@ class Staff():
     def spell_add(self, spell: Spell) -> 'Staff':
         """ add a spell to the prepared list """
         self.spell_list_prepared.spell_add(spell)
-        self.__recalculate_hardware_hints()
+        self.__recalculate_hardware()
         return self
 
     def spell_add_list(self, spelllist) -> 'Staff':
         """ add a list of spells to the prepared list """
         self.spell_list_prepared.spell_add_list(spelllist)
-        self.__recalculate_hardware_hints()
+        self.__recalculate_hardware()
         return self
 
-    def __recalculate_hardware_hints(self) -> None:
+    def __recalculate_hardware(self) -> None:
         hardware_hints_new = self.spell_list_prepared.get_hardware_hints()
-        for hardware_hint in self.hardware_hints - hardware_hints_new:
-            self.hwf.get(hardware_hint).deactivate()
-        for hardware_hint in hardware_hints_new - self.hardware_hints:
-            self.hwf.get(hardware_hint).activate()
-        self.hardware_hints = hardware_hints_new
+        for hardware_hint in self.hardware.keys() - hardware_hints_new:
+            self.hardware[hardware_hint].deactivate()
+            del self.hardware[hardware_hint]
+        for hardware_hint in hardware_hints_new - self.hardware.keys():
+            hw = self.hwf.get(hardware_hint)
+            self.hardware[hardware_hint] = hw
+            hw.activate()
 
     def end(self) -> 'Staff':
         """ shut down the hardware """
-        for hardware_hint in self.hardware_hints:
-            self.hwf.get(hardware_hint).deactivate()
+        for hardware in self.hardware.values():
+            hardware.deactivate()
