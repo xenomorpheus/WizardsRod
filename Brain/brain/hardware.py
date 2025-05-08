@@ -27,8 +27,6 @@ class Hardware():
 
     def activate(self) -> None:
         """ make hardware available """
-        pass
 
     def deactivate(self) -> None:
         """ finish using hardware """
-        pass

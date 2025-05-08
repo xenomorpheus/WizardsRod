@@ -4,8 +4,8 @@ Events - A button is pressed.
 
 """
 
-from staffevent import StaffEvent
 from time import gmtime
+from staffevent import StaffEvent
 
 
 class StaffEventButton(StaffEvent):
