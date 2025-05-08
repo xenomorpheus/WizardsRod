@@ -8,8 +8,9 @@ The definition of a spell.
 
 """
 
-from typing import List, Callable
+from typing import List, Set, Callable
 from spelltrigger import SpellTrigger
+from hardware import Hardware
 SpellTriggerSequence = List[SpellTrigger]
 
 
@@ -25,10 +26,10 @@ class Spell():
         self.trigger_timeout = 0  # type: int
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """
-        self.hardware_set = set()
+        self.hardware_set = set() # type: Set[Hardware]
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
         Accelerometer """
-        self.perform_actions_method = None
+        self.perform_actions_method = None # type: Callable
 
     def get_name(self) -> str:
         """ get the name of the spell """

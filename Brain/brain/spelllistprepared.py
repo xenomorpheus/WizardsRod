@@ -57,19 +57,24 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.spell_trigger_event_timeout = 0
         self.spell_dict = {}
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = set()
+        self.spell_hardware = set() # type: Set()
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted = {}
+        self.spell_triggers_permitted = set() # type: Set()
         """ Only the triggers of the prepared spells. keyed by trigger name """
         self.event_pending_list = []
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
         self.spell_trigger_sequence_all = {}
+        """ For each prepared spell, a sequence of indexes to that spell's
+        triggers. Each spell trigger sequence may have repeats of triggers.
+        Analogy: entering a numeric security code needs to support
+        repeats of digits.   """
         self.__recalculate_spell_triggers()
 
     def __recalculate_spell_triggers(self) -> None:
         # work out what events could progress a prepared spell.
         # work out maximum time to wait for all triggers to receive events.
+        # Update the list of hardware we are monitoring.
         self.spell_trigger_event_timeout = 0
         self.spell_triggers_permitted.clear()
         self.spell_hardware.clear()
@@ -77,8 +82,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         for spell in self.spell_dict.values():
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
             for spell_trigger in spell.get_trigger_sequence():
-                self.spell_triggers_permitted[spell_trigger.get_name()] = \
-                    spell_trigger
+                self.spell_triggers_permitted.add(spell_trigger)
             for hardware in spell.get_hardware_set():
                 self.spell_hardware.add(hardware)
         self.spell_trigger_event_timeout = timeout_max
@@ -88,7 +92,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         return self.spell_hardware
 
     def spell_add(self, spell: Spell) -> 'SpellListPrepared':
-        """ add a spell """
+        """ add a spell to the list of prepared spells. This will
+        automatically handle connections to any required hardware. """
         self.spell_dict[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
@@ -118,7 +123,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         """
 
         if not any(trigger.is_triggerd_by(event)
-                   for trigger in self.spell_triggers_permitted.values()):
+                   for trigger in self.spell_triggers_permitted):
             return
 
         spells_triggered = []
