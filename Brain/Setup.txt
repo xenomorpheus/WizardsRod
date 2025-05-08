@@ -6,3 +6,6 @@ sudo apt install python3-pip
 # Unit testing in Python 3
 pip3 install pytest
 pip3 install coverage
+
+# Python style checking
+python3 -m pip install pylint --user
