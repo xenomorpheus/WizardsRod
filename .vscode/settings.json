@@ -6,5 +6,7 @@
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
-    "restructuredtext.confPath": "${workspaceFolder}/Brain"
+   // "restructuredtext.confPath": "Brain/",
+   // Important! Where to look for projct modules.
+    "python.autoComplete.extraPaths": ["Brain/brain"],
 }
