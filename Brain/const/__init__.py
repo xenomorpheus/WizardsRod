@@ -3,7 +3,7 @@
 from spell import Spell
 from spelltrigger import SpellTrigger
 from spelltriggertype import SpellTriggerType
-from spelltriggertypegesture import SpellTriggerTypeGesture
+from spelltriggergesture import SpellTriggerGesture
 from staffevent import StaffEvent
 
 # Will probably need to turn these into objects rather than strings.
@@ -30,13 +30,13 @@ SPELL_TRIGGER_TYPE = {_STT_TEST01.get_name(): _STT_TEST01,
                       _STT_TEST03.get_name(): _STT_TEST03, }
 
 # spell trigger that are gestures AKA movement
-_G_POINTING_UPWARDS = SpellTriggerTypeGesture("POINTING_UPWARDS")
-_G_LEANING_FORWARDS_UPWARDS = SpellTriggerTypeGesture(
+_G_POINTING_UPWARDS = SpellTriggerGesture("POINTING_UPWARDS")
+_G_LEANING_FORWARDS_UPWARDS = SpellTriggerGesture(
     "LEANING_FORWARDS_UPWARDS")
-_G_HORIZONTAL = SpellTriggerTypeGesture("HORIZONTAL")
-_G_LEANING_FORWARDS_DOWNWARDS = SpellTriggerTypeGesture(
+_G_HORIZONTAL = SpellTriggerGesture("HORIZONTAL")
+_G_LEANING_FORWARDS_DOWNWARDS = SpellTriggerGesture(
     "LEANING_FORWARDS_DOWNWARDS")
-_G_POINTING_DOWNWARDS = SpellTriggerTypeGesture("POINTING_DOWNWARDS")
+_G_POINTING_DOWNWARDS = SpellTriggerGesture("POINTING_DOWNWARDS")
 
 ST_GESTURE = {'POINTING_UPWARDS': _G_POINTING_UPWARDS,
               'LEANING_FORWARDS_UPWARDS': _G_LEANING_FORWARDS_UPWARDS,

@@ -2,23 +2,23 @@
 from __future__ import absolute_import
 import unittest
 
-from spelltriggertypegesture import SpellTriggerTypeGesture
+from spelltriggergesture import SpellTriggerGesture
 
 
-class TestSpellTriggerTypeGesture(unittest.TestCase):
+class TestSpellTriggerGesture(unittest.TestCase):
     """ test """
 
     def test_constructor(self):
         """ test """
-        stg = SpellTriggerTypeGesture('gesture')
-        self.assertTrue(isinstance(stg, SpellTriggerTypeGesture))
+        stg = SpellTriggerGesture('gesture')
+        self.assertTrue(isinstance(stg, SpellTriggerGesture))
 
     # Only the gesture matters, not the name
     def test_match_trigger(self):
         """ test """
-        stg1 = SpellTriggerTypeGesture('gesture1')
-        stg2 = SpellTriggerTypeGesture('gesture1')
-        stg3 = SpellTriggerTypeGesture('gesture2')
+        stg1 = SpellTriggerGesture('gesture1')
+        stg2 = SpellTriggerGesture('gesture1')
+        stg3 = SpellTriggerGesture('gesture2')
         self.assertEqual(stg1, stg2)
         self.assertNotEqual(stg1, stg3)
 
