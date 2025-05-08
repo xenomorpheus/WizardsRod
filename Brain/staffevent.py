@@ -14,17 +14,17 @@ An event that occurs on the staff.  Spells will be triggered by a sequence of th
 
 class StaffEvent():
 
-    def __init__(self, name, created):
+    def __init__(self, name: str, created) -> None:
         self.name = name
         self.created = created
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'StaffEvent'):
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
         return hash((self.name, self.created))
 
-    def getName(self):
+    def getName(self) -> str:
         return self.name
     
     def getCreated(self):

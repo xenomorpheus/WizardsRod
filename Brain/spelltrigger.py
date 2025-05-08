@@ -3,21 +3,21 @@ from staffevent import StaffEvent
 
 class SpellTrigger():
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         self.name = name
 
-    def __key(self):
+    def __key(self) -> str:
         return (self.name)
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'SpellTrigger'):
         return (type(self) is type(other)) and (self.getName() == other.getName())
 
     def __hash__(self):
         return hash(self.__key())
 
-    def getName(self):
+    def getName(self) -> str:
         return self.name
 
-    def isTriggerdBy(self, event):
+    def isTriggerdBy(self, event: StaffEvent):
         """ For simple triggers, the event name just has to match. """
         return (issubclass(type(event), StaffEvent)) and (self.getName() == event.getName())

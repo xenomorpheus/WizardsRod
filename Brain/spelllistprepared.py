@@ -30,7 +30,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
 
 class SpellListPrepared():
 
-    def __init__(self, name):
+    def __init__(self, name) -> None:
         self.name = name
         self.spell_trigger_event_timeout = 0
         self.spell_map = {}
@@ -61,30 +61,30 @@ class SpellListPrepared():
                 self.spell_hardware[hardware] = 1
         self.spell_trigger_event_timeout = timeout_max
 
-    def getName(self):
+    def getName(self) -> str:
         return self.name
 
     def getHardwareHints(self):
         return list(self.spell_hardware.keys())
 
-    def spellAdd(self, spell):
+    def spellAdd(self, spell) -> 'SpellListPrepared':
         self.spell_map[spell.getName()] = spell
         self.__recalculate_spell_triggers()
         return self
 
-    def spellAddList(self, spelllist):
+    def spellAddList(self, spelllist) -> 'SpellListPrepared':
         for spell in spelllist:
             self.spell_map[spell.getName()] = spell
         self.__recalculate_spell_triggers()
         return self
 
-    def spellDel(self, spellName):
+    def spellDel(self, spellName) -> 'SpellListPrepared':
         if (spellName in self.spell_map):
             del self.spell_map[spellName]
             self.__recalculate_spell_triggers()
         return self
 
-    def acceptEvents(self, new_events):
+    def acceptEvents(self, new_events) -> int:
         """
         accept events. Only keep the events that can trigger the prepared spells.
         returns a count of the number of events accepted. """

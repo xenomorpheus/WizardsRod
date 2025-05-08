@@ -4,5 +4,5 @@ from spelltrigger import SpellTrigger
 
 class SpellTriggerGesture(SpellTrigger):
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         SpellTrigger.__init__( self, name )
