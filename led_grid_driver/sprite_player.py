@@ -8,11 +8,10 @@ from led_grid import LedGrid
 
 class SpritePlayer(LedGrid):
     """
-     Draw onto a LED grid the contents of a sprite file.
+     Draw onto a LED grid the sequence of images in a sprite file.
 
      Using Pillow library http://python-pillow.org/
-     Install PIL using the command "sudo apt-get install python-imaging"
-     and run the following program.
+     Install PIL using the command "sudo apt-get install python-imaging".
     """
 
     def set_sprite_filename(self, filename):
@@ -21,6 +20,7 @@ class SpritePlayer(LedGrid):
 
     def update(self, strip, num_led, num_steps_per_cycle, current_step,
                current_cycle):
+        # print("current_cycle={}".format(current_cycle))
         width = self.get_x()
         height = self.get_y()
         sprite_offset = current_cycle * width
