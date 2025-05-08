@@ -11,10 +11,6 @@ class Staff():
 
     """ The Staff brings together the prepared spells and the hardware. """
 
-    #name: str
-    #spell_list_prepared: SpellListPrepared
-    #hardware_hints: set
-    #hwf: HardwareFetch
 
     def __init__(self, name: str) -> None:
         self.name = name

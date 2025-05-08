@@ -18,10 +18,9 @@ Events - Spells will be triggered by a sequence of these events.
 * A pressure change
 * Reaching a GPS location
 
+Events are immutable
+
     """
-    #name: str
-    #created: int
-    #event_type: str
 
     def __init__(self, name, created, event_type='none') -> None:
         self.name = name

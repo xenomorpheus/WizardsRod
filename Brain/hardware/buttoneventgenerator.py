@@ -19,8 +19,6 @@ class ButtonEventGenerator(object):
     listener.recieve_event(StaffEventButton(the_channel, now)
 
     '''
-    #channels: set(int)
-    #listeners: List(callable)
 
     def __init__(self, listeners, channels):
         '''

@@ -50,13 +50,6 @@ The thinkgeek wizard robe solved this with a reset action (starting position
 "mana")
 
 """
-    #name: str
-    #spell_trigger_event_timeout: int
-    #spell_dict: dict
-    #spell_hardware: set
-    #spell_triggers_permitted: dict
-    #event_pending_list: list
-    #spell_trigger_sequence_all: dict
 
     def __init__(self, name: str) -> None:
         self.name = name

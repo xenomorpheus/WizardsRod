@@ -12,11 +12,6 @@ class Spell():
 
     """    Builder pattern.    """
 
-    #name: str
-    #trigger_sequence: SpellTriggerSequence = []
-    #trigger_timeout: int
-    #hardware_set: List[str] = []
-    #perform_actions_method: Callable
 
     def __init__(self, name: str) -> None:
         self.name = name
