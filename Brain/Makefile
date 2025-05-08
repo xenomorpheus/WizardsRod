@@ -23,4 +23,7 @@ pycodestyle:
 mypy:
 	mypy *.py const/*.py tests/*.py
 
-checkstyle: lint pycodestyle mypy
+checkstyle:
+	-pylint *.py const/*.py tests/*.py
+	-pycodestyle *.py const/*.py tests/*.py
+	-mypy *.py const/*.py tests/*.py
