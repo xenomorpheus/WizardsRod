@@ -19,6 +19,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_constructor(self):
         st = Spell(name=self.name)
+        self.assertTrue( isinstance(st, Spell) )
 
     def test_getName(self):
         st = Spell(name=self.name)
