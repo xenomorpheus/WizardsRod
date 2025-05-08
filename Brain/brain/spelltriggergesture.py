@@ -9,5 +9,5 @@ class SpellTriggerGesture(SpellTrigger):
 
     """ A spell trigger that looks for movement """
 
-    def __init__(self, name: str, type='gesture') -> None:
+    def __init__(self, name: str, type=__class__) -> None:
         SpellTrigger.__init__(self, name, type)

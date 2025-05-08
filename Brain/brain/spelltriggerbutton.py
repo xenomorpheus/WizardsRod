@@ -9,5 +9,5 @@ class SpellTriggerButton(SpellTrigger):
 
     """ A spell trigger that looks for button press """
 
-    def __init__(self, name: str, type='BUTTON') -> None:
+    def __init__(self, name: str, type=__class__) -> None:
         SpellTrigger.__init__(self, name, type)
