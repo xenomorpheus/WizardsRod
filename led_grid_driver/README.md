@@ -1,23 +1,21 @@
 
 Simple Script to run a LED display on a Raspberry Pi
 
+Run Script:
+
+   PYTHONPATH=./APA102_Pi:. ./led_grid_driver_demo.py
+
 Produces the following patterns:
 
   HAL9000
+  Knight Rider
 
   (Planned)
-  Knight Rider
-  Cylon
   Galileo Thermometer
     Show the temperature. Have digital display at the bottom.
   Sand falling in hour glass
   Two liquids of different colours and densities. One run up. Other run down.
 
-
-
-Run Script:
-
-   PYTHONPATH=./APA102_Pi:. ./runcomputerdisplay.py 
 
 Software Requirements:
 
