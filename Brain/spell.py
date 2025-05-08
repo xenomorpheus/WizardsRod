@@ -8,7 +8,7 @@ Builder pattern.
 class Spell():
 
 
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = name
         """ Name of the spell """
         self.trigger_sequence = []

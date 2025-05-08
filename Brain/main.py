@@ -25,19 +25,13 @@ class main():
         # prepared_spells.spellDel('spell name')
 
         # Some spells might need special hardware, e.g. GPS
-        hardware_hints = prepared_spells.getHardwareHints()
-
-        staff = Staff()
-        # only activate hardware sensors we are interested in
-        staff.setHardwareHints(hardware_hints=hardware_hints)
+        staff = Staff().setHardwareHints(prepared_spells.getHardwareHints())
 
         # looking for staff events to trigger spells
         loops = 2
         while loops > 1:
-            new_staff_event_list = staff.getNewStaffEvents()
-            prepared_spells.acceptEvents(new_staff_event_list)
-            triggered_spells_list = prepared_spells.getTriggeredSpells()
-            for spell in triggered_spells_list:
+            prepared_spells.acceptEvents(staff.getNewStaffEvents())
+            for spell in prepared_spells.getTriggeredSpells():
                 spell.performActions(staff)
             loops = loops - 1
 

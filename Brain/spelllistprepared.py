@@ -98,6 +98,10 @@ class SpellListPrepared():
     # consume staff events. Work out if any spells have hit all the triggers in sequence.
     # TODO not finished
     def getTriggeredSpells(self):
+        """ return a list of spells that have been triggered.
+
+        Consume staff events. Determine which, if any, spells have had all triggers in sequence, within the timeout period. """
+
         triggered_spells_list = []
         spell_trigger_sequence_all = self.spell_trigger_sequence_all
 

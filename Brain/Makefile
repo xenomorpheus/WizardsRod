@@ -11,6 +11,7 @@ cover:
 	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltriggergesture.py
 	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltrigger.py
 	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staffevent.py
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staff.py
 	coverage3 report -m --skip-covered
 
 lint:

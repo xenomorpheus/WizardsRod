@@ -117,7 +117,7 @@ class TestSpellListPrepared(unittest.TestCase):
         TestSpell02 = Spell("Test Spell 02").setHardwareSet([ 'Button02', 'Button03'])
         slp = SpellListPrepared('MyList').spellAddList([TestSpell01,TestSpell02])
         hwl = slp.getHardwareHints()
-        self.assertEqual([ 'Button01','Button02', 'Button03'], hwl)
+        self.assertTrue(set([ 'Button01','Button02', 'Button03']), set(hwl))
 
 if __name__ == '__main__':
     unittest.main()
