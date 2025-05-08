@@ -15,5 +15,5 @@ cover:
 	coverage3 report -m --skip-covered
 
 lint:
-	pylint --py3k *.py tests/*.py
+	pylint *.py tests/*.py
 
