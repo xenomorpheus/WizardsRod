@@ -1,3 +1,4 @@
 *.desktop
+**/*.pyc
 **/.DS_Store 
 **/.AppleDouble
