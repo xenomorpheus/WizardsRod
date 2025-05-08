@@ -97,8 +97,6 @@ class TestSpellListPrepared(unittest.TestCase):
         triggerd_spells = slp.getTriggeredSpells()
         self.assertEqual([], triggerd_spells, 'no triggerd spells')
 
-    # TODO not complete
-    # TODO more
     def test_getTriggeredSpells_some_spells(self):
         self.longMessage=True
         triggers = [gesture.Test01, gesture.Test02 ]
@@ -112,7 +110,7 @@ class TestSpellListPrepared(unittest.TestCase):
         accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
-        self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')  # TODO
+        self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')
 
 
 if __name__ == '__main__':

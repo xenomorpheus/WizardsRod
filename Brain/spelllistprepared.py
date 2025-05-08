@@ -64,17 +64,16 @@ class SpellListPrepared():
                 count += 1
         return count
 
-    # consume spell triggers. Work out if any spells have hit all the triggers in sequence.
+    # consume staff events. Work out if any spells have hit all the triggers in sequence.
     # TODO not finished
     def getTriggeredSpells(self):
         triggered_spells_list = []
         spell_trigger_sequence_all = self.spell_trigger_sequence_all
 
-        # consume spell triggers.
+        # consume staff events.
         event_pending_list = self.event_pending_list
         while(len(event_pending_list)):
             event = event_pending_list.pop(0)
-            print "Saw event:" + event.getName()
 
             event_created_time = event.getCreated()
             for spell_name, sequence_list in spell_trigger_sequence_all.iteritems():
@@ -84,12 +83,13 @@ class SpellListPrepared():
                 sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence["timeout"]]
 
                 # If spell is waiting for that trigger next, then progress the spell to the next event or mark as complete.
+                trigger_list = spell.getTriggerList()
                 for sequence in sequence_list:
-                    trigger_list = spell.getTriggerList()
-                    if (trigger_list[sequence["trigger_wanted"]].getName() == event.getEvent().getName()):
-                        if ((len(trigger_list) - 1) < sequence["trigger_wanted"]):
+                    trigger_wanted_idx = sequence["trigger_wanted_idx"]
+                    if (trigger_list[trigger_wanted_idx].getName() == event.getTrigger().getName()):
+                        if ((len(trigger_list) - 1) < trigger_wanted_idx):
                             # progress to waiting for next event in trigger sequence
-                            sequence["trigger_wanted"] += 1
+                            trigger_wanted_idx += 1
                         else:
                             # all triggers matched
                             sequence["timeout"] = 0  # TODO delete from trigger list
@@ -97,10 +97,10 @@ class SpellListPrepared():
 
             # If zeroth trigger, add the sequence to the list.
             for spell_name, spell in self.spell_map.iteritems():
-                if (spell.getTriggerList()[0].getName() == event.getEvent().getName()):
+                if (spell.getTriggerList()[0].getName() == event.getTrigger().getName()):
                     if (not spell_name in spell_trigger_sequence_all):
                         spell_trigger_sequence_all[spell_name] = []
-                    spell_trigger_sequence_all[spell_name].append({ "trigger_wanted" : 1, "timeout" : event_created_time + spell.getTriggerTimeout() })
+                    spell_trigger_sequence_all[spell_name].append({ "trigger_wanted_idx" : 1, "timeout" : event_created_time + spell.getTriggerTimeout() })
 
         return triggered_spells_list
 

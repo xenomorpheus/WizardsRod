@@ -13,9 +13,9 @@ class TestStaffEvent(unittest.TestCase):
         st = StaffEvent("Test Event 01", gesture.Test01, 0)
         self.assertEqual("Test Event 01", st.getName())
 
-    def test_getEvent(self):
+    def test_getTrigger(self):
         st = StaffEvent("Test Event 01", gesture.Test01, 99)
-        self.assertEqual(gesture.Test01, st.getEvent())
+        self.assertEqual(gesture.Test01, st.getTrigger())
 
     def test_getCreated(self):
         st = StaffEvent("Test Event 01", gesture.Test01, 99)

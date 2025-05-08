@@ -14,9 +14,9 @@ An event that occurs on the staff.  Spells will be triggered by a sequence of th
 
 class StaffEvent():
 
-    def __init__(self, name, event, created):
+    def __init__(self, name, trigger, created):
         self.name = name
-        self.event = event
+        self.trigger = trigger
         self.created = created
 
     def __str__(self):
@@ -32,8 +32,8 @@ class StaffEvent():
     def getName(self):
         return self.name
 
-    def getEvent(self):
-        return self.event
+    def getTrigger(self):
+        return self.trigger
     
     def getCreated(self):
         return self.created
