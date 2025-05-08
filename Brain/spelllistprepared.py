@@ -78,28 +78,29 @@ class SpellListPrepared():
 
             event_created_time = event.getCreated()
             for spell_name, sequence_list in spell_trigger_sequence_all.iteritems():
-                print spell_name
-                spell = spell_map[spell_name]
+                spell = self.spell_map[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
-                sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence.timeout]
+                sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence["timeout"]]
 
                 # If spell is waiting for that trigger next, then progress the spell to the next event or mark as complete.
                 for sequence in sequence_list:
                     trigger_list = spell.getTriggerList()
-                    if (trigger_list[sequence.trigger_wanted].getName() == event.getEvent().getName()):
-                        if ((len(trigger_list) - 1) < sequence.trigger_wanted):
+                    if (trigger_list[sequence["trigger_wanted"]].getName() == event.getEvent().getName()):
+                        if ((len(trigger_list) - 1) < sequence["trigger_wanted"]):
                             # progress to waiting for next event in trigger sequence
-                            sequence.trigger_wanted += 1
+                            sequence["trigger_wanted"] += 1
                         else:
                             # all triggers matched
-                            sequence.timeout = 0 # TODO delete from trigger list
+                            sequence["timeout"] = 0  # TODO delete from trigger list
                             triggered_spells_list.append(spell)
 
             # If zeroth trigger, add the sequence to the list.
             for spell_name, spell in self.spell_map.iteritems():
                 if (spell.getTriggerList()[0].getName() == event.getEvent().getName()):
-                    spell_trigger_sequence_all[spell_name].append({ "trigger_wanted" : 1, "timeout" : event_created_time + spell.getTimeout() })
+                    if (not spell_name in spell_trigger_sequence_all):
+                        spell_trigger_sequence_all[spell_name] = []
+                    spell_trigger_sequence_all[spell_name].append({ "trigger_wanted" : 1, "timeout" : event_created_time + spell.getTriggerTimeout() })
 
         return triggered_spells_list
 
