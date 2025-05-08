@@ -2,6 +2,7 @@ import unittest
 
 from spelllistprepared import SpellListPrepared
 from spell import Spell
+from staffevent import StaffEvent
 from const.spellbookmaster import SpellBookMaster
 from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
 from const.staffeventconst import StaffEventConst as event
@@ -53,7 +54,11 @@ class TestSpellTrigger(unittest.TestCase):
         TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # 03 ignored
-        accepted_count = slp.acceptEvents([gesture.Test01, gesture.Test02, gesture.Test03])
+        events = [
+            StaffEvent("Test Event 01", gesture.Test01, 4),
+            StaffEvent("Test Event 02", gesture.Test02, 4),
+            StaffEvent("Test Event 03", gesture.Test03, 4)]
+        accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
     # Only accept events that are for our prepared spells
@@ -84,7 +89,11 @@ class TestSpellTrigger(unittest.TestCase):
         TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # 03 ignored
-        accepted_count = slp.acceptEvents([gesture.Test01, gesture.Test02, gesture.Test03])
+        events = [
+            StaffEvent("Test Event 01", gesture.Test01, 4),
+            StaffEvent("Test Event 02", gesture.Test02, 4),
+            StaffEvent("Test Event 03", gesture.Test03, 4)]
+        accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
         self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')  # TODO
