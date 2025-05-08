@@ -26,7 +26,7 @@ class SpritePlayer(LedGridTemplate):
         for x in range(width):
           for y in range(height):
             red, blue, green = self.pix[x + sprite_offset, y]  #NOTE RGB swap
-            pprint (" MAX r={}, g={}, b={}".format(red, green, blue))
+            pprint (" MAX RGB details r={}, g={}, b={}".format(red, green, blue))
             #red = 10 * int(red / 10)
             #if red < 20 :
             #red = y

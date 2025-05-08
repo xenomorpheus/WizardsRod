@@ -2,30 +2,30 @@
 """Sample script to run a few colour tests on the strip.
 
 
-PYTHONPATH=./APA102_Pi:. ./spriteplayer_demo.py --sprite=sprite/lightningX_30x100.png 
+PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py --sprite=sprite/lightningX_30x100.png
 
 
 
 """
 import sys
 import argparse
-from spriteplayer import SpritePlayer
+from sprite_player import SpritePlayer
 
 
 class SpritePlayerDemo:
 
-    def spriteplayer_demo(sprite_filename, x_size=3, y_size=100):
+    def sprite_player_demo(sprite_filename, x_size=3, y_size=100):
         num_led = x_size * y_size
 
         print ('Sprite')
 
-        spriteplayer = SpritePlayer(num_led=num_led, pause_value=9.050,
+        sprite_player = SpritePlayer(num_led=num_led, pause_value=9.050,
                                num_steps_per_cycle=1, num_cycles=1, # 10
                                global_brightness=2)
-        spriteplayer.set_x(x_size)
-        spriteplayer.set_y(y_size)
-        spriteplayer.set_sprite_filename(sprite_filename)
-        spriteplayer.start()
+        sprite_player.set_x(x_size)
+        sprite_player.set_y(y_size)
+        sprite_player.set_sprite_filename(sprite_filename)
+        sprite_player.start()
 
         print ('Finished the test')
 
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     sprite_filename = args.sprite
 
-    SpritePlayerDemo.spriteplayer_demo(sprite_filename=sprite_filename)
+    SpritePlayerDemo.sprite_player_demo(sprite_filename=sprite_filename)
