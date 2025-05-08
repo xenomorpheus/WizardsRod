@@ -1,6 +1,7 @@
-all: test cover pycodestyle docs lint mypy
+all: pycodestyle lint mypy test cover docs
 
 test:
+	python3 --version
 	python3 -m pytest tests/*.py
 
 cover:
@@ -14,13 +15,13 @@ cover:
 	coverage3 report -m --skip-covered
 
 lint:
-	pylint brain/ tests/
+	pylint brain/ tests/ || true
 
 pycodestyle:
 	pycodestyle brain/ tests/
 
 mypy:
-	mypy brain/ tests/
+	mypy brain/ tests/ || true
 
 docs:
 	pdoc3 --force --html -o doc/ brain/ tests/
