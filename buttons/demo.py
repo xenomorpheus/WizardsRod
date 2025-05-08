@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 
-import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
-
+# Import Raspberry Pi GPIO library
+try:
+    import RPi.GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import fake_rpigpio.utils
+    fake_rpigpio.utils.install()
 
 def button_callback(the_channel: int):
     print("Button %d was pushed!" % (the_channel))
