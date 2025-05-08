@@ -57,6 +57,7 @@ class SpritePrint:
             pprint(" min RGB values r={}, g={}, b={}"
                    .format(red_min, green_min, blue_min))
 
+
 if __name__ == "__main__":
     FILENAME = 'sprite/fire_dark_3x100_18.png'
     # image can be in gif jpeg or png format
