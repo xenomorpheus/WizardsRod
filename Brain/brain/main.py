@@ -48,7 +48,7 @@ class Main():  # pylint: disable=too-few-public-methods
 
         fireball = Spell("Button Test").set_trigger_sequence(
             __fireball_trigger_sequence).set_trigger_timeout(6). \
-            set_hardware_set(set([const.HARDWARE["BUTTON"]])). \
+            set_hardware_set(set([const.HW_BUTTON])). \
             set_perform_actions(Main.spell_perform_actions)
         staff = Staff("MyStaff").spell_add(fireball)
         input("> Waiting for BUTTON1 then BUTTON2. Press return to exit")

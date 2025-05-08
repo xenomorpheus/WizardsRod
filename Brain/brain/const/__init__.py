@@ -9,9 +9,9 @@ from staffevent import StaffEvent
 # Will probably need to turn these into objects rather than strings.
 # Will need to be able to select polling frequency.
 
-_HW_GPS = "GPS"
+HW_GPS = "GPS"
 HW_ACCELEROMETER = "ACCELEROMETER"
-_HW_BUTTON = "BUTTON"
+HW_BUTTON = "BUTTON"
 
 # Generic spell trigger objects
 
