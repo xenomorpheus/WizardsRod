@@ -16,21 +16,20 @@ class Sprite(LedGridTemplate):
         """This method is called to initialize a colour program.
         """
 
-        FILENAME='lightning2 30x100.png' #image can be in gif jpeg or png format 
-        im=Image.open(FILENAME, 'r').convert('RGB')
-        self.pix=im.load()
-        self.width = 3
-        self.height = 100
-
+    def set_pix(self, filename):
+        im = Image.open(filename, 'r').convert('RGB')
+        self.pix = im.load()
         # width, height = im.size
 
     def update(self, strip, num_led, num_steps_per_cycle, current_step,
                current_cycle):
 
-        sprite_offset = current_cycle * 3
-        for x in range(self.width):
-          for y in range(self.height):
-            red, green, blue = self.pix[x+sprite_offset,y]
+        width = self.get_x()
+        height = self.get_y()
+        sprite_offset = current_cycle * width
+        for x in range(width):
+          for y in range(height):
+            red, blue, green = self.pix[x + sprite_offset, y]  #NOTE RGB swap
             self.set_pixel_xy(strip, x, y, red, green, blue)
 
         return 1
