@@ -1,7 +1,6 @@
 all: test cover lint
 
 test:
-	#PYTHONPATH=. py.test tests
 	python3 -m pytest tests/*.py
 
 cover:
