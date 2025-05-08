@@ -1,8 +1,15 @@
+# Unix GUI to launch application
 *.desktop
+
+# Compiled python
 **/*.pyc
-**/.DS_Store 
+
+# OSX meta files
+**/.DS_Store
 **/.AppleDouble
-bin
-lib
+
+# no idea
 share/
-pyvenv.cfg
+
+# virtualenv python environment manager
+env
