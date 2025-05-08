@@ -12,13 +12,13 @@ class Staff():
 
     name: str
     spell_list_prepared: SpellListPrepared
-    hardware_hints: List[str]
+    hardware_hints: set #TODO not set. cant hold object
 
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_list_prepared = SpellListPrepared(
             name + ' SpellListPrepared')
-        self.hardware_hints = []
+        self.hardware_hints = set()
 
     def get_name(self) -> str:
         """ get the name """
@@ -38,13 +38,19 @@ class Staff():
 
     def __recalculate_hardware_hints(self) -> None:
         hardware_hints_new = self.spell_list_prepared.get_hardware_hints()
+        for hardware in self.hardware_hints - hardware_hints_new:
+            print(f"remove hardware {hardware}")
+        for hardware in hardware_hints_new - self.hardware_hints:
+            print(f"add hardware {hardware}")
         # TODO add/remove hardware
         self.hardware_hints = hardware_hints_new
 
     def __get_new_staff_events(self):
         # TODO Poll hardware_hints hardware for events
-        todo = self.hardware_hints
-        return[]  # TODO
+        events: List = []
+        for hardware in self.hardware_hints:
+            events.append(hardware.get_events)
+        return events
 
     def run(self) -> None:
         """ looking for staff events to trigger spells  """

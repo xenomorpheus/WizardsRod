@@ -52,8 +52,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position
 """
     name: str
     spell_trigger_event_timeout: int
-    spell_map: dict
-    spell_hardware: dict
+    spell_dict: dict
+    spell_hardware: set
     spell_triggers_permitted: dict
     event_pending_list: list
     spell_trigger_sequence_all: dict
@@ -61,9 +61,9 @@ The thinkgeek wizard robe solved this with a reset action (starting position
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_trigger_event_timeout = 0
-        self.spell_map = {}
+        self.spell_dict = {}
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = {}
+        self.spell_hardware = set()
         """ special hardware requirements. e.g. generate triggers """
         self.spell_triggers_permitted = {}
         """ Only the triggers of the prepared spells. keyed by trigger name """
@@ -81,40 +81,40 @@ The thinkgeek wizard robe solved this with a reset action (starting position
         self.spell_triggers_permitted.clear()
         self.spell_hardware.clear()
         timeout_max = 0
-        for spell in self.spell_map.values():
+        for spell in self.spell_dict.values():
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
             for spell_trigger in spell.get_trigger_sequence():
                 self.spell_triggers_permitted[spell_trigger.get_name()] = \
                     spell_trigger
             for hardware in spell.get_hardware_set():
-                self.spell_hardware[hardware] = 1
+                self.spell_hardware.add(hardware)
         self.spell_trigger_event_timeout = timeout_max
 
     def get_name(self) -> str:
         """ get the name """
         return self.name
 
-    def get_hardware_hints(self) -> List[str]:
+    def get_hardware_hints(self) -> set:
         """ get the hardware hints """
-        return list(self.spell_hardware.keys())
+        return self.spell_hardware
 
     def spell_add(self, spell: Spell) -> 'SpellListPrepared':
         """ add a spell """
-        self.spell_map[spell.get_name()] = spell
+        self.spell_dict[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
     def spell_add_list(self, spelllist: List[Spell]) -> 'SpellListPrepared':
         """ add a list of spells """
         for spell in spelllist:
-            self.spell_map[spell.get_name()] = spell
+            self.spell_dict[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
     def spell_del(self, spell_name: str) -> 'SpellListPrepared':
         """ remove a spell """
-        if spell_name in self.spell_map:
-            del self.spell_map[spell_name]
+        if spell_name in self.spell_dict:
+            del self.spell_dict[spell_name]
             self.__recalculate_spell_triggers()
         return self
 
@@ -150,7 +150,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position
 
             event_created_time = event.get_created()
             for spell_name, sequence_list in spell_trigger_sequence_all.items():
-                spell = self.spell_map[spell_name]
+                spell = self.spell_dict[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
                 sequence_list[:] = [sequence for sequence in sequence_list
@@ -174,7 +174,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position
                             triggered_spells_list.append(spell)
 
             # If zeroth trigger, add the sequence to the list.
-            for spell in self.spell_map.values():
+            for spell in self.spell_dict.values():
                 spell_name = spell.name
                 if spell.get_trigger_sequence()[0].is_triggerd_by(event):
                     if spell_name not in spell_trigger_sequence_all:

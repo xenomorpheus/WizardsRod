@@ -37,18 +37,24 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_equal(self):
         """ test """
-        spell_trigger1 = SpellTrigger('trigger 01', const.SPELL_TRIGGER_TYPE['TEST_01'])
-        spell_trigger2 = SpellTrigger('trigger 01', const.SPELL_TRIGGER_TYPE['TEST_01'])
-        spell_trigger3 = SpellTrigger('trigger 02', const.SPELL_TRIGGER_TYPE['TEST_02'])
+        spell_trigger1 = SpellTrigger('trigger 01',
+                                      const.SPELL_TRIGGER_TYPE['TEST_01'])
+        spell_trigger2 = SpellTrigger('trigger 01',
+                                      const.SPELL_TRIGGER_TYPE['TEST_01'])
+        spell_trigger3 = SpellTrigger('trigger 02',
+                                      const.SPELL_TRIGGER_TYPE['TEST_02'])
         self.assertEqual(spell_trigger1, spell_trigger2)
         self.assertNotEqual(spell_trigger1, spell_trigger3)
         self.assertTrue(spell_trigger1.__eq__(spell_trigger2), "basic equals")
 
     def test_hash(self):
         """ test """
-        spell_trigger1 = SpellTrigger('trigger 01', const.SPELL_TRIGGER_TYPE['TEST_01'])
-        spell_trigger2 = SpellTrigger('trigger 01', const.SPELL_TRIGGER_TYPE['TEST_01'])
-        spell_trigger3 = SpellTrigger('trigger 02', const.SPELL_TRIGGER_TYPE['TEST_02'])
+        spell_trigger1 = SpellTrigger('trigger 01',
+                                      const.SPELL_TRIGGER_TYPE['TEST_01'])
+        spell_trigger2 = SpellTrigger('trigger 01',
+                                      const.SPELL_TRIGGER_TYPE['TEST_01'])
+        spell_trigger3 = SpellTrigger('trigger 02',
+                                      const.SPELL_TRIGGER_TYPE['TEST_02'])
         self.assertEqual(spell_trigger1.__hash__(),
                          spell_trigger2.__hash__(),
                          'hash spell_trigger1 and spell_trigger2')
