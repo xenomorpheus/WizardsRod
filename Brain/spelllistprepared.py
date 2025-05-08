@@ -149,8 +149,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position
             event = event_pending_list.pop(0)
 
             event_created_time = event.get_created()
-            for spell_name, sequence_list in spell_trigger_sequence_all.
-            items():
+            for spell_name, sequence_list in spell_trigger_sequence_all.items():
                 spell = self.spell_map[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
