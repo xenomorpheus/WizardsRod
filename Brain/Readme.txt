@@ -4,7 +4,8 @@ Keeping with the theme of a wizards staff, we introduce various concepts:
 
   spell - Is a definition of what staff effects we want to happen when a sequence of events are received in a particular time period.
 
-  prepared spells - Only prepared spells look for staff events and perform staff effects. That way we can choose the sub-set of spells that are active at given time.
+  prepared spells - Any number of spells can be chosen to be prepared. A prepared spell is actively monitoring sensors on the staff looking
+    for the particular sequence of events that trigger the spell. Once triggered the spell controls various actions on the staff.
 
   staff event - A hardware event on the staff e.g. button press, staff moved horizontal, GPS location reached, time reached, prox-card reader, etc.
 
