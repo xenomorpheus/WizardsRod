@@ -2,6 +2,7 @@
 """Sample script to run a few colour tests on the strip."""
 from hal9000 import Hal9000
 from knightrider import KnightRider
+from sprite import Sprite
 
 #NUM_LED = 430
 X_SIZE = 3
@@ -20,6 +21,14 @@ print ('KnightRider')
 MY_CYCLE = KnightRider(num_led=NUM_LED, pause_value=0.000,
                        num_steps_per_cycle=100, num_cycles=4,
                        global_brightness=40)
+MY_CYCLE.set_x(X_SIZE)
+MY_CYCLE.set_y(Y_SIZE)
+MY_CYCLE.start()
+
+print ('Sprite')
+MY_CYCLE = Sprite(num_led=NUM_LED, pause_value=0.0000,
+                       num_steps_per_cycle=1, num_cycles=10,
+                       global_brightness=80)
 MY_CYCLE.set_x(X_SIZE)
 MY_CYCLE.set_y(Y_SIZE)
 MY_CYCLE.start()
