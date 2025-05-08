@@ -12,11 +12,11 @@ class SpellListPrepared():
         self.spell_trigger_actions.clear()
         actions_max = 0
         timeout_max = 0
-        for spell_name, spell in self.spell_map.itervalues():
+        for spell_name, spell in self.spell_map.iteritems():
             actions_max = max(actions_max , len(spell.getTriggerActions()))
             timeout_max = max(timeout_max , spell.getTriggerTimeout())
             for spell_trigger_action in spell.getTriggerActions():
-                self.spell_trigger_actions[spell_trigger_action + ''] = 1
+                self.spell_trigger_actions[spell_trigger_action.getName()] = 1
         self.spell_trigger_actions_max = actions_max
         self.spell_trigger_action_timeout = timeout_max
 

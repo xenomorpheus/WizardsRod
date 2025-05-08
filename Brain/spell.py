@@ -6,10 +6,7 @@ class Spell():
         self.spell_trigger_timeout = spell_trigger_timeout
 
     def __str__(self):
-        return str(self.__dict__)
-
-    def __eq_(self, other):
-        return self.__dict__ == other.__dict__
+        return self.getName()
 
     def getName(self):
         return self.name

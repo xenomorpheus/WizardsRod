@@ -1,23 +1,21 @@
 import unittest
 
 from spelllistprepared import SpellListPrepared
-from spell import Spell
+from const.spellbookmaster import SpellBookMaster
+
 
 class TestSpellTrigger(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.spell = SpellBookMaster.Fireball
+
     def test_constructor(self):
-        st = Spell('Fire Ball')
+        st = SpellListPrepared(name='MyList', spell_map={ self.spell.getName() : self.spell })
 
     def test_getName(self):
-        st = Spell('Fire Ball')
-        self.assertEqual('Fire Ball', st.getName())
-
-    def test_equal(self):
-        st1 = Spell('Fire Ball')
-        st2 = Spell('Fire Ball, Lessor')
-        st3 = Spell('Fire Ball, Greater')
-        self.assertEqual(st1, st2)
-        self.assertNotEqual(st1, st3)
+        st = SpellListPrepared('MyList', spell_map={ self.spell.getName() : self.spell })
+        self.assertEqual('MyList', st.getName())
 
 
 if __name__ == '__main__':

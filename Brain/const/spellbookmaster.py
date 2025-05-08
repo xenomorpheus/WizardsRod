@@ -1,8 +1,8 @@
-import spell
-import const/spelltriggergestureconst
+from spell import Spell
+from const.spelltriggergestureconst import SpellTriggerGestureConst
 
 
-class SpellBook():
+class SpellBookMaster():
 
     __triggers = [SpellTriggerGestureConst.Pointing_Upwards,
       SpellTriggerGestureConst.Leaning_Forwards_Upwards,
@@ -10,5 +10,5 @@ class SpellBook():
       SpellTriggerGestureConst.Leaning_Forwards_Downwards,
       SpellTriggerGestureConst.Pointing_Downwards ]
 
-    Fireball = Spell(name="Fireball", spell_triggers=__triggers, spell_trigger_timeout=6)
+    Fireball = Spell(name="Fireball", spell_trigger_actions=__triggers, spell_trigger_timeout=6)
 
