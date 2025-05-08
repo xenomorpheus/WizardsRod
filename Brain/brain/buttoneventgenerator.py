@@ -1,3 +1,9 @@
+"""
+Created on 19 Sep. 2019
+
+@author: bruins
+"""
+
 from typing import List
 # Import Raspberry Pi GPIO library
 try:
@@ -8,12 +14,6 @@ except (RuntimeError, ModuleNotFoundError):
 
 from hardware import Hardware
 from staffeventbutton import StaffEventButton
-
-"""
-Created on 19 Sep. 2019
-
-@author: bruins
-"""
 
 
 class ButtonEventGenerator(Hardware):
