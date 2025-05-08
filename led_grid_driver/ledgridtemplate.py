@@ -36,13 +36,17 @@ class LedGridTemplate(ColorCycleTemplate):
         #print ("x={}, y={}, pixel={}".format(x,y, pixel))
         return pixel
 
-    def set_xy_rgb(self, strip, x, y, colour):
-        strip.set_pixel_rgb(self.__to_pixel(x, y), colour)
+    def set_xy_rgb(self, strip, x, y, rgb_colour):
+        strip.set_pixel_rgb(self.__to_pixel(x, y), rgb_colour)
 
-    def set_line_x_rgb(self, strip, x, colour):
+    def set_line_x_rgb(self, strip, x, rgb_colour):
         for y in range(self.y_size):
-            strip.set_pixel_rgb(self.__to_pixel(x, y), colour)
+            strip.set_pixel_rgb(self.__to_pixel(x, y), rgb_colour)
 
-    def set_line_y_rgb(self, strip, y, colour):
+    def set_line_y_rgb(self, strip, y, rgb_colour):
         for x in range(self.x_size):
-            strip.set_pixel_rgb(self.__to_pixel(x, y), colour)
+            strip.set_pixel_rgb(self.__to_pixel(x, y), rgb_colour)
+
+    def set_pixel_xy(self, strip, x, y, red, green, blue):
+        #rgb_colour = (( red & 0xFF ) << 16) + (( green & 0xFF) << 8) + ( blue & 0xFF )
+        strip.set_pixel(self.__to_pixel(x, y), red, green, blue)
