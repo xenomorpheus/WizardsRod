@@ -13,10 +13,6 @@ _HW_GPS = "GPS"
 HW_ACCELEROMETER = "ACCELEROMETER"
 _HW_BUTTON = "BUTTON"
 
-HARDWARE = {_HW_GPS: _HW_GPS,
-            HW_ACCELEROMETER: HW_ACCELEROMETER,
-            _HW_BUTTON: _HW_BUTTON}
-
 # Generic spell trigger objects
 
 # spell trigger that are gestures AKA movement

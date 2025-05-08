@@ -49,7 +49,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_hardware_set(self):
         """ test """
-        hwlist = [const.HARDWARE['ACCELEROMETER']]
+        hwlist = [const.HW_ACCELEROMETER]
         spell = Spell(name=self.spell_name)
         st_got = spell.set_hardware_set(hwlist)
         self.assertEqual(spell, st_got)
