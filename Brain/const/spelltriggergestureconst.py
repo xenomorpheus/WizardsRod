@@ -1,7 +1,11 @@
+
+""" spell trigger that are gestures AKA movement """
+
 from spelltriggergesture import SpellTriggerGesture
 
 
 class SpellTriggerGestureConst():
+    """ spell trigger that are gestures AKA movement """
 
     Pointing_Upwards = SpellTriggerGesture("Pointing upwards")
     Leaning_Forwards_Upwards = SpellTriggerGesture("Leaning forwards upwards")
