@@ -21,8 +21,16 @@ class TestStaffEvent(unittest.TestCase):
         st1 = StaffEvent("Test Event 01", 4)
         st2 = StaffEvent("Test Event 01", 4)
         st3 = StaffEvent("Test Event 02", 4)
+        self.assertTrue(st1.__eq__(st2))
         self.assertEqual(st1, st2)
         self.assertNotEqual(st1, st3)
+
+    def test_hash(self):
+        st1 = StaffEvent("Test Event 01", 4)
+        st2 = StaffEvent("Test Event 01", 4)
+        st3 = StaffEvent("Test Event 02", 4)
+        self.assertEqual(st1.__hash__(), st2.__hash__(), 'hash st1 and st2')
+        self.assertNotEqual(st1.__hash__(), st3.__hash__(), 'hash st1 and st3')
 
 if __name__ == '__main__':
     unittest.main()
