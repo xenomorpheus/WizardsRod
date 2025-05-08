@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import unittest
 
 from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture

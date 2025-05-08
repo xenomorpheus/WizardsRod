@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from const.spelltriggergestureconst import SpellTriggerGestureConst
 from const.spellhardwareconst import SpellHardwareConst
 from spell import Spell
