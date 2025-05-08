@@ -6,7 +6,7 @@ An event that occurs on the staff.
 """
 
 
-class StaffEvent():
+class StaffEvent(object):
 
     """
 

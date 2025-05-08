@@ -1,17 +1,22 @@
 import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
 
 
-def button_callback(channel):
-    print("Button %d was pushed!" % (channel))
+def button_callback(the_channel: int):
+    print("Button %d was pushed!" % (the_channel))
 
 
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 channel: int = 10
-GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set pin channel to be an input pin and set initial value to be pulled low (off)
-# Setup event on pin channel rising edge. Ignore furhter edges for 200ms for switch bounce handling
+GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# Set pin channel to be an input pin and set initial value to be pulled low
+#    (off).
+# Setup event on pin channel rising edge. Ignore further edges for 200ms for
+#    switch bounce handling
 # Multiple callback handlers can be added
-GPIO.add_event_detect(channel, GPIO.RISING, callback=button_callback, bouncetime=200)
+
+GPIO.add_event_detect(channel, GPIO.RISING, callback=button_callback,
+                      bouncetime=200)
 message = input("Press enter to quit\n\n")  # Run until someone presses enter
 GPIO.remove_event_detect(channel)
 GPIO.cleanup()  # Clean up

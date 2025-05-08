@@ -4,6 +4,7 @@
 from typing import List
 from spell import Spell
 from spelllistprepared import SpellListPrepared
+from hardwarefetch import HardwareFetch
 
 
 class Staff():
@@ -12,13 +13,15 @@ class Staff():
 
     name: str
     spell_list_prepared: SpellListPrepared
-    hardware_hints: set #TODO not set. cant hold object
+    hardware_hints: set
+    hwf: HardwareFetch
 
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_list_prepared = SpellListPrepared(
             name + ' SpellListPrepared')
         self.hardware_hints = set()
+        self.hwf = HardwareFetch()
 
     def get_name(self) -> str:
         """ get the name """
@@ -38,18 +41,18 @@ class Staff():
 
     def __recalculate_hardware_hints(self) -> None:
         hardware_hints_new = self.spell_list_prepared.get_hardware_hints()
-        for hardware in self.hardware_hints - hardware_hints_new:
-            print(f"remove hardware {hardware}")
-        for hardware in hardware_hints_new - self.hardware_hints:
-            print(f"add hardware {hardware}")
-        # TODO add/remove hardware
+        for hardware_hint in self.hardware_hints - hardware_hints_new:
+            self.hwf.get(hardware_hint).deactivate()
+        for hardware_hint in hardware_hints_new - self.hardware_hints:
+            self.hwf.get(hardware_hint).activate()
         self.hardware_hints = hardware_hints_new
 
-    def __get_new_staff_events(self):
-        # TODO Poll hardware_hints hardware for events
+    def __get_new_staff_events(self) -> List:
+        """ "Poll hardware_hints hardware for events """
         events: List = []
-        for hardware in self.hardware_hints:
-            events.append(hardware.get_events)
+        for hardware_hint in self.hardware_hints:
+            hardware = self.hwf.get(hardware_hint)
+            events.append(hardware.get_events())
         return events
 
     def run(self) -> None:
