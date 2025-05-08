@@ -113,28 +113,24 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             self.__recalculate_spell_triggers()
         return self
 
-    def accept_events(self, new_events: List[StaffEvent]) -> int:
-        """
-        accept events. Only keep the events that can trigger the prepared
-        spells.
-        returns a count of the number of events accepted. """
-        count = 0
-        for event in new_events:
-            if any(trigger.is_triggerd_by(event)
-                   for trigger in self.spell_triggers_permitted.values()):
-                self.event_pending_list.append(event)
-                count += 1
-        return count
-
     def get_spells_triggered(self) -> List:
         """ return a list of spells that have been triggered. """
         return self.spells_triggered
+
+    def recieve_events(self, new_events: List[StaffEvent]):
+        """ accept events """
+        for event in new_events:
+            self.recieve_event(event)
 
     def recieve_event(self, event: StaffEvent) -> None:
         """ TODO not finished
         Consume staff events. Determine which, if any, spells have had all
         triggers in sequence, within the timeout period.
         """
+
+        if not any(trigger.is_triggerd_by(event)
+               for trigger in self.spell_triggers_permitted.values()):
+                   return
 
         event_created_time = event.get_created()
         for spell_name, sequence_list in self.spell_trigger_sequence_all.items():

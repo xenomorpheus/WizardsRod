@@ -46,21 +46,19 @@ class TestSpellListPrepared(unittest.TestCase):
         slp_got = slp.spell_del(self.spell.name)
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
-    def test_accept_events_no_spells_no_events(self):
+    def test_recieve_events_no_spells_no_events(self):
         """ test """
         slp = SpellListPrepared('MyList')
         new_events = []
-        accepted_count = slp.accept_events(new_events)
-        self.assertEqual(0, accepted_count)
+        slp.recieve_events(new_events)
 
-    def test_accept_events_no_spells_some_events(self):
+    def test_recieve_events_no_spells_some_events(self):
         """ test """
         slp = SpellListPrepared('MyList')
         new_events = [const.EVENT["TEST_01"], const.EVENT["TEST_02"]]
-        accepted_count = slp.accept_events(new_events)
-        self.assertEqual(0, accepted_count)
+        slp.recieve_events(new_events)
 
-    def test_accept_events_some_spells_some_events(self):
+    def test_recieve_events_some_spells_some_events(self):
         """ test """
         triggers = [
             SpellTrigger('TEST_01'),
@@ -72,11 +70,10 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent('TEST_01', 4),
             StaffEvent('TEST_02', 4),
             StaffEvent('TEST_03', 4)]
-        accepted_count = slp.accept_events(events)
-        self.assertEqual(2, accepted_count, 'accepted count')
+        slp.recieve_events(events)
 
     # Only accept events that are for our prepared spells
-    def test_accept_events_some_spells_unwanted_events(self):
+    def test_recieve_events_some_spells_unwanted_events(self):
         """ test """
         triggers = [
             SpellTrigger('TEST_01'),
@@ -85,14 +82,13 @@ class TestSpellListPrepared(unittest.TestCase):
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         events = [
             StaffEvent('Event 03', 4)]
-        accepted_count_got = slp.accept_events(events)
-        self.assertEqual(0, accepted_count_got, 'accepted count')
+        slp.recieve_events(events)
 
     def test_get_spells_triggered_no_spells_no_events(self):
         """ test """
         slp = SpellListPrepared('MyList')
         new_events = []
-        slp.accept_events(new_events)
+        slp.recieve_events(new_events)
         triggerd_spells = slp.get_spells_triggered()
         self.assertEqual([], triggerd_spells)
 
@@ -100,7 +96,7 @@ class TestSpellListPrepared(unittest.TestCase):
         """ test """
         slp = SpellListPrepared('MyList').spell_add(self.spell)
         new_events = []
-        slp.accept_events(new_events)
+        slp.recieve_events(new_events)
         triggerd_spells = slp.get_spells_triggered()
         self.assertEqual([], triggerd_spells, 'no triggered spells')
 
@@ -116,8 +112,7 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent('TEST_01', 4),
             StaffEvent('TEST_02', 4),
             StaffEvent('TEST_03', 4)]
-        accepted_count = slp.accept_events(events)
-        self.assertEqual(2, accepted_count, 'accepted count')
+        slp.recieve_events(events)
         self.assertEqual([test_spell01], slp.get_spells_triggered(),
                          'triggered spells')
 
