@@ -2,7 +2,8 @@
 """Sample script to run a few colour tests on the strip.
 
 
-PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py --sprite=sprite/lightningX_3x100_10.png
+PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py \
+           --sprite=sprite/lightningX_3x100_10.png
 
 
 
@@ -14,14 +15,15 @@ from sprite_player import SpritePlayer
 
 class SpritePlayerDemo:
 
-    def sprite_player_demo(sprite_filename, x_size=3, y_size=100):
+    def sprite_player_demo(sprite_filename, x_size=3, y_size=100,
+                           num_cycles=10):
         num_led = x_size * y_size
-
         print('Sprite')
-
-        sprite_player = SpritePlayer(num_led=num_led, pause_value=0.0, # 9.050,
-                               num_steps_per_cycle=1, num_cycles=10,
-                               global_brightness=2)
+        sprite_player = SpritePlayer(num_led=num_led, pause_value=0.0,
+                                     # pause_value=9.050,
+                                     num_steps_per_cycle=1,
+                                     num_cycles=num_cycles,
+                                     global_brightness=2)
         sprite_player.set_x(x_size)
         sprite_player.set_y(y_size)
         sprite_player.set_sprite_filename(sprite_filename)
@@ -33,12 +35,12 @@ class SpritePlayerDemo:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    #parser.add_argument(
+    # parser.add_argument(
     #    "--mode",
     #    type=str,
     #    default="hsv",
     #    help="Mode (hsv, lab)")
-    #parser.add_argument(
+    # parser.add_argument(
     #    "--save-dir",
     #    type=str,
     #    help="Save results to dir")
@@ -47,7 +49,7 @@ if __name__ == "__main__":
         type=str,
         default=None,
         help="filename of sprite to show")
-    #parser.add_argument(
+    # parser.add_argument(
     #    "--batch",
     #    action="store_true",
     #    help="Run in batch mode, skipping wait for key",

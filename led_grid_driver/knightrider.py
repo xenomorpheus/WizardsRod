@@ -22,7 +22,8 @@ class KnightRider(LedGrid):
 
         half_steps = int(num_steps_per_cycle / 2)
 
-        offset = int(abs(half_steps - current_step) / half_steps * remainder_height)
+        offset = int(abs(half_steps - current_step) /
+                     half_steps * remainder_height)
         offset_increasing = current_step >= half_steps
 
         for i in range(eye_height):
@@ -32,6 +33,7 @@ class KnightRider(LedGrid):
             self.set_line_y_rgb(strip, offset - 1, self.background_c)
         else:
             self.set_line_y_rgb(strip, offset + eye_height, self.background_c)
-            self.set_line_y_rgb(strip, offset + eye_height + 1, self.background_c)
+            self.set_line_y_rgb(strip, offset + eye_height + 1,
+                                self.background_c)
 
         return 1

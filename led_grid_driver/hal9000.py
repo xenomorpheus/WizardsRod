@@ -2,7 +2,8 @@ from led_grid import LedGrid
 
 
 class Hal9000(LedGrid):
-    """ This class dispays the Hal9000 text and a red dot on a 2 dimensional LED grid """
+    """ This class displays the Hal9000 text and a red dot on a 2 dimensional
+    LED grid """
 
     eye_c = 0xFF0000  # red
     background_c = 0x000000  # black
