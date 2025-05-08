@@ -1,10 +1,13 @@
 astroid==2.5
 attrs==20.3.0
 coverage==5.4
+gitdb==4.0.5
+GitPython==3.1.14
 importlib-metadata==3.4.0
 iniconfig==1.1.1
 isort==5.7.0
 lazy-object-proxy==1.5.2
+lint==1.2.1
 Mako==1.1.4
 Markdown==3.3.4
 MarkupSafe==1.1.1
@@ -19,6 +22,7 @@ pylint==2.7.0
 pyparsing==2.4.7
 pytest==6.2.2
 RPi.GPIO==0.7.0
+smmap==3.0.5
 toml==0.10.2
 typed-ast==1.4.2
 typing-extensions==3.7.4.3
