@@ -18,7 +18,6 @@ class Main():  # pylint: disable=too-few-public-methods
         """ Perform the actions when the spell is triggered """
         print("Perform Actions called on "+staff.name+" by spell "+spell.name)
 
-
     @staticmethod
     def _accelerator_example():
         """ Accelerator example """
