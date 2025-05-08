@@ -21,9 +21,8 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertNotEqual(st1, st3)
 
     def test_isTriggerdBy(self):
-        name = 'Button1'
-        st = SpellTrigger(name)
-        se = StaffEvent(name, st, gmtime())
+        st = SpellTrigger('Button1')
+        se = StaffEvent(st.getName(), st, gmtime())
         self.assertTrue(st.isTriggerdBy(se))
 
 if __name__ == '__main__':
