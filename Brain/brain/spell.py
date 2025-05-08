@@ -32,16 +32,31 @@ class Spell():
         self.hardware_set = set()  # type: Set[Hardware]
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
         Accelerometer """
-        self.perform_actions_method = None  # type: Callable
+        self.perform_actions = None  # type: Callable[..., Any]
+        """ code to call when trigger sequence completed """
+
+    def __hash__(self):
+        return hash((self.name, tuple(self.trigger_sequence),
+                    tuple(self.reset_trigger_set), self.trigger_timeout,
+                    tuple(self.hardware_set), self.perform_actions))
 
     def get_name(self) -> str:
         """ get the name of the spell """
         return self.name
 
+    def print(self) -> 'Spell':
+        """ TODO remove. print the spell """
+        print("spell "+self.name)
+        for trigger in self.trigger_sequence:
+            print(trigger.get_name())
+        return self
+
     def set_trigger_sequence(self, trigger_sequence: SpellTriggerSequence
                              ) -> 'Spell':
         """ set the trigger sequence """
-        self.trigger_sequence = trigger_sequence
+        self.trigger_sequence = []
+        for trigger in trigger_sequence:
+            self.trigger_sequence.append(trigger)
         return self
 
     def get_trigger_sequence(self) -> SpellTriggerSequence:
@@ -59,7 +74,9 @@ class Spell():
 
     def set_hardware_set(self, hardware_set: set) -> 'Spell':
         """ set the hardware the spell will need """
-        self.hardware_set = hardware_set
+        self.hardware_set = set()
+        for hardware in hardware_set:
+            self.hardware_set.add(hardware)
         return self
 
     def get_hardware_set(self) -> set:
@@ -68,12 +85,9 @@ class Spell():
 
     def set_perform_actions(self, perform_actions: Callable) -> 'Spell':
         """ set the method that is called when the spell run """
-        self.perform_actions_method = perform_actions
+        self.perform_actions = perform_actions
         return self
 
-    def perform_actions(self, staff: 'Staff'):
-        """ this is called automatically when the spell is triggered.
-        This is the outcome of the spell. e.g. flash lights, make sounds. """
-        if not self.perform_actions_method:
-            raise Exception('perform_actions_method not set')
-        self.perform_actions_method(self, staff)
+    def get_perform_actions(self) -> Callable:
+        """ get the method that is called when the spell run """
+        return self.perform_actions

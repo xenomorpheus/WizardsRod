@@ -13,7 +13,7 @@ class Staff():
 
     def __init__(self, name: str) -> None:
         self.name = name
-        self.spell_list_prepared = SpellListPrepared(self)
+        self.spell_list_prepared = SpellListPrepared()
         """ a list of spells we are waiting for events in order to activate """
         self.hwf = HardwareFetch()
         """ object for fetching hardware interfaces """

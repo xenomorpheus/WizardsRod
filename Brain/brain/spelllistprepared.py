@@ -52,11 +52,9 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
 
 """
 
-    def __init__(self, staff: 'Staff') -> None:
-        self.staff = staff
-        """ the staff """
+    def __init__(self) -> None:
         self.spell_trigger_event_timeout = 0
-        self.spell_dict = {}  # type: Dict[str, Any]
+        self.spell_list = []  # type: List[Spell]
         """ Prepared spells, keyed by spell name """
         self.spell_hardware = set()  # type: Set[str]
         """ special hardware requirements. e.g. generate triggers """
@@ -65,7 +63,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.event_pending_list = []  # type: List[StaffEvent]
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all = {}
+        self.spell_trigger_sequence_all = {}\
+            # type: Dict[Spell, List[Dict[str, Any]]]
         """ For each prepared spell, a sequence of indexes to that spell's
         triggers. Each spell trigger sequence may have repeats of triggers.
         Analogy: entering a numeric security code needs to support
@@ -80,7 +79,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.spell_triggers_permitted.clear()
         self.spell_hardware.clear()
         timeout_max = 0
-        for spell in self.spell_dict.values():
+        for spell in self.spell_list:
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
             for trigger in spell.get_trigger_sequence():
                 self.spell_triggers_permitted.add(trigger)
@@ -95,45 +94,46 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
     def spell_add(self, spell: Spell) -> 'SpellListPrepared':
         """ add a spell to the list of prepared spells. This will
         automatically handle connections to any required hardware. """
-        self.spell_dict[spell.get_name()] = spell
+        self.spell_list.append(spell)
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_add_list(self, spelllist: List[Spell]) -> 'SpellListPrepared':
+    def spell_add_list(self, spell_list: List[Spell]) -> 'SpellListPrepared':
         """ add a list of spells """
-        for spell in spelllist:
-            self.spell_dict[spell.get_name()] = spell
+        # TODO check spell has triggers
+        for spell in spell_list:
+            self.spell_list.append(spell)
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_del(self, spell_name: str) -> 'SpellListPrepared':
+    def spell_del(self, spell: Spell) -> 'SpellListPrepared':
         """ remove a spell """
-        if spell_name in self.spell_dict:
-            del self.spell_dict[spell_name]
+        if spell in self.spell_list:
+            self.spell_list.remove(spell)
             self.__recalculate_spell_triggers()
         return self
 
-    def receive_events(self, new_events: List[StaffEvent]) -> None:
+    def receive_events(self, new_events: List[StaffEvent]) -> List[Spell]:
         """ accept events """
+        spells_triggered = []  # type: List[Spell]
         for event in new_events:
-            self.receive_event(event)
+            for spell in self.receive_event(event):
+                spells_triggered.append(spell)
+        return spells_triggered
 
-    def receive_event(self, event: StaffEvent) -> None:
+    def receive_event(self, event: StaffEvent) -> List[Spell]:
         """ Consume staff events. Determine which spells, if any, have had all
         triggers in sequence, and within the timeout period.
         """
-
+        spells_triggered = []  # type: List[Spell]
         if not any(trigger.is_triggerd_by(event)
                    for trigger in self.spell_triggers_permitted):
-            return
-
-        spells_triggered = []
+            return spells_triggered
         event_created_time = event.get_created()
-        for spell_name, sequence_list \
-                in self.spell_trigger_sequence_all.items():
-            spell = self.spell_dict[spell_name]
+        for spell, sequence_list in self.spell_trigger_sequence_all.items():
 
-            # Delete partially completed spell sequences if they timeout.
+            # Delete partially completed spell sequences if they have
+            # timed out.
             sequence_list[:] = [sequence for sequence in sequence_list
                                 if event_created_time <=
                                 sequence['timeout']]
@@ -151,20 +151,18 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                     else:
                         # all triggers matched
                         sequence['timeout'] = 0
-                        # TODO delete from trigger list
+                        # TODO delete from list
                         spells_triggered.append(spell)
 
         # If zeroth trigger, add the sequence to the list.
-        for spell in self.spell_dict.values():
-            spell_name = spell.name
-            if spell.get_trigger_sequence()[0].is_triggerd_by(event):
-                if spell_name not in self.spell_trigger_sequence_all:
-                    self.spell_trigger_sequence_all[spell_name] = []
-                self.spell_trigger_sequence_all[spell_name].append(
+        for spell in self.spell_list:
+            if len(spell.get_trigger_sequence()) > 0 and \
+                    spell.get_trigger_sequence()[0].is_triggerd_by(event):
+                if spell not in self.spell_trigger_sequence_all:
+                    self.spell_trigger_sequence_all[spell] = []
+                self.spell_trigger_sequence_all[spell].append(
                     {'trigger_wanted_idx': 1,
                      'timeout': event_created_time +
                         spell.get_trigger_timeout()})
 
-        # Triggered spells now perform their actions
-        for spell in spells_triggered:
-            spell.perform_actions(self.staff)
+        return spells_triggered

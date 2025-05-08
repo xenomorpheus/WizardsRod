@@ -49,12 +49,12 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_hardware_set(self):
         """ test """
-        hwlist = [const.HW_ACCELEROMETER]
+        hw_set = set([const.HW_ACCELEROMETER])
         spell = Spell(name=self.spell_name)
-        st_got = spell.set_hardware_set(hwlist)
+        st_got = spell.set_hardware_set(hw_set)
         self.assertEqual(spell, st_got)
         hw_got = spell.get_hardware_set()
-        self.assertEqual(hwlist, hw_got)
+        self.assertEqual(hw_set, hw_got)
 
     @staticmethod
     def spell_callback(spell: Spell, staff: Staff):
@@ -65,8 +65,8 @@ class TestSpellTrigger(unittest.TestCase):
         """ test """
         spell = Spell(name=self.spell_name)
         spell.set_perform_actions(self.spell_callback)
-        staff = Staff("some staff")
-        spell.perform_actions(staff)
+        cb_got = spell.get_perform_actions()
+        self.assertEqual(self.spell_callback, cb_got)
 
 
 if __name__ == '__main__':

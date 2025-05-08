@@ -4,7 +4,7 @@ Created on 19 Sep. 2019
 @author: bruins
 """
 
-from typing import List
+from typing import List, Set
 # Import Raspberry Pi GPIO library
 try:
     import RPi.GPIO as GPIO
@@ -23,20 +23,21 @@ class ButtonEventGenerator(Hardware):
 
     Example.  Each listener will be called with the following.
 
-    listener.recieve_event(StaffEventButton(the_channel, now))
+    listener.recieve_event(StaffEventButton(channel, now))
 
     """
 
     def __init__(self):
-        """
-        Constructor
-        """
+        """ Constructor """
         super().__init__(self)
-        self.active = 0
-        self.channels = set()
+        self.active = False  # type: bool
+        self.channels = set()  # type: Set
         """ a list of button integers for the buttons """
-        self.listeners = []
+        self.listeners = []  # type: List
         """ a list of objects that have the recieve_event method """
+
+    def __hash__(self):
+        return hash((self.active, self.channels, self.listeners))
 
     def listener_add(self, listener) -> None:
         """ add a listener for button events """
@@ -67,18 +68,20 @@ class ButtonEventGenerator(Hardware):
         self.channels.remove(channel)
         GPIO.remove_event_detect(channel)
 
-    def activate(self):
+    def activate(self) -> None:
         GPIO.setwarnings(False)  # Ignore warning for now
         GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
+        self.active = True
 
-    def deactivate(self):
+    def deactivate(self) -> None:
         for channel in self.channels:
             self.channel_remove(channel)
         GPIO.cleanup()  # Clean up
+        self.active = False
 
-    def _button_callback(self, the_channel):
-        print("Button %d was pushed!" % (the_channel))
+    def _button_callback(self, channel: int) -> None:
+        print("Button %d was pushed!" % (channel))
         now = 0  # TODO
-        event = StaffEventButton(""+the_channel, now)
+        event = StaffEventButton(str(channel), now)
         for listener in self.listeners:
             listener.recieve_event(event)
