@@ -48,10 +48,10 @@ _B_2 = SpellTriggerButton('2')
 _B_3 = SpellTriggerButton('3')
 _B_4 = SpellTriggerButton('4')
 
-ST_BUTTON = { 'BUTTON1': _B_1,
-              'BUTTON2': _B_2,
-              'BUTTON3': _B_3,
-              'BUTTON4': _B_4,}
+ST_BUTTON = {'BUTTON1': _B_1,
+             'BUTTON2': _B_2,
+             'BUTTON3': _B_3,
+             'BUTTON4': _B_4,}
 
 # Simple generic events that the staff will generate and look
 #  for in order to trigger spells.

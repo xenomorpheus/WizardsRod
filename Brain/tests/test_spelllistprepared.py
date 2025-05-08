@@ -106,7 +106,7 @@ class TestSpellListPrepared(unittest.TestCase):
         self.perform_action_calls = set()
         slp.recieve_events(events)
         self.assertEqual(set([staff.name+"="+test_spell01.name]),
-                        self.perform_action_calls)
+                         self.perform_action_calls)
 
     def test_get_hardware_hints(self):
         """ test """
@@ -114,7 +114,7 @@ class TestSpellListPrepared(unittest.TestCase):
         test_spell02 = Spell("Test Spell 02").set_hardware_set(['Button02',
                                                                 'Button03'])
         slp = SpellListPrepared(None).spell_add_list([test_spell01,
-                                                          test_spell02])
+                                                      test_spell02])
         hwl = slp.get_hardware_hints()
         self.assertEqual(set(['Button01', 'Button02', 'Button03']), set(hwl))
 

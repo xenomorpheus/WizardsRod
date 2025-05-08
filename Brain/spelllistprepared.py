@@ -119,8 +119,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         """
 
         if not any(trigger.is_triggerd_by(event)
-               for trigger in self.spell_triggers_permitted.values()):
-                   return
+                   for trigger in self.spell_triggers_permitted.values()):
+            return
 
         spells_triggered = []
         event_created_time = event.get_created()

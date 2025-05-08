@@ -1,11 +1,10 @@
-from staffevent import StaffEvent
-
-
 """
 
 Events - A button is pressed.
 
 """
+
+from staffevent import StaffEvent
 
 
 class StaffEventButton(StaffEvent):
