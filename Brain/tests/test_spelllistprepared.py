@@ -13,6 +13,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_constructor(self):
         slp = SpellListPrepared(name='MyList')
+        self.assertFalse(slp is None, 'must not be None')
 
     def test_getName(self):
         slp = SpellListPrepared('MyList')
@@ -21,14 +22,17 @@ class TestSpellTrigger(unittest.TestCase):
     def test_spellAdd(self):
         slp = SpellListPrepared('MyList')
         slp_got = slp.spellAdd(self.spell)
+        self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
     def test_spellAddList(self):
         slp = SpellListPrepared('MyList')
         slp_got = slp.spellAddList([self.spell])
+        self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
     def test_spellDel(self):
         slp = SpellListPrepared('MyList')
         slp_got = slp.spellDel(self.spell.getName)
+        self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
     def test_acceptActions_no_spells_no_actions(self):
         slp = SpellListPrepared('MyList')
@@ -52,7 +56,7 @@ class TestSpellTrigger(unittest.TestCase):
         new_actions.append(acts[0])
         new_actions.append(acts[1])
         accepted_count = slp.acceptActions(new_actions)
-        self.assertEqual(len(new_actions), accepted_count)
+        self.assertEqual(len(new_actions), accepted_count, 'action count')
 
     # Only accept actions that are for our prepared spells
     def test_acceptActions_some_spells_unwanted_actions(self):
@@ -60,8 +64,8 @@ class TestSpellTrigger(unittest.TestCase):
         slp.spellAdd(self.spell)
         acts = self.spell.getTriggerActions()
         new_actions = [gesture.Testing_Only]
-        accepted_count = slp.acceptActions(new_actions)
-        self.assertEqual(0, accepted_count)
+        accepted_count_got = slp.acceptActions(new_actions)
+        self.assertEqual(0, accepted_count_got, 'action count')
 
     def test_getTriggeredSpells_no_spells_no_actions(self):
         slp = SpellListPrepared('MyList')
@@ -76,7 +80,7 @@ class TestSpellTrigger(unittest.TestCase):
         new_actions = []
         slp.acceptActions(new_actions)
         triggerd_spells = slp.getTriggeredSpells()
-        self.assertEqual([], triggerd_spells)
+        self.assertEqual([], triggerd_spells, 'no triggerd spells')
 
     # TODO not complete
     # TODO more
@@ -88,7 +92,7 @@ class TestSpellTrigger(unittest.TestCase):
         new_actions.extend(acts)
         slp.acceptActions(new_actions)
         triggerd_spells = slp.getTriggeredSpells()
-        self.assertEqual([self.spell], triggerd_spells)  # TODO
+        self.assertEqual([self.spell], triggerd_spells, 'triggered spells')  # TODO
 
 
 if __name__ == '__main__':

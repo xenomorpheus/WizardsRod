@@ -39,9 +39,12 @@ I think something like.
     prepared_spells.spellAdd(spell4)
     prepared_spells.spellDel('spell name')
 
+    # Some spells might need special hardware, e.g. GPS
+    hw_hints = prepared_spells.getHardwareHings()
+
     # looking for actions to trigger spells
     while(true) {
-        new_action_list = ...# get new actions
+        new_action_list = getNewActions(hw_hints= hw_hints) # get new actions
         accepted_count = prepared_spells.acceptActions(new_action_list)
         if (accepted_count > 0):
             triggered_spells_list = prepared_spells.getTriggeredSpells()
