@@ -5,6 +5,7 @@ An event that occurs on the staff.
 
 """
 
+from time import gmtime
 
 class StaffEvent():
 
@@ -22,7 +23,7 @@ Events are immutable
 
     """
 
-    def __init__(self, name, created, type='none') -> None:
+    def __init__(self, name, created=gmtime(), type='none') -> None:
         self.name = name
         self.created = created
         self.type = type

@@ -2,7 +2,6 @@
 from __future__ import absolute_import
 import unittest
 
-from time import gmtime
 from spelltrigger import SpellTrigger
 from staffevent import StaffEvent
 import tests
@@ -65,19 +64,19 @@ class TestSpellTrigger(unittest.TestCase):
     def test_is_triggerd_by(self):
         """ test """
         trigger = SpellTrigger('TEST_01')
-        event = StaffEvent('TEST_01', gmtime())
+        event = StaffEvent('TEST_01')
         self.assertTrue(trigger.is_triggerd_by(event))
 
     def test_is_triggerd_by_with_type(self):
         """ test """
         trigger = SpellTrigger('TEST_01', type='foo')
-        event = StaffEvent('TEST_01', gmtime(), type='foo')
+        event = StaffEvent('TEST_01', type='foo')
         self.assertTrue(trigger.is_triggerd_by(event))
 
     def test_is_triggerd_by_with_wrong_type(self):
         """ test """
         trigger = SpellTrigger('TEST_01', type='foo')
-        event = StaffEvent('TEST_01', gmtime(), type='wrong')
+        event = StaffEvent('TEST_01', type='wrong')
         self.assertFalse(trigger.is_triggerd_by(event))
 
 
