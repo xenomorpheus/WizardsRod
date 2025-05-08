@@ -6,6 +6,7 @@ except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
     fake_rpigpio.utils.install()
 
+from hardware import Hardware
 from staffeventbutton import StaffEventButton
 
 '''
@@ -15,7 +16,7 @@ Created on 19 Sep. 2019
 '''
 
 
-class ButtonEventGenerator():
+class ButtonEventGenerator(Hardware):
     '''
     When hardware buttons are pressed send StaffEvent objects to
     listeners that have been previously setup.

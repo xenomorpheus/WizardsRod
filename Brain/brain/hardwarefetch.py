@@ -4,9 +4,7 @@ Created on 19 Sep. 2019
 @author: bruins
 '''
 
-# from hardware.buttoneventgenerator import ButtonEventGenerator
-
-from hardware.buttoneventgenerator import ButtonEventGenerator
+from buttoneventgenerator import ButtonEventGenerator
 
 
 class HardwareFetch():
