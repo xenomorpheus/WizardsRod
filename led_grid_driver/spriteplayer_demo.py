@@ -24,11 +24,7 @@ class SpritePlayerDemo:
                                global_brightness=2)
         spriteplayer.set_x(x_size)
         spriteplayer.set_y(y_size)
-        #SPRITE_FILENAME = 'sprite/test pattern 3x100_1.png'  # image can be in gif jpeg or png format
-        # SPRITE_FILENAME = sys.argv[1]  # image can be in gif jpeg or png format
         spriteplayer.set_sprite_filename(sprite_filename)
-
-
         spriteplayer.start()
 
         print ('Finished the test')
