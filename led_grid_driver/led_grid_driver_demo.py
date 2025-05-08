@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Sample script to run a few colour tests on the strip."""
+"""
+
+Sample script to run a few colour tests on the strip.
+
+PYTHONPATH=./APA102_Pi:. ./led_grid_driver_demo.py
+
+
+"""
 from hal9000 import Hal9000
 from knightrider import KnightRider
-from sprite import Sprite
 
 #NUM_LED = 430
 X_SIZE = 3
