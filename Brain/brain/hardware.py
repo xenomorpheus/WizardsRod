@@ -24,4 +24,3 @@ class Hardware():
     def get_hardware_type(self) -> str:
         """ get the hardware_type """
         return self.hardware_type
-

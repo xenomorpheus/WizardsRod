@@ -1,4 +1,4 @@
-# Only for tests.
+""" Constants. Only for tests """
 from staffevent import StaffEvent
 from spelltrigger import SpellTrigger
 from spell import Spell

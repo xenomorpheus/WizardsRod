@@ -1,4 +1,4 @@
-""" constants """
+""" constants. Not for tests. """
 
 from spell import Spell
 from spelltrigger import SpellTrigger
@@ -43,4 +43,3 @@ ST_BUTTON = {'BUTTON1': _B_1,
              'BUTTON2': _B_2,
              'BUTTON3': _B_3,
              'BUTTON4': _B_4, }
-

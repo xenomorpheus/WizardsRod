@@ -49,6 +49,7 @@ class Staff():
         for hardware_hint in list(self.hardware.keys()):
             self.hardware[hardware_hint].deactivate()
             del self.hardware[hardware_hint]
+        return self
 
     def __del__(self):
         """ destructor """
