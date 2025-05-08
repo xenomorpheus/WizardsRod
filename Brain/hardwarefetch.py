@@ -4,7 +4,7 @@ Created on 19 Sep. 2019
 @author: bruins
 '''
 
-from hardware.Button import Button
+from hardware.buttoneventgenerator import ButtonEventGenerator
 
 class HardwareFetch(object):
     '''
@@ -18,5 +18,5 @@ class HardwareFetch(object):
 
     def get(self, hint: str):
         if str == 'button':
-            return Button()
+            return ButtonEventGenerator()
         return

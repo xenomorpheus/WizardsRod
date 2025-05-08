@@ -9,9 +9,15 @@ Created on 19 Sep. 2019
 '''
 
 
-class Button(object):
+class ButtonEventGenerator(object):
     '''
-    classdocs
+    When hardware buttons are pressed send StaffEvent objects to
+    listeners that have been previously setup.
+
+    An example, each listener will be called with the following.
+
+    listener.recieve_event(StaffEventButton(the_channel, now)
+
     '''
     #channels: set(int)
     #listeners: List(callable)
@@ -21,7 +27,9 @@ class Button(object):
         Constructor
         '''
         self.channels = channels
+        ''' a list of button integers for the buttons '''
         self.listeners = listeners
+        ''' a list of objects that have the recieve_event method '''
 
     def activate(self):
         GPIO.setwarnings(False)  # Ignore warning for now
@@ -45,5 +53,6 @@ class Button(object):
     def _button_callback(self, the_channel):
         print("Button %d was pushed!" % (the_channel))
         now = 0 # TODO
+        event = StaffEventButton(the_channel, now)
         for listener in self.listeners:
-            listener.recieve(StaffEventButton(the_channel, now))
+            listener.recieve_event(event)

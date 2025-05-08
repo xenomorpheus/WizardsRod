@@ -7,7 +7,8 @@ def button_callback(the_channel: int):
 
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
-channel: int = 10
+#channel: int = 10
+channel = 10
 GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # Set pin channel to be an input pin and set initial value to be pulled low
 #    (off).
