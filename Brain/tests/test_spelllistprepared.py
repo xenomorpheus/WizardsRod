@@ -75,7 +75,6 @@ class TestSpellListPrepared(unittest.TestCase):
         triggers = [gesture.Test01, gesture.Test02 ]
         TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
-        acts = self.spell.getTriggerList()
         events = [
             StaffEvent("Event 03", gesture.Test03, 4)]
         accepted_count_got = slp.acceptEvents(events)
