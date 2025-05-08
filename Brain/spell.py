@@ -1,17 +1,22 @@
+"""
+A specific Spell's definition.
 
-# Builder pattern
+Builder pattern.
 
+"""
 
 class Spell():
 
+
     def __init__(self, name):
         self.name = name
-        # Ordered steps required to trigger the spell
+        """ Name of the spell """
         self.trigger_list = []
-        # Maximum time to complete the spell
+        """ Ordered steps required to trigger the spell """
         self.trigger_timeout = 0
-        # Some spells require hardware, e.g GPS, Accelerometer
+        """ Maximum time to complete the spell. """
         self.hardware_list = []
+        """ Some spells are triggered by hardware actions. e.g Buttons, GPS, Accelerometer """
 
     def __str__(self):
         return self.getName()

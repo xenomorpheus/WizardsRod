@@ -1,7 +1,7 @@
 
 The smarts of the staff.
 
-Let us think about it from the use case.  We are going to have a stream of Staff events flowing in.
+Let us think about it from the use case.  We are going to have a stream of Staff events flowing in, presumably from hardware.
 We are going to need to know if we have performed the correct events to trigger a Spell.
 
 My thoughts are as follows:

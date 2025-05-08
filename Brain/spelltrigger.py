@@ -16,6 +16,6 @@ class SpellTrigger():
     def getName(self):
         return self.name
 
-    # For simple triggers, the event name just has to match.
     def isTriggerdBy(self, event):
+        """ For simple triggers, the event name just has to match. """
         return self.getName() == event.getName()

@@ -1,27 +1,33 @@
-# Builder pattern
+"""
 
+A set of Spells prepared and actively looking to be triggered by StaffEvent objects.
+
+
+Builder pattern
+
+"""
 
 class SpellListPrepared():
 
     def __init__(self, name):
         self.name = name
         self.spell_trigger_event_timeout = 0
-        # Prepared spells, keyed by spell name
         self.spell_map = {}
-        # special hardware requirements
+        """ Prepared spells, keyed by spell name """
         self.spell_hardware = {}
-        # Only the triggers of the prepared spells. keyed by trigger name
+        """ special hardware requirements. e.g. generate triggers """
         self.spell_triggers_permitted = {}
-        # The events in the buffer.
-        # Only events that trigger prepared spells will be kept.
+        """ Only the triggers of the prepared spells. keyed by trigger name """
         self.event_pending_list = []
-        # Spells that have received some of the triggers
+        """ The events in the buffer.
+        Only events that trigger prepared spells will be kept. """
         self.spell_trigger_sequence_all = {}
+        """ Spells that have received some of the triggers  """
         self.__recalculate_spell_triggers()
 
-    # work out what events could progress a prepared spell
-    # work out maximum time to wait for all triggers to receive events
     def __recalculate_spell_triggers(self):
+        # work out what events could progress a prepared spell.
+        # work out maximum time to wait for all triggers to receive events.
         self.spell_trigger_event_timeout = 0
         self.spell_triggers_permitted.clear()
         self.spell_hardware.clear()
@@ -42,21 +48,22 @@ class SpellListPrepared():
         self.__recalculate_spell_triggers()
         return self
 
-    def spellAddList(self, list):
-        for spell in list:
+    def spellAddList(self, spelllist):
+        for spell in spelllist:
             self.spell_map[spell.getName()] = spell
         self.__recalculate_spell_triggers()
         return self
 
     def spellDel(self, spellName):
         if (self.spell_map.has_key(spellName)):
-            del self.spell_map[spell.spellName]
+            del self.spell_map[spellName]
             self.__recalculate_spell_triggers()
         return self
 
-    # accept events. Only keep the events that can trigger the prepared spells
-    # returns a count of the number of events accepted
     def acceptEvents(self, new_events):
+        """
+        accept events. Only keep the events that can trigger the prepared spells.
+        returns a count of the number of events accepted. """
         count = 0
         for event in new_events:
             if any(trigger.isTriggerdBy(event) for trigger in self.spell_triggers_permitted.values()):
