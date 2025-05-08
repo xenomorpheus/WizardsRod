@@ -1,6 +1,5 @@
 
 """ The Staff brings together the prepared spells and the hardware. """
-from typing import List
 from spell import Spell
 from spelllistprepared import SpellListPrepared
 from hardwarefetch import HardwareFetch
@@ -41,9 +40,9 @@ class Staff():
             self.hardware[hardware_hint].deactivate()
             del self.hardware[hardware_hint]
         for hardware_hint in hardware_hints_new - self.hardware.keys():
-            hw = self.hwf.get(hardware_hint)
-            self.hardware[hardware_hint] = hw
-            hw.activate()
+            hardware = self.hwf.get(hardware_hint)
+            self.hardware[hardware_hint] = hardware
+            hardware.activate()
 
     def end(self) -> 'Staff':
         """ shut down the hardware """

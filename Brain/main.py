@@ -55,6 +55,7 @@ class Main():  # pylint: disable=too-few-public-methods
 
     @staticmethod
     def main():
+        """ main """
         Main._button_example()
 
 
