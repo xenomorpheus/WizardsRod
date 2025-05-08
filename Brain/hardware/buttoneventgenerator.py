@@ -70,6 +70,6 @@ class ButtonEventGenerator():
     def _button_callback(self, the_channel):
         print("Button %d was pushed!" % (the_channel))
         now = 0 # TODO
-        event = StaffEventButton(the_channel, now)
+        event = StaffEventButton(""+the_channel, now)
         for listener in self.listeners:
             listener.recieve_event(event)

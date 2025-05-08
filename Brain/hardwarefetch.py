@@ -19,6 +19,6 @@ class HardwareFetch():
 
     def get(self, hint: str):
         ''' return hardware object using hint as selector '''
-        if hint == 'button':
+        if hint == 'BUTTON':
             return ButtonEventGenerator()
         raise Exception("Hint "+hint+" not known")

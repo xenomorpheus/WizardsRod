@@ -11,5 +11,5 @@ class StaffEventButton(StaffEvent):
 
     """ Events - A button is pressed.    """
 
-    def __init__(self, name, created, event_type='button') -> None:
+    def __init__(self, name, created, event_type='BUTTON') -> None:
         super().__init__(name, created, event_type)
