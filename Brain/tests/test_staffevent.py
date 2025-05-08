@@ -8,7 +8,7 @@ class TestStaffEvent(unittest.TestCase):
 
     def test_constructor(self):
         staff_event = StaffEvent("Test Event 01", 0)
-        self.assertTrue( isinstance(staff_event, StaffEvent) )
+        self.assertTrue(isinstance(staff_event, StaffEvent))
 
     def test_get_name(self):
         staff_event = StaffEvent("Test Event 01", 0)
@@ -32,6 +32,7 @@ class TestStaffEvent(unittest.TestCase):
         staff_event3 = StaffEvent("Test Event 02", 4)
         self.assertEqual(staff_event1.__hash__(), staff_event2.__hash__(), 'hash staff_event1 and staff_event2')
         self.assertNotEqual(staff_event1.__hash__(), staff_event3.__hash__(), 'hash staff_event1 and staff_event3')
+
 
 if __name__ == '__main__':
     unittest.main()

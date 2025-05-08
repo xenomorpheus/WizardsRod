@@ -1,15 +1,16 @@
 from __future__ import absolute_import
 import unittest
 
+from time import gmtime
 from spelltrigger import SpellTrigger
 from staffevent import StaffEvent
-from time import gmtime
+
 
 class TestSpellTrigger(unittest.TestCase):
 
     def test_constructor(self):
         spell_trigger = SpellTrigger('Abracadabra')
-        self.assertTrue( isinstance(spell_trigger, SpellTrigger) )
+        self.assertTrue(isinstance(spell_trigger, SpellTrigger))
 
     def test_get_name(self):
         spell_trigger = SpellTrigger('Abracadabra')
@@ -34,6 +35,7 @@ class TestSpellTrigger(unittest.TestCase):
         spell_trigger = SpellTrigger('Button1')
         staff_event = StaffEvent(spell_trigger.get_name(), gmtime())
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
+
 
 if __name__ == '__main__':
     unittest.main()

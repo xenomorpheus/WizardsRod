@@ -1,7 +1,16 @@
 
 
 """
-An event that occurs on the staff.  Spells will be triggered by a sequence of these events.
+An event that occurs on the staff.
+
+"""
+
+
+class StaffEvent():
+
+    """
+
+Events - Spells will be triggered by a sequence of these events.
 
 * A button is pressed.
 * A gesture/stamp of the staff
@@ -9,10 +18,7 @@ An event that occurs on the staff.  Spells will be triggered by a sequence of th
 * A pressure change
 * Reaching a GPS location
 
-"""
-
-
-class StaffEvent():
+    """
 
     def __init__(self, name: str, created) -> None:
         self.name = name

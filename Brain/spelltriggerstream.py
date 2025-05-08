@@ -2,7 +2,6 @@ class SpellTriggerStream():
 
 #    def __init__(self):
 
-
     def __str__(self):
         return str(self.__dict__)
 

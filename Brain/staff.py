@@ -1,6 +1,7 @@
 from spell import Spell
 from spelllistprepared import SpellListPrepared
 
+
 class Staff():
 
     def __init__(self, name: str) -> None:
@@ -28,8 +29,7 @@ class Staff():
 
     def __get_new_staff_events(self):
         # TODO Poll hardware_hints hardware for events
-        return[] # TODO
-
+        return[]  # TODO
 
     def run(self) -> None:
         # looking for staff events to trigger spells

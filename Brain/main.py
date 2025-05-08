@@ -1,6 +1,6 @@
 """
 
-Example calling code
+Some examples to show how to call the code.
 
 """
 
@@ -10,9 +10,24 @@ from const.spellhardwareconst import SpellHardwareConst
 from spell import Spell
 from staff import Staff
 
-class Main():
+class Main():# pylint: disable=too-few-public-methods
 
-    def main(self):
+    """
+
+    Some examples to show how to call the code.
+
+    """
+
+
+    @staticmethod
+    def main():
+
+        """
+
+        Some examples to show how to call the code.
+
+        """
+
         fireball_trigger_sequence = [
             SpellTriggerGestureConst.Pointing_Upwards,
             SpellTriggerGestureConst.Leaning_Forwards_Upwards,
@@ -26,5 +41,4 @@ class Main():
         Staff("MyStaff").spell_add(fireball).run()
 
 if __name__ == '__main__':
-    main = Main()
-    main.main()
+    Main.main()

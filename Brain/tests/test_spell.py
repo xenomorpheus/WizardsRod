@@ -12,15 +12,15 @@ class TestSpellTrigger(unittest.TestCase):
     def setUpClass(cls):
         cls.name = "Test Spell"
         cls.spell_trigger_list = [gesture.Pointing_Upwards,
-            gesture.Leaning_Forwards_Upwards,
-            gesture.Horizontal,
-            gesture.Leaning_Forwards_Downwards,
-            gesture.Pointing_Downwards ]
+                                  gesture.Leaning_Forwards_Upwards,
+                                  gesture.Horizontal,
+                                  gesture.Leaning_Forwards_Downwards,
+                                  gesture.Pointing_Downwards ]
         cls.spell_trigger_timeout = 6
 
     def test_constructor(self):
         spell = Spell(name=self.name)
-        self.assertTrue( isinstance(spell, Spell) )
+        self.assertTrue(isinstance(spell, Spell))
 
     def test_get_name(self):
         spell = Spell(name=self.name)
