@@ -22,10 +22,10 @@ Events are immutable
 
     """
 
-    def __init__(self, name, created, event_type='none') -> None:
+    def __init__(self, name, created, type='none') -> None:
         self.name = name
         self.created = created
-        self.event_type = event_type
+        self.type = type
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, StaffEvent):
@@ -33,7 +33,7 @@ Events are immutable
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.name, self.created, self.event_type))
+        return hash((self.name, self.created, self.type))
 
     def get_name(self) -> str:
         """ get name """
@@ -44,5 +44,5 @@ Events are immutable
         return self.created
 
     def get_type(self) -> str:
-        """ get event_type """
-        return self.event_type
+        """ get type """
+        return self.type

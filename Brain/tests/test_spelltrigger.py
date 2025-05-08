@@ -71,13 +71,13 @@ class TestSpellTrigger(unittest.TestCase):
     def test_is_triggerd_by_with_type(self):
         """ test """
         spell_trigger = SpellTrigger('TEST_01', type='foo')
-        staff_event = StaffEvent('TEST_01', gmtime(), event_type='foo')
+        staff_event = StaffEvent('TEST_01', gmtime(), type='foo')
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
 
     def test_is_triggerd_by_with_wrong_type(self):
         """ test """
         spell_trigger = SpellTrigger('TEST_01', type='foo')
-        staff_event = StaffEvent('TEST_01', gmtime(), event_type='wrong')
+        staff_event = StaffEvent('TEST_01', gmtime(), type='wrong')
         self.assertFalse(spell_trigger.is_triggerd_by(staff_event))
 
 
