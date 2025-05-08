@@ -28,7 +28,6 @@ class SpritePrint:
         width, height = im.size
         sprite_count = int(width / SPRITE_WIDTH)
 
-
         for sprite_idx in range(sprite_count):
             sprite_offset = sprite_idx * SPRITE_WIDTH
             red_max = 0

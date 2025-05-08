@@ -1,13 +1,12 @@
 from colorcycletemplate import ColorCycleTemplate
 
-class LedGridTemplate(ColorCycleTemplate):
-    """ convert (x,y) into absolute pixel on a single strip.
+class LedGrid(ColorCycleTemplate):
+    """ convert (x,y) coordinate into absolute pixel on a single strip.
     Left top corner is (0,0).
     The grid is formed by a taking a single strip and folding
-    into a snake pattern, starting on the right, and always
-    folding to the left.  """
+    into a snake pattern, starting to the right, and always
+    folding below.  """
 
-    strip = None
     x_size = 0
     y_size = 0
 
@@ -26,14 +25,13 @@ class LedGridTemplate(ColorCycleTemplate):
     def __to_pixel(self, x, y):
         """ convert (x,y) into absolute pixel.
         Left top corner is (0,0)
-        The grid is formed by a snake pattern, starting on the
-        right, and folding left.  """
+        The grid is formed by a snake pattern, starting to the
+        right, and folding below.  """
         pixel = (self.x_size - 1 - x) * self.y_size
         if (x % 2 == 0 ):
             pixel += y
         else:
             pixel += self.y_size - 1 - y
-        #print ("x={}, y={}, pixel={}".format(x,y, pixel))
         return pixel
 
     def set_xy_rgb(self, strip, x, y, rgb_colour):
@@ -48,5 +46,4 @@ class LedGridTemplate(ColorCycleTemplate):
             strip.set_pixel_rgb(self.__to_pixel(x, y), rgb_colour)
 
     def set_pixel_xy(self, strip, x, y, red, green, blue):
-        #rgb_colour = (( red & 0xFF ) << 16) + (( green & 0xFF) << 8) + ( blue & 0xFF )
         strip.set_pixel(self.__to_pixel(x, y), red, green, blue)

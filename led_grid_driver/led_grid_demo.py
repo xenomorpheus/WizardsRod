@@ -5,6 +5,9 @@ Sample script to run a few colour tests on the strip.
 
 PYTHONPATH=./APA102_Pi:. ./led_grid_driver_demo.py
 
+1. HAL9000 text and red eye shown as a a static display.
+2. Knightrider red eye bounces backwards and forwards.
+
 
 """
 from hal9000 import Hal9000

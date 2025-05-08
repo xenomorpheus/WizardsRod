@@ -1,7 +1,9 @@
-from ledgridtemplate import LedGridTemplate
+from led_grid import LedGrid
 from unicodedata import bidirectional
 
-class KnightRider(LedGridTemplate):
+class KnightRider(LedGrid):
+    """ The classic red dot moving side to side like KnightRider (and Cylons)
+    is displayed on a LED grid. """
 
     eye_c = 0xFF0000  # red
     background_c = 0x000000  # black

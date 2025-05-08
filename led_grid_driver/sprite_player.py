@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-# Inspired by https://stackoverflow.com/questions/138250/how-can-i-read-the-rgb-value-of-a-given-pixel-in-python
-# Using Pillow library http://python-pillow.org/
-# install PIL using the command "sudo apt-get install python-imaging" and run the following program.
-# It will print RGB values of the image. If the image is large redirect the output to a file using '>' later open the file to see RGB values
 
 from PIL import Image
 from pprint import pprint
-from ledgridtemplate import LedGridTemplate
-from unicodedata import bidirectional
+from led_grid import LedGrid
+#from unicodedata import bidirectional
 
 
-class SpritePlayer(LedGridTemplate):
+class SpritePlayer(LedGrid):
+    """
+     Draw onto a LED grid the contents of a sprite file.
+
+     Using Pillow library http://python-pillow.org/
+     Install PIL using the command "sudo apt-get install python-imaging" and run the following program.
+    """
 
     def set_sprite_filename(self, filename):
         im = Image.open(filename, 'r').convert('RGB')
