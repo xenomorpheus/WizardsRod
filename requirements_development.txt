@@ -1,0 +1,6 @@
+pytest
+coverage
+pylint
+mypy
+pycodestyle
+pydoc

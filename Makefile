@@ -1,6 +1,8 @@
 init:
-	pip3 install -r requirements.txt
-
+	# TODO remove --user
+	pip3 install --user -r requirements.txt
+	# TODO where to put modules required for development?
+	pip3 install --user -r requirements_development.txt
 test:
 	py.test brain/tests
 
