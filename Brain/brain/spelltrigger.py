@@ -32,4 +32,4 @@ class SpellTrigger():
         """ For simple triggers, the types just need to match. """
         return (issubclass(type(event), StaffEvent)) and (
             self.get_name() == event.get_name() and
-            self.get_type() == event.get_event_type())
+            self.get_type() == event.get_type())

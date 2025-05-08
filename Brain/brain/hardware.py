@@ -21,6 +21,6 @@ class Hardware():
         """ get the name """
         return self.name
 
-    def get_hardware_type(self) -> str:
+    def get_type(self) -> str:
         """ get the hardware_type """
         return self.hardware_type

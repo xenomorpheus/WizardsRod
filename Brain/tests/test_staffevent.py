@@ -17,7 +17,7 @@ class TestStaffEvent(unittest.TestCase):
         """ test """
         staff_event = StaffEvent('TEST_01', 0, 'sometype')
         self.assertEqual('sometype', staff_event.
-                         get_event_type())
+                         get_type())
 
     def test_get_name(self):
         """ test """
@@ -30,11 +30,11 @@ class TestStaffEvent(unittest.TestCase):
         staff_event = StaffEvent('TEST_01', 99)
         self.assertEqual(99, staff_event.get_created())
 
-    def test_get_event_type(self):
+    def test_get_type(self):
         """ test """
         staff_event = StaffEvent('TEST_01', 0)
         self.assertEqual('none', staff_event.
-                         get_event_type())
+                         get_type())
 
     def test_equal(self):
         """ test """

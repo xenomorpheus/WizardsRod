@@ -43,6 +43,6 @@ Events are immutable
         """ get time/date event was created """
         return self.created
 
-    def get_event_type(self) -> str:
+    def get_type(self) -> str:
         """ get event_type """
         return self.event_type
