@@ -51,12 +51,14 @@ class TestSpellListPrepared(unittest.TestCase):
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
     def test_receive_events_no_spells_no_events(self):
+        # pylint: disable=R0201
         """ test """
         slp = SpellListPrepared(None)
         new_events = []
         slp.receive_events(new_events)
 
     def test_receive_events_no_spells_some_events(self):
+        # pylint: disable=R0201
         """ test """
         slp = SpellListPrepared(None)
         new_events = [const.EVENT["TEST_01"], const.EVENT["TEST_02"]]
