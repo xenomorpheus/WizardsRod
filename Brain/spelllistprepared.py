@@ -10,13 +10,13 @@ class SpellListPrepared():
         self.spell_map = {}
         # special hardware requirements
         self.spell_hardware = {}
-        # The trigger of the prepared spells, keyed by trigger name
+        # Only the triggers of the prepared spells. keyed by trigger name
         self.spell_triggers_permitted = {}
         # The events in the buffer.
         # Only events that trigger prepared spells will be kept.
         self.event_pending_list = []
         # Spells that have received some of the triggers
-        self.spell_trigger_list_by_spell_name_map = {}
+        self.spell_trigger_sequence_all = {}
         self.__recalculate_spell_triggers()
 
     # work out what events could progress a prepared spell
@@ -64,25 +64,42 @@ class SpellListPrepared():
                 count += 1
         return count
 
-    # consume spell triggers. Work out if any spells have hit all the triggers in sequence
+    # consume spell triggers. Work out if any spells have hit all the triggers in sequence.
+    # TODO not finished
     def getTriggeredSpells(self):
         triggered_spells_list = []
-        spell_trigger_list_by_spell_name_map = self.spell_trigger_list_by_spell_name_map
+        spell_trigger_sequence_all = self.spell_trigger_sequence_all
 
         # consume spell triggers.
         event_pending_list = self.event_pending_list
         while(len(event_pending_list)):
             event = event_pending_list.pop(0)
+            print "Saw event:" + event.getName()
 
-            # Cancel partially completed spells if they timeout.
-            trigger_created_time = event.getCreated()
-            for spell_name, spell_trigger_list in spell_trigger_list_by_spell_name_map.iteritems():
-                spell_trigger_list[:] = [trigger for trigger in spell_trigger_list if trigger.timeout < trigger_created_time]
+            event_created_time = event.getCreated()
+            for spell_name, sequence_list in spell_trigger_sequence_all.iteritems():
+                print spell_name
+                spell = spell_map[spell_name]
 
-            # if spell is waiting for that trigger next, then progress the spell to the next symbol or mark as complete.
-            # TODO for spell_name, spell_trigger_list in spell_trigger_list_by_spell_name_map.iteritems():
+                # Delete partially completed spell sequences if they timeout.
+                sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence.timeout]
 
-            # Next add any spells to the map
+                # If spell is waiting for that trigger next, then progress the spell to the next event or mark as complete.
+                for sequence in sequence_list:
+                    trigger_list = spell.getTriggerList()
+                    if (trigger_list[sequence.trigger_wanted].getName() == event.getEvent().getName()):
+                        if ((len(trigger_list) - 1) < sequence.trigger_wanted):
+                            # progress to waiting for next event in trigger sequence
+                            sequence.trigger_wanted += 1
+                        else:
+                            # all triggers matched
+                            sequence.timeout = 0 # TODO delete from trigger list
+                            triggered_spells_list.append(spell)
 
-        return triggered_spells_list  # TODO not finished
+            # If zeroth trigger, add the sequence to the list.
+            for spell_name, spell in self.spell_map.iteritems():
+                if (spell.getTriggerList()[0].getName() == event.getEvent().getName()):
+                    spell_trigger_sequence_all[spell_name].append({ "trigger_wanted" : 1, "timeout" : event_created_time + spell.getTimeout() })
+
+        return triggered_spells_list
 
