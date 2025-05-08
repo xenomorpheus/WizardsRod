@@ -1,8 +1,17 @@
-all: test lint
+all: test cover lint
 
 test:
 	#PYTHONPATH=. py.test tests
 	python3 -m pytest tests/*.py
+
+cover:
+	coverage3 erase
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelllistprepared.py
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spell.py
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltriggergesture.py
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltrigger.py
+	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staffevent.py
+	coverage3 report -m --skip-covered
 
 lint:
 	pylint --py3k *.py tests/*.py

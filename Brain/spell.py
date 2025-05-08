@@ -18,9 +18,6 @@ class Spell():
         self.hardware_list = []
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS, Accelerometer """
 
-    def __str__(self):
-        return self.getName()
-
     def getName(self):
         return self.name
 
