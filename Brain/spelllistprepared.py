@@ -107,10 +107,10 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             self.__recalculate_spell_triggers()
         return self
 
-    def recieve_events(self, new_events: List[StaffEvent]) -> None:
+    def receive_events(self, new_events: List[StaffEvent]) -> None:
         """ accept events """
         for event in new_events:
-            self.recieve_event(event)
+            self.receive_event(event)
 
     def recieve_event(self, event: StaffEvent) -> None:
         """ Consume staff events. Determine which, if any, spells have had all
