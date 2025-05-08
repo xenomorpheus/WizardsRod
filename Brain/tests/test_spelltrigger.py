@@ -1,6 +1,8 @@
 import unittest
 
 from spelltrigger import SpellTrigger
+from staffevent import StaffEvent
+from time import gmtime
 
 class TestSpellTrigger(unittest.TestCase):
 
@@ -18,6 +20,11 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(st1, st2)
         self.assertNotEqual(st1, st3)
 
+    def test_isTriggerdBy(self):
+        name = 'Button1'
+        st = SpellTrigger(name)
+        se = StaffEvent(name, st, gmtime())
+        self.assertTrue(st.isTriggerdBy(se))
 
 if __name__ == '__main__':
     unittest.main()
