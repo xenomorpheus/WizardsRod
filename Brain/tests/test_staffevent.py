@@ -10,30 +10,30 @@ class TestStaffEvent(unittest.TestCase):
 
     def test_constructor(self):
         """ test """
-        staff_event = StaffEvent('TEST_01', 0)
-        self.assertTrue(isinstance(staff_event, StaffEvent))
+        event = StaffEvent('TEST_01', 0)
+        self.assertTrue(isinstance(event, StaffEvent))
 
     def test_constructor_with_type(self):
         """ test """
-        staff_event = StaffEvent('TEST_01', 0, 'sometype')
-        self.assertEqual('sometype', staff_event.
+        event = StaffEvent('TEST_01', 0, 'sometype')
+        self.assertEqual('sometype', event.
                          get_type())
 
     def test_get_name(self):
         """ test """
-        staff_event = StaffEvent('TEST_01', 0)
-        self.assertEqual('TEST_01', staff_event.
+        event = StaffEvent('TEST_01', 0)
+        self.assertEqual('TEST_01', event.
                          get_name())
 
     def test_get_created(self):
         """ test """
-        staff_event = StaffEvent('TEST_01', 99)
-        self.assertEqual(99, staff_event.get_created())
+        event = StaffEvent('TEST_01', 99)
+        self.assertEqual(99, event.get_created())
 
     def test_get_type(self):
         """ test """
-        staff_event = StaffEvent('TEST_01', 0)
-        self.assertEqual('none', staff_event.
+        event = StaffEvent('TEST_01', 0)
+        self.assertEqual('none', event.
                          get_type())
 
     def test_equal(self):

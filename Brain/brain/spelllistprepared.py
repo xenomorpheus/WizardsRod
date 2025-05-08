@@ -81,8 +81,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         timeout_max = 0
         for spell in self.spell_dict.values():
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
-            for spell_trigger in spell.get_trigger_sequence():
-                self.spell_triggers_permitted.add(spell_trigger)
+            for trigger in spell.get_trigger_sequence():
+                self.spell_triggers_permitted.add(trigger)
             for hardware in spell.get_hardware_set():
                 self.spell_hardware.add(hardware)
         self.spell_trigger_event_timeout = timeout_max
