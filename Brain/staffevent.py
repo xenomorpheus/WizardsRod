@@ -5,8 +5,6 @@ An event that occurs on the staff.
 
 """
 
-from spelltriggertype import SpellTriggerType
-
 
 class StaffEvent():
 
@@ -21,12 +19,14 @@ Events - Spells will be triggered by a sequence of these events.
 * Reaching a GPS location
 
     """
-    event_type: SpellTriggerType
+    name: str
     created: int
+    event_type: str
 
-    def __init__(self, event_type, created) -> None:
-        self.event_type = event_type
+    def __init__(self, name, created, event_type='none') -> None:
+        self.name = name
         self.created = created
+        self.event_type = event_type
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, StaffEvent):
@@ -34,12 +34,16 @@ Events - Spells will be triggered by a sequence of these events.
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.event_type, self.created))
+        return hash((self.name, self.created, self.event_type))
 
-    def get_event_type(self) -> SpellTriggerType:
-        """ get event_type """
-        return self.event_type
+    def get_name(self) -> str:
+        """ get name """
+        return self.name
 
     def get_created(self) -> int:
         """ get time/date event was created """
         return self.created
+
+    def get_event_type(self) -> str:
+        """ get event_type """
+        return self.event_type

@@ -1,7 +1,6 @@
 """ spell trigger """
 
 from staffevent import StaffEvent
-from spelltriggertype import SpellTriggerType
 
 
 class SpellTrigger():
@@ -10,7 +9,7 @@ class SpellTrigger():
     is met. """
 
     name: str
-    trigger_type: SpellTriggerType
+    trigger_type: str
 
     def __init__(self, name: str, trigger_type='none') -> None:
         self.name = name
@@ -22,17 +21,18 @@ class SpellTrigger():
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.trigger_type))
+        return hash((self.name, self.trigger_type))
 
     def get_name(self) -> str:
         """ get the name """
         return self.name
 
-    def get_trigger_type(self) -> SpellTriggerType:
+    def get_trigger_type(self) -> str:
         """ get the trigger_type """
         return self.trigger_type
 
     def is_triggerd_by(self, event: StaffEvent):
         """ For simple triggers, the types just need to match. """
         return (issubclass(type(event), StaffEvent)) and (
+            self.get_name() == event.get_name() and
             self.get_trigger_type() == event.get_event_type())

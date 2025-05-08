@@ -2,7 +2,6 @@
 
 from spell import Spell
 from spelltrigger import SpellTrigger
-from spelltriggertype import SpellTriggerType
 from spelltriggergesture import SpellTriggerGesture
 from staffevent import StaffEvent
 
@@ -18,16 +17,13 @@ HARDWARE = {_HW_GPS: _HW_GPS,
 # Generic spell trigger objects
 
 # Only for tests.
-_TRIGGER_TYPE_STR01 = "TEST_01"
-_TRIGGER_TYPE_STR02 = "TEST_02"
-_TRIGGER_TYPE_STR03 = "TEST_03"
-_STT_TEST01 = SpellTriggerType(_TRIGGER_TYPE_STR01)
-_STT_TEST02 = SpellTriggerType(_TRIGGER_TYPE_STR02)
-_STT_TEST03 = SpellTriggerType(_TRIGGER_TYPE_STR03)
+_STT_TEST01 = "TEST_01"
+_STT_TEST02 = "TEST_02"
+_STT_TEST03 = "TEST_03"
 
-SPELL_TRIGGER_TYPE = {_STT_TEST01.get_name(): _STT_TEST01,
-                      _STT_TEST02.get_name(): _STT_TEST02,
-                      _STT_TEST03.get_name(): _STT_TEST03, }
+SPELL_TRIGGER_TYPE = {_STT_TEST01: _STT_TEST01,
+                      _STT_TEST02: _STT_TEST02,
+                      _STT_TEST03: _STT_TEST03, }
 
 # spell trigger that are gestures AKA movement
 _G_POINTING_UPWARDS = SpellTriggerGesture("POINTING_UPWARDS")
@@ -49,12 +45,12 @@ ST_GESTURE = {'POINTING_UPWARDS': _G_POINTING_UPWARDS,
 
 # Only for test spells
 _SE_TEST_01 = StaffEvent(_STT_TEST01, 0)
-_SE_TEST_02 = StaffEvent(_STT_TEST02, 0)
+_SE_TEST_01 = StaffEvent(_STT_TEST02, 0)
 _SE_TEST_03 = StaffEvent(_STT_TEST03, 0)
 
-EVENT = {_TRIGGER_TYPE_STR01: _STT_TEST01,
-         _TRIGGER_TYPE_STR02: _STT_TEST02,
-         _TRIGGER_TYPE_STR03: _STT_TEST03}
+EVENT = {_STT_TEST01: _SE_TEST_01,
+         _STT_TEST03: _SE_TEST_01,
+         _STT_TEST02: _SE_TEST_03}
 
 # A master list of spells.
 # TestSpells are only for unit tests

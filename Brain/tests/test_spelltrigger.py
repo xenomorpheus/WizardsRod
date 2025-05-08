@@ -58,9 +58,21 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_is_triggerd_by(self):
         """ test """
-        spell_trigger = SpellTrigger('my trigger', const.SPELL_TRIGGER_TYPE['TEST_01'])
-        staff_event = StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_01'], gmtime())
+        spell_trigger = SpellTrigger('TEST_01')
+        staff_event = StaffEvent('TEST_01', gmtime())
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
+
+    def test_is_triggerd_by_with_type(self):
+        """ test """
+        spell_trigger = SpellTrigger('TEST_01', trigger_type='foo')
+        staff_event = StaffEvent('TEST_01', gmtime(), event_type='foo')
+        self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
+
+    def test_is_triggerd_by_with_wrong_type(self):
+        """ test """
+        spell_trigger = SpellTrigger('TEST_01', trigger_type='foo')
+        staff_event = StaffEvent('TEST_01', gmtime(), event_type='wrong')
+        self.assertFalse(spell_trigger.is_triggerd_by(staff_event))
 
 
 if __name__ == '__main__':
