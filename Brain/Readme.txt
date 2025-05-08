@@ -1,49 +1,22 @@
+This code is the orchestration of the wizards staff.  The wizards staff has a micro-controller running a bunch of sensors, emitters and other hardware.  The aim is when the staff is moved in certain ways, and/or buttons pressed, certain lights and other effects are triggered.
 
-The smarts of the staff.
+Keeping with the theme of a wizards staff, we introduce various concepts:
 
-Let us think about it from the use case.  We are going to have a stream of Staff events flowing in, presumably from hardware.
-We are going to need to know if we have performed the correct events to trigger a Spell.
+  spell - Is a definition of what staff effects we want to happen when a sequence of events are received in a particular time period.
 
-My thoughts are as follows:
+  prepared spells - Only prepared spells look for staff events and perform staff effects. That way we can choose the sub-set of spells that are active at given time.
 
-* We will have the concept of a spell - when certain staff events occur in sequence, an effect
-    in generated.
-* We will have a collection of spells which are known, but dormant.
-* We have a set of "Prepared" spells, which we want to fire if certain staff movements (etc) are preformed.
-* We have a stream of events, and new events are added to an end.
-* We need to see if any of the prepared spells have been triggered.
+  staff event - A hardware event on the staff e.g. button press, staff moved horizontal, GPS location reached, time reached, prox-card reader, etc.
 
-I think something like.
+  trigger - Code that recognises a staff event.
+
+  trigger sequence - A sequence of trigger events to listen for.
+
+  trigger time-out - The maximum time to wait for an entire trigger sequence.
+
+  action - Some staff output e.g. flash lights, play sound, blutooth communication, etc.
 
 
-    __fireball_triggers = [SpellTriggerGestureConst.Pointing_Upwards,
-      SpellTriggerGestureConst.Leaning_Forwards_Upwards,
-      SpellTriggerGestureConst.Horizontal,
-      SpellTriggerGestureConst.Leaning_Forwards_Downwards,
-      SpellTriggerGestureConst.Pointing_Downwards ]
-
-    spell1 = Spell("Fireball").setTriggerActions(__fireball_triggers).setTriggerTimeout(6)
-    spell2 = ...
-    spell3 = ...
-
-    # preparing a spell list
-    prepared_spells = SpellListPrepared('MyList')
-    prepared_spells.spellAddList([spell1, spell2, spell3])
-    prepared_spells.spellAdd(spell4)
-    prepared_spells.spellDel('spell name')
-
-    # Some spells might need special hardware, e.g. GPS
-    hw_hints = prepared_spells.getHardwareHints()
-
-    # looking for staff events to trigger spells
-    while True:
-        new_staff_event_list = getNewStaffEvennts(hw_hints=hw_hints) # get new staff events
-        accepted_count = prepared_spells.acceptActions(new_staff_event_list)
-        if (accepted_count > 0):
-            triggered_spells_list = prepared_spells.getTriggeredSpells()
-            for spell in triggered_spells_list:
-                # do spell stuff e.g. sound effects
-                spell.performActions()
 
 
 

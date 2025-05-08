@@ -11,22 +11,22 @@ class Spell():
     def __init__(self, name):
         self.name = name
         """ Name of the spell """
-        self.trigger_list = []
+        self.trigger_sequence = []
         """ Ordered steps required to trigger the spell """
         self.trigger_timeout = 0
         """ Maximum time to complete the spell. """
-        self.hardware_list = []
+        self.hardware_set = []
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS, Accelerometer """
 
     def getName(self):
         return self.name
 
-    def setTriggerList(self, trigger_list):
-        self.trigger_list = trigger_list
+    def setTriggerSequence(self, trigger_sequence):
+        self.trigger_sequence = trigger_sequence
         return self
 
-    def getTriggerList(self):
-        return self.trigger_list
+    def getTriggerSequence(self):
+        return self.trigger_sequence
 
     def setTriggerTimeout(self, trigger_timeout):
         self.trigger_timeout = trigger_timeout
@@ -35,12 +35,12 @@ class Spell():
     def getTriggerTimeout(self):
         return self.trigger_timeout
 
-    def setHardwareList(self, hardware_list):
-        self.hardware_list = hardware_list
+    def setHardwareSet(self, hardware_set):
+        self.hardware_set = hardware_set
         return self
 
-    def getHardwareList(self):
-        return self.hardware_list
+    def getHardwareSet(self):
+        return self.hardware_set
 
     def performActionns(self):
         # TODO stuff

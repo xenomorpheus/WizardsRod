@@ -59,7 +59,7 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_acceptEvents_some_spells_some_events(self):
         self.longMessage=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
+        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # Gesture Test03 will be ignored
         events = [
@@ -73,7 +73,7 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_acceptEvents_some_spells_unwanted_events(self):
         self.longMessage=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
+        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         events = [
             StaffEvent("Event 03", gesture.Test03, 4)]
@@ -99,7 +99,7 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_getTriggeredSpells_some_spells(self):
         self.longMessage=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerList(triggers)
+        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # Gesture Test03 will be ignored
         events = [
@@ -112,8 +112,8 @@ class TestSpellListPrepared(unittest.TestCase):
 
     def test_getHardwareHints(self):
         self.longMessage=True
-        TestSpell01 = Spell("Test Spell 01").setHardwareList([ 'Button01'])
-        TestSpell02 = Spell("Test Spell 02").setHardwareList([ 'Button02', 'Button03'])
+        TestSpell01 = Spell("Test Spell 01").setHardwareSet([ 'Button01'])
+        TestSpell02 = Spell("Test Spell 02").setHardwareSet([ 'Button02', 'Button03'])
         slp = SpellListPrepared('MyList').spellAddList([TestSpell01,TestSpell02])
         hwl = slp.getHardwareHints()
         self.assertEqual([ 'Button01','Button02', 'Button03'], hwl)

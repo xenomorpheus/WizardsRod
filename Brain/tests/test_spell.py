@@ -25,11 +25,11 @@ class TestSpellTrigger(unittest.TestCase):
         st = Spell(name=self.name)
         self.assertEqual(self.name, st.getName())
 
-    def test_TriggerList(self):
+    def test_TriggerSequence(self):
         st = Spell(name=self.name)
-        st_got = st.setTriggerList(self.spell_trigger_list)
+        st_got = st.setTriggerSequence(self.spell_trigger_list)
         self.assertEqual(st, st_got)
-        sta_got = st.getTriggerList()
+        sta_got = st.getTriggerSequence()
         self.assertEqual(self.spell_trigger_list, sta_got)
 
     def test_TriggerTimeout(self):
@@ -39,12 +39,12 @@ class TestSpellTrigger(unittest.TestCase):
         stt_got = st.getTriggerTimeout()
         self.assertEqual(self.spell_trigger_timeout, stt_got)
 
-    def test_HardwareList(self):
+    def test_HardwareSet(self):
         hwlist = [hw.ACCELEROMETER]
         st = Spell(name=self.name)
-        st_got = st.setHardwareList(hwlist)
+        st_got = st.setHardwareSet(hwlist)
         self.assertEqual(st, st_got)
-        hw_got = st.getHardwareList()
+        hw_got = st.getHardwareSet()
         self.assertEqual(hwlist, hw_got)
 
 
