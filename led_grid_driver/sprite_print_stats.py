@@ -26,13 +26,14 @@ class SpritePrint:
     def __init__(self):
         pass
 
-    def sprite_print_stats(self, filename):
+    def sprite_print_stats(self, filename: str):
 
         SPRITE_WIDTH = 3
         im = Image.open(filename)
         rgb_img = im.convert('RGB')
         width, height = rgb_img.size
         sprite_count = int(width / SPRITE_WIDTH)
+        print("filename={}".format(filename))
         print("width={},height={}, sprite_count={}".format(
             width, height, sprite_count))
 
@@ -48,7 +49,7 @@ class SpritePrint:
             for x in range(SPRITE_WIDTH):
                 for y in range(height):
                     rgb = rgb_img.getpixel((x + sprite_offset, y))
-                    pprint("x={}, y={}, RGB={}".format(x, y, rgb))
+                    # pprint("x={}, y={}, RGB={}".format(x, y, rgb))
                     red, blue, green = rgb
                     red_max = max(red, red_max)
                     green_max = max(green, green_max)
