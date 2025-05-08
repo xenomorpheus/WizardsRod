@@ -39,7 +39,7 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_spellDel(self):
         self.longMessage=True
         slp = SpellListPrepared('MyList')
-        slp_got = slp.spellDel(self.spell.getName)
+        slp_got = slp.spellDel(self.spell.name)
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
     def test_acceptEvents_no_spells_no_events(self):

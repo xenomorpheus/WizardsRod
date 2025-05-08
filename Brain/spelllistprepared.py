@@ -53,7 +53,7 @@ class SpellListPrepared():
         self.spell_triggers_permitted.clear()
         self.spell_hardware.clear()
         timeout_max = 0
-        for spell_name, spell in self.spell_map.iteritems():
+        for spell in self.spell_map.values():
             timeout_max = max(timeout_max , spell.getTriggerTimeout())
             for spell_trigger in spell.getTriggerList():
                 self.spell_triggers_permitted[spell_trigger.getName()] = spell_trigger
@@ -76,7 +76,7 @@ class SpellListPrepared():
         return self
 
     def spellDel(self, spellName):
-        if (self.spell_map.has_key(spellName)):
+        if (spellName in self.spell_map):
             del self.spell_map[spellName]
             self.__recalculate_spell_triggers()
         return self
@@ -104,7 +104,7 @@ class SpellListPrepared():
             event = event_pending_list.pop(0)
 
             event_created_time = event.getCreated()
-            for spell_name, sequence_list in spell_trigger_sequence_all.iteritems():
+            for spell_name, sequence_list in spell_trigger_sequence_all.items():
                 spell = self.spell_map[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
@@ -124,7 +124,8 @@ class SpellListPrepared():
                             triggered_spells_list.append(spell)
 
             # If zeroth trigger, add the sequence to the list.
-            for spell_name, spell in self.spell_map.iteritems():
+            for spell in self.spell_map.values():
+                spell_name = spell.name
                 if (spell.getTriggerList()[0].isTriggerdBy(event)):
                     if (not spell_name in spell_trigger_sequence_all):
                         spell_trigger_sequence_all[spell_name] = []
