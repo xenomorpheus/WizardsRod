@@ -95,7 +95,7 @@ class TestSpellListPrepared(unittest.TestCase):
         new_events = []
         slp.acceptEvents(new_events)
         triggerd_spells = slp.getTriggeredSpells()
-        self.assertEqual([], triggerd_spells, 'no triggerd spells')
+        self.assertEqual([], triggerd_spells, 'no triggered spells')
 
     def test_getTriggeredSpells_some_spells(self):
         self.longMessage=True
