@@ -14,9 +14,16 @@ import const
 class TestSpellListPrepared(unittest.TestCase):
     """ test """
 
+
     @classmethod
-    def setUpClass(cls):
+    def setUp(self):
+        self.perform_action_calls = set()
         """ setup all tests """
+
+    def perform_action(self, spell, staff):
+        """ detect if this method was called.
+        simulate the spell performing actions. """
+        self.perform_action_calls.add(staff.name+"="+spell.name)
 
     def test_constructor(self):
         """ test """
@@ -48,17 +55,13 @@ class TestSpellListPrepared(unittest.TestCase):
         """ test """
         slp = SpellListPrepared(None)
         new_events = []
-        self.perform_action_calls = set()
         slp.recieve_events(new_events)
-        self.assertFalse(self.perform_action_calls)
 
     def test_recieve_events_no_spells_some_events(self):
         """ test """
         slp = SpellListPrepared(None)
         new_events = [const.EVENT["TEST_01"], const.EVENT["TEST_02"]]
-        self.perform_action_calls = set()
         slp.recieve_events(new_events)
-        self.assertFalse(self.perform_action_calls)
 
     # Only accept events that are for our prepared spells
     def test_recieve_events_some_spells_unwanted_events(self):
@@ -67,26 +70,21 @@ class TestSpellListPrepared(unittest.TestCase):
             SpellTrigger('TEST_01'),
             SpellTrigger('TEST_02')]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
+        test_spell01.set_perform_actions(self.perform_action)
         slp = SpellListPrepared(None).spell_add(test_spell01)
         new_events = [
             StaffEvent('Event 03', 4)]
-        self.perform_action_calls = set()
         slp.recieve_events(new_events)
         self.assertFalse(self.perform_action_calls)
 
     def test_recieve_events_one_spells_no_events(self):
         """ test """
         test_spell01 = Spell('Test Spell 01')
+        test_spell01.set_perform_actions(self.perform_action)
         slp = SpellListPrepared(None).spell_add(test_spell01)
         new_events = []
-        self.perform_action_calls = set()
         slp.recieve_events(new_events)
         self.assertFalse(self.perform_action_calls)
-
-    def perform_action(self, spell, staff):
-        """ detect if this method was called.
-        simulate the spell performing actions. """
-        self.perform_action_calls.add(staff.name+"="+spell.name)
 
     def test_recieve_events_some_spells(self):
         """ test """
@@ -103,7 +101,6 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent('TEST_01', 4),
             StaffEvent('TEST_02', 4),
             StaffEvent('TEST_03', 4)]
-        self.perform_action_calls = set()
         slp.recieve_events(events)
         self.assertEqual(set([staff.name+"="+test_spell01.name]),
                          self.perform_action_calls)
