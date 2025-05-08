@@ -5,9 +5,10 @@ objects.
 
 
 """
-from typing import List
+from typing import Any, Dict, List, Set
 from spell import Spell
 from staffevent import StaffEvent
+from spelltrigger import SpellTrigger
 
 
 class SpellListPrepared():
@@ -55,13 +56,13 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.staff = staff
         """ the staff """
         self.spell_trigger_event_timeout = 0
-        self.spell_dict = {}
+        self.spell_dict = {}  # type: Dict[str, Any]
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = set()  # type: Set()
+        self.spell_hardware = set()  # type: Set[str]
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted = set()  # type: Set()
+        self.spell_triggers_permitted = set()  # type: Set[SpellTrigger]
         """ Only the triggers of the prepared spells. keyed by trigger name """
-        self.event_pending_list = []
+        self.event_pending_list = []  # type: List[StaffEvent]
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
         self.spell_trigger_sequence_all = {}

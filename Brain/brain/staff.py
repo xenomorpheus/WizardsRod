@@ -1,7 +1,9 @@
 
 """ The Staff brings together the prepared spells and the hardware. """
+from typing import Dict
 from spell import Spell
 from spelllistprepared import SpellListPrepared
+from hardware import Hardware
 from hardwarefetch import HardwareFetch
 
 
@@ -15,7 +17,7 @@ class Staff():
         """ a list of spells we are waiting for events in order to activate """
         self.hwf = HardwareFetch()
         """ object for fetching hardware interfaces """
-        self.hardware = {}
+        self.hardware = {}  # type: Dict[str, Hardware]
         """ hardware interface objects. keyed by hardware hint string """
 
     def get_name(self) -> str:
