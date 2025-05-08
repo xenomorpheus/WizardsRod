@@ -15,9 +15,9 @@ class Spell():
     def __init__(self, name: str) -> None:
         self.name = name
         """ Name of the spell """
-        self.trigger_sequence = []
+        self.trigger_sequence = [] # type: SpellTriggerSequence
         """ Ordered steps required to trigger the spell """
-        self.trigger_timeout = 0
+        self.trigger_timeout = 0 # type: int
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """
         self.hardware_set = set()
