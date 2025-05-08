@@ -13,6 +13,12 @@ class TestStaffEvent(unittest.TestCase):
         staff_event = StaffEvent('TEST_01', 0)
         self.assertTrue(isinstance(staff_event, StaffEvent))
 
+    def test_constructor_with_type(self):
+        """ test """
+        staff_event = StaffEvent('TEST_01', 0, 'sometype')
+        self.assertEqual('sometype', staff_event.
+                         get_event_type())
+
     def test_get_name(self):
         """ test """
         staff_event = StaffEvent('TEST_01', 0)
@@ -38,6 +44,7 @@ class TestStaffEvent(unittest.TestCase):
         self.assertTrue(staff_event1.__eq__(staff_event2))
         self.assertEqual(staff_event1, staff_event2)
         self.assertNotEqual(staff_event1, staff_event3)
+        self.assertNotEqual(staff_event1, 1)
 
     def test_hash(self):
         """ test """
