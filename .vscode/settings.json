@@ -8,5 +8,8 @@
     "python.testing.pytestEnabled": true,
    // "restructuredtext.confPath": "Brain/",
    // Important! Where to look for projct modules.
-    "python.autoComplete.extraPaths": ["Brain/brain"],
+    "python.autoComplete.extraPaths": [
+        "Brain/brain"
+    ],
+    "restructuredtext.confPath": "",
 }
