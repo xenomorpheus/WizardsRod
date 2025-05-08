@@ -12,14 +12,14 @@ class KnightRider(LedGrid):
     def init(self, strip, num_led):
         """This method is called to initialize a colour program.
         """
-
-    def update(self, strip, num_led, num_steps_per_cycle, current_step,
-               current_cycle):
-
         height = self.get_y()
         width = self.get_x()
         eye_height = int(height * 0.15)  # 15 %
         remainder_height = height - eye_height
+
+    def update(self, strip, num_led, num_steps_per_cycle, current_step,
+               current_cycle):
+
         half_steps = int(num_steps_per_cycle / 2)
 
         offset = int(abs(half_steps - current_step) / half_steps * remainder_height)
