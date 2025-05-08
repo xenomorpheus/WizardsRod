@@ -17,7 +17,7 @@ class main():
 
         fireball = Spell("Fireball").setTriggerSequence(fireball_trigger_sequence).setTriggerTimeout(6). \
             setHardwareSet([SpellHardwareConst.ACCELEROMETER])
-        staff = Staff("MyStaff").spellAdd(fireball).run()
+        Staff("MyStaff").spellAdd(fireball).run()
 
 if __name__ == '__main__':
     main.main()

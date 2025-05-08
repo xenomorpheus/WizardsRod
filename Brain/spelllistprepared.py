@@ -30,7 +30,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
 
 class SpellListPrepared():
 
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
         self.name = name
         self.spell_trigger_event_timeout = 0
         self.spell_map = {}
@@ -46,7 +46,7 @@ class SpellListPrepared():
         """ Spells that have received some of the triggers  """
         self.__recalculate_spell_triggers()
 
-    def __recalculate_spell_triggers(self):
+    def __recalculate_spell_triggers(self) -> None:
         # work out what events could progress a prepared spell.
         # work out maximum time to wait for all triggers to receive events.
         self.spell_trigger_event_timeout = 0
