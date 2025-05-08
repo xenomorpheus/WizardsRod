@@ -29,7 +29,7 @@ class SpellListPrepared():
         for spell_name, spell in self.spell_map.iteritems():
             timeout_max = max(timeout_max , spell.getTriggerTimeout())
             for spell_trigger in spell.getTriggerList():
-                self.spell_triggers_permitted[spell_trigger.getName()] = 1
+                self.spell_triggers_permitted[spell_trigger.getName()] = spell_trigger
             for hardware in spell.getHardwareList():
                 self.spell_hardware[hardware] = 1
         self.spell_trigger_event_timeout = timeout_max
@@ -59,7 +59,7 @@ class SpellListPrepared():
     def acceptEvents(self, new_events):
         count = 0
         for event in new_events:
-            if (self.spell_triggers_permitted.has_key(event.getName())):
+            if any(trigger.isTriggerdBy(event) for trigger in self.spell_triggers_permitted.values()):
                 self.event_pending_list.append(event)
                 count += 1
         return count
@@ -86,7 +86,7 @@ class SpellListPrepared():
                 trigger_list = spell.getTriggerList()
                 for sequence in sequence_list:
                     trigger_wanted_idx = sequence["trigger_wanted_idx"]
-                    if (trigger_list[trigger_wanted_idx].getName() == event.getTrigger().getName()):
+                    if (trigger_list[trigger_wanted_idx].isTriggerdBy(event)):
                         if ((len(trigger_list) - 1) < trigger_wanted_idx):
                             # progress to waiting for next event in trigger sequence
                             trigger_wanted_idx += 1
@@ -97,7 +97,7 @@ class SpellListPrepared():
 
             # If zeroth trigger, add the sequence to the list.
             for spell_name, spell in self.spell_map.iteritems():
-                if (spell.getTriggerList()[0].getName() == event.getTrigger().getName()):
+                if (spell.getTriggerList()[0].isTriggerdBy(event)):
                     if (not spell_name in spell_trigger_sequence_all):
                         spell_trigger_sequence_all[spell_name] = []
                     spell_trigger_sequence_all[spell_name].append({ "trigger_wanted_idx" : 1, "timeout" : event_created_time + spell.getTriggerTimeout() })

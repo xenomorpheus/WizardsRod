@@ -1,5 +1,6 @@
 from spelltrigger import SpellTrigger
 
+
 class SpellTriggerGesture(SpellTrigger):
 
     def __init__(self, name):
@@ -8,7 +9,5 @@ class SpellTriggerGesture(SpellTrigger):
     def __str__(self):
         return self.getName()
 
-    # Only the gesture matters, not the name
-    def matchTrigger(self, other):
-        return self.getName() == other.getName()
-
+    def isTriggerdBy(self, event):
+        return self.getName() == event.getTrigger().getName()
