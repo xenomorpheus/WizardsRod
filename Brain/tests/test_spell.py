@@ -1,6 +1,6 @@
 import unittest
 
-import spell
+from spell import Spell
 
 class TestSpellTrigger(unittest.TestCase):
 

@@ -1,6 +1,6 @@
 import unittest
 
-import spelltriggergesture
+from spelltriggergesture import SpellTriggerGesture
 
 
 class TestSpellTriggerGesture(unittest.TestCase):
@@ -17,8 +17,8 @@ class TestSpellTriggerGesture(unittest.TestCase):
         st1 = SpellTriggerGesture('Abracadabra1', 123)
         st2 = SpellTriggerGesture('Abracadabra2', 123)
         st3 = SpellTriggerGesture('Abracadabra3', 456)
-        self.assertEqual(st1.matchTrigger(st2))
-        self.assertNotEqual(st1.matchTrigger(st3))
+        self.assertTrue(st1.matchTrigger(st2))
+        self.assertFalse(st1.matchTrigger(st3))
 
 
 if __name__ == '__main__':

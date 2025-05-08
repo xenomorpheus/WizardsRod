@@ -1,4 +1,4 @@
-import SpellTriggerGesture
+from spelltriggergesture import SpellTriggerGesture
 
 
 class SpellTriggerGestureConst():
