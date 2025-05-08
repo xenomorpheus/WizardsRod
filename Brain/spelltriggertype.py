@@ -1,13 +1,14 @@
-""" A Spell has a sequence of triggers that need to be satisfied.  """
+""" A Spell has a sequence of triggers that need to be satisfied.
+Each trigger has a type.  """
 
 from __future__ import absolute_import
-from staffevent import StaffEvent
 
 
 class SpellTriggerType():
 
-    """ Each trigger looks at events and determines if the trigger condition
-    is met. """
+    """ A Spell has a sequence of triggers that need to be satisfied.
+    Each trigger has a type.  """
+    name: str
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -24,7 +25,3 @@ class SpellTriggerType():
     def get_name(self) -> str:
         """ get the name """
         return self.name
-
-    def is_triggerd_by(self, event: StaffEvent):
-        """ For simple triggers, the event name just has to match. """
-        return (issubclass(type(event), StaffEvent)) and (self.get_name() == event.get_name())

@@ -15,7 +15,9 @@ cover:
 	coverage3 report -m --skip-covered
 
 # python3 -m pip install pylint --user
-# PATH=/Users/bruins/Library/Python/3.7/bin:$PATH
 lint:
 	pylint *.py const/*.py tests/*.py
 
+# pip3 install pycodestyle
+pycodestyle:
+	pycodestyle *.py const/*.py tests/*.py

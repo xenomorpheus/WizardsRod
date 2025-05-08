@@ -3,6 +3,10 @@ A specific Spell's definition.
 
 """
 
+from typing import List
+from spelltrigger import SpellTrigger
+SpellTriggerSequence = List[SpellTrigger]
+
 class Spell():
 
     """
@@ -22,12 +26,12 @@ class Spell():
         """ get the name of the spell """
         return self.name
 
-    def set_trigger_sequence(self, trigger_sequence) -> 'Spell':
+    def set_trigger_sequence(self, trigger_sequence: SpellTriggerSequence) -> 'Spell':
         """ set the trigger sequence """
         self.trigger_sequence = trigger_sequence
         return self
 
-    def get_trigger_sequence(self):
+    def get_trigger_sequence(self) -> SpellTriggerSequence:
         """ get the trigger sequence """
         return self.trigger_sequence
 

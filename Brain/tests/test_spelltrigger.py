@@ -3,37 +3,45 @@ from __future__ import absolute_import
 import unittest
 
 from time import gmtime
-from spelltriggertype import SpellTriggerType
+from spelltrigger import SpellTrigger
 from staffevent import StaffEvent
+from const.spelltriggertypeconst import SpellTriggerTypeConst
 
 
-class TestSpellTriggerType(unittest.TestCase):
+class TestSpellTrigger(unittest.TestCase):
     """ test """
 
     def test_constructor(self):
         """ test """
-        spell_trigger = SpellTriggerType('Abracadabra')
-        self.assertTrue(isinstance(spell_trigger, SpellTriggerType))
+        spell_trigger = SpellTrigger(SpellTriggerTypeConst.Test01)
+        self.assertTrue(isinstance(spell_trigger, SpellTrigger))
+
+    def test_get_trigger_type(self):
+        """ test """
+        spell_trigger_type = SpellTriggerTypeConst.Test01
+        spell_trigger = SpellTrigger(spell_trigger_type)
+        self.assertEqual(spell_trigger_type, spell_trigger.get_trigger_type())
 
     def test_get_name(self):
         """ test """
-        spell_trigger = SpellTriggerType('Abracadabra')
-        self.assertEqual('Abracadabra', spell_trigger.get_name())
+        spell_trigger_type = SpellTriggerTypeConst.Test01
+        spell_trigger = SpellTrigger(spell_trigger_type)
+        self.assertEqual(spell_trigger_type.get_name(), spell_trigger.get_name())
 
     def test_equal(self):
         """ test """
-        spell_trigger1 = SpellTriggerType('Abracadabra')
-        spell_trigger2 = SpellTriggerType('Abracadabra')
-        spell_trigger3 = SpellTriggerType('Abracadabra2')
+        spell_trigger1 = SpellTrigger(SpellTriggerTypeConst.Test01)
+        spell_trigger2 = SpellTrigger(SpellTriggerTypeConst.Test01)
+        spell_trigger3 = SpellTrigger(SpellTriggerTypeConst.Test02)
         self.assertEqual(spell_trigger1, spell_trigger2)
         self.assertNotEqual(spell_trigger1, spell_trigger3)
         self.assertTrue(spell_trigger1.__eq__(spell_trigger2), "basic equals")
 
     def test_hash(self):
         """ test """
-        spell_trigger1 = SpellTriggerType('Abracadabra')
-        spell_trigger2 = SpellTriggerType('Abracadabra')
-        spell_trigger3 = SpellTriggerType('Abracadabra2')
+        spell_trigger1 = SpellTrigger(SpellTriggerTypeConst.Test01)
+        spell_trigger2 = SpellTrigger(SpellTriggerTypeConst.Test01)
+        spell_trigger3 = SpellTrigger(SpellTriggerTypeConst.Test02)
         self.assertEqual(spell_trigger1.__hash__(),
                          spell_trigger2.__hash__(), 'hash spell_trigger1 and spell_trigger2')
         self.assertNotEqual(spell_trigger1.__hash__(),
@@ -41,8 +49,8 @@ class TestSpellTriggerType(unittest.TestCase):
 
     def test_is_triggerd_by(self):
         """ test """
-        spell_trigger = SpellTriggerType('Button1')
-        staff_event = StaffEvent(spell_trigger.get_name(), gmtime())
+        spell_trigger = SpellTrigger('Button1')
+        staff_event = StaffEvent(spell_trigger, gmtime())
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
 
 

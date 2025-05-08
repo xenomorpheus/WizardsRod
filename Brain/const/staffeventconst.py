@@ -3,7 +3,7 @@
   for in order to trigger spells """
 
 from staffevent import StaffEvent
-from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
+from const.spelltriggertypeconst import SpellTriggerTypeConst as trigger_type
 
 
 class StaffEventConst():
@@ -12,6 +12,6 @@ class StaffEventConst():
       for in order to trigger spells """
 
     # Only for test spells
-    Test01 = StaffEvent(gesture.Test01.get_name(), 0)
-    Test02 = StaffEvent(gesture.Test02.get_name(), 0)
-    Test03 = StaffEvent(gesture.Test03.get_name(), 0)
+    Test01 = StaffEvent(trigger_type.Test01, 0)
+    Test02 = StaffEvent(trigger_type.Test02, 0)
+    Test03 = StaffEvent(trigger_type.Test03, 0)

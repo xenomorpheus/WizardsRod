@@ -5,9 +5,10 @@ import unittest
 
 from spelllistprepared import SpellListPrepared
 from spell import Spell
+from spelltrigger import SpellTrigger
 from staffevent import StaffEvent
 from const.spellbookmaster import SpellBookMaster
-from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
+from const.spelltriggertypeconst import SpellTriggerTypeConst as trigger_type
 from const.staffeventconst import StaffEventConst as event
 
 
@@ -63,21 +64,25 @@ class TestSpellListPrepared(unittest.TestCase):
 
     def test_accept_events_some_spells_some_events(self):
         """ test """
-        triggers = [gesture.Test01, gesture.Test02]
+        triggers = [
+            SpellTrigger(trigger_type.Test01),
+            SpellTrigger(trigger_type.Test02)]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.get_name(), 4),
-            StaffEvent(gesture.Test02.get_name(), 4),
-            StaffEvent(gesture.Test03.get_name(), 4)]
+            StaffEvent(trigger_type.Test01, 4),
+            StaffEvent(trigger_type.Test02, 4),
+            StaffEvent(trigger_type.Test03, 4)]
         accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
     # Only accept events that are for our prepared spells
     def test_accept_events_some_spells_unwanted_events(self):
         """ test """
-        triggers = [gesture.Test01, gesture.Test02]
+        triggers = [
+            SpellTrigger(trigger_type.Test01),
+            SpellTrigger(trigger_type.Test02)]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         events = [
@@ -103,14 +108,16 @@ class TestSpellListPrepared(unittest.TestCase):
 
     def test_get_triggered_spells_some_spells(self):
         """ test """
-        triggers = [gesture.Test01, gesture.Test02]
+        triggers = [
+            SpellTrigger(trigger_type.Test01),
+            SpellTrigger(trigger_type.Test02)]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.get_name(), 4),
-            StaffEvent(gesture.Test02.get_name(), 4),
-            StaffEvent(gesture.Test03.get_name(), 4)]
+            StaffEvent(trigger_type.Test01, 4),
+            StaffEvent(trigger_type.Test02, 4),
+            StaffEvent(trigger_type.Test03, 4)]
         accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
         self.assertEqual([test_spell01], slp.get_triggered_spells(), 'triggered spells')

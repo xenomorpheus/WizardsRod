@@ -107,7 +107,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
         returns a count of the number of events accepted. """
         count = 0
         for event in new_events:
-            if any(trigger.is_triggerd_by(event) for trigger in self.spell_triggers_permitted.values()):
+            if any(trigger.is_triggerd_by(event)
+                   for trigger in self.spell_triggers_permitted.values()):
                 self.event_pending_list.append(event)
                 count += 1
         return count
@@ -156,7 +157,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
             for spell in self.spell_map.values():
                 spell_name = spell.name
                 if spell.get_trigger_sequence()[0].is_triggerd_by(event):
-                    if not spell_name in spell_trigger_sequence_all:
+                    if spell_name not in spell_trigger_sequence_all:
                         spell_trigger_sequence_all[spell_name] = []
                     spell_trigger_sequence_all[spell_name].append(
                         {"trigger_wanted_idx" : 1,

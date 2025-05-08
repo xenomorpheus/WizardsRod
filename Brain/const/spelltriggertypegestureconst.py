@@ -12,8 +12,3 @@ class SpellTriggerTypeGestureConst():
     Horizontal = SpellTriggerTypeGesture("Horizontal")
     Leaning_Forwards_Downwards = SpellTriggerTypeGesture("Leaning forwards downwards")
     Pointing_Downwards = SpellTriggerTypeGesture("Pointing downwards")
-
-    # Only for tests.
-    Test01 = SpellTriggerTypeGesture("Test Gesture 01")
-    Test02 = SpellTriggerTypeGesture("Test Gesture 02")
-    Test03 = SpellTriggerTypeGesture("Test Gesture 03")
