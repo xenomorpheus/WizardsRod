@@ -1,4 +1,4 @@
-all: test cover lint mypy checkstyle docs
+all: test cover pycodestyle docs lint mypy
 
 test:
 	python3 -m pytest tests/*.py
