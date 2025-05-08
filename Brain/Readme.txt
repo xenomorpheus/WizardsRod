@@ -27,7 +27,7 @@ I think something like.
     spell3 = ...
 
     # preparing a spell list
-    prepared_spells = PreparedSpells('my prepared spell list')
+    prepared_spells = SpellListPrepared('MyList')
     prepared_spells.spellAddList([spell1, spell2, spell3])
     prepared_spells.spellAdd(spell4)
     prepared_spells.spellDel('spell name')
@@ -35,10 +35,10 @@ I think something like.
     # Some spells might need special hardware, e.g. GPS
     hw_hints = prepared_spells.getHardwareHints()
 
-    # looking for actions to trigger spells
+    # looking for staff events to trigger spells
     while True:
-        new_action_list = getNewActions(hw_hints=hw_hints) # get new actions
-        accepted_count = prepared_spells.acceptActions(new_action_list)
+        new_staff_event_list = getNewStaffEvennts(hw_hints=hw_hints) # get new staff events
+        accepted_count = prepared_spells.acceptActions(new_staff_event_list)
         if (accepted_count > 0):
             triggered_spells_list = prepared_spells.getTriggeredSpells()
             for spell in triggered_spells_list:

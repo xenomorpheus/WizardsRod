@@ -108,9 +108,15 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent(gesture.Test03.getName(), gesture.Test03, 4)]
         accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
-
         self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')
 
+    def test_getHardwareHints(self):
+        self.longMessage=True
+        TestSpell01 = Spell("Test Spell 01").setHardwareList([ 'Button01'])
+        TestSpell02 = Spell("Test Spell 02").setHardwareList([ 'Button02', 'Button03'])
+        slp = SpellListPrepared('MyList').spellAddList([TestSpell01,TestSpell02])
+        hwl = slp.getHardwareHints()
+        self.assertEqual([ 'Button01','Button02', 'Button03'], hwl)
 
 if __name__ == '__main__':
     unittest.main()

@@ -42,3 +42,7 @@ class Spell():
     def getHardwareList(self):
         return self.hardware_list
 
+    def performActionns(self):
+        # TODO stuff
+        return self
+

@@ -64,6 +64,9 @@ class SpellListPrepared():
     def getName(self):
         return self.name
 
+    def getHardwareHints(self):
+        return list(self.spell_hardware.keys())
+
     def spellAdd(self, spell):
         self.spell_map[spell.getName()] = spell
         self.__recalculate_spell_triggers()
@@ -132,4 +135,3 @@ class SpellListPrepared():
                     spell_trigger_sequence_all[spell_name].append({ "trigger_wanted_idx" : 1, "timeout" : event_created_time + spell.getTriggerTimeout() })
 
         return triggered_spells_list
-
