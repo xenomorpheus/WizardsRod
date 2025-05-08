@@ -3,6 +3,7 @@
 from staffevent import StaffEvent
 from spelltriggertype import SpellTriggerType
 
+
 class SpellTrigger():
 
     """ Each trigger looks at events and determines if the trigger condition

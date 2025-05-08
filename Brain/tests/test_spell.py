@@ -2,9 +2,8 @@
 from __future__ import absolute_import
 import unittest
 
-from const.spelltriggertypegestureconst import SpellTriggerTypeGestureConst as gesture
-from const.spellhardwareconst import SpellHardwareConst as hw
 from spell import Spell
+import const
 
 
 class TestSpellTrigger(unittest.TestCase):
@@ -13,11 +12,11 @@ class TestSpellTrigger(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.name = "Test Spell"
-        cls.spell_trigger_list = [gesture.Pointing_Upwards,
-                                  gesture.Leaning_Forwards_Upwards,
-                                  gesture.Horizontal,
-                                  gesture.Leaning_Forwards_Downwards,
-                                  gesture.Pointing_Downwards]
+        cls.spell_trigger_list = [const.GESTURE['POINTING_UPWARDS'],
+                                  const.GESTURE['LEANING_FORWARDS_UPWARDS'],
+                                  const.GESTURE['HORIZONTAL'],
+                                  const.GESTURE['LEANING_FORWARDS_DOWNWARDS'],
+                                  const.GESTURE['POINTING_DOWNWARDS']]
         cls.spell_trigger_timeout = 6
 
     def test_constructor(self):
@@ -48,7 +47,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_hardware_set(self):
         """ test """
-        hwlist = [hw.ACCELEROMETER]
+        hwlist = [const.HARDWARE['ACCELEROMETER']]
         spell = Spell(name=self.name)
         st_got = spell.set_hardware_set(hwlist)
         self.assertEqual(spell, st_got)

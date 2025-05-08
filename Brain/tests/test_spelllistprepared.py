@@ -7,9 +7,7 @@ from spelllistprepared import SpellListPrepared
 from spell import Spell
 from spelltrigger import SpellTrigger
 from staffevent import StaffEvent
-from const.spellbookmaster import SpellBookMaster
-from const.spelltriggertypeconst import SpellTriggerTypeConst as trigger_type
-from const.staffeventconst import StaffEventConst as event
+import const
 
 
 class TestSpellListPrepared(unittest.TestCase):
@@ -18,7 +16,7 @@ class TestSpellListPrepared(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """ setup all tests """
-        cls.spell = SpellBookMaster.TestSpell01
+        cls.spell = const.MASTER_SPELLBOOK["TEST_SPELL_01"]
 
     def test_constructor(self):
         """ test """
@@ -58,22 +56,22 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_accept_events_no_spells_some_events(self):
         """ test """
         slp = SpellListPrepared('MyList')
-        new_events = [event.Test01, event.Test02]
+        new_events = [const.EVENT["TEST_01"], const.EVENT["TEST_02"]]
         accepted_count = slp.accept_events(new_events)
         self.assertEqual(0, accepted_count)
 
     def test_accept_events_some_spells_some_events(self):
         """ test """
         triggers = [
-            SpellTrigger(trigger_type.Test01),
-            SpellTrigger(trigger_type.Test02)]
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(trigger_type.Test01, 4),
-            StaffEvent(trigger_type.Test02, 4),
-            StaffEvent(trigger_type.Test03, 4)]
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_01'], 4),
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_02'], 4),
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_03'], 4)]
         accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
@@ -81,8 +79,8 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_accept_events_some_spells_unwanted_events(self):
         """ test """
         triggers = [
-            SpellTrigger(trigger_type.Test01),
-            SpellTrigger(trigger_type.Test02)]
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         events = [
@@ -109,24 +107,27 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_get_triggered_spells_some_spells(self):
         """ test """
         triggers = [
-            SpellTrigger(trigger_type.Test01),
-            SpellTrigger(trigger_type.Test02)]
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(trigger_type.Test01, 4),
-            StaffEvent(trigger_type.Test02, 4),
-            StaffEvent(trigger_type.Test03, 4)]
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_01'], 4),
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_02'], 4),
+            StaffEvent(const.SPELL_TRIGGER_TYPE['TEST_03'], 4)]
         accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
-        self.assertEqual([test_spell01], slp.get_triggered_spells(), 'triggered spells')
+        self.assertEqual([test_spell01], slp.get_triggered_spells(),
+                         'triggered spells')
 
     def test_get_hardware_hints(self):
         """ test """
         test_spell01 = Spell("Test Spell 01").set_hardware_set(['Button01'])
-        test_spell02 = Spell("Test Spell 02").set_hardware_set(['Button02', 'Button03'])
-        slp = SpellListPrepared('MyList').spell_add_list([test_spell01, test_spell02])
+        test_spell02 = Spell("Test Spell 02").set_hardware_set(['Button02',
+                                                                'Button03'])
+        slp = SpellListPrepared('MyList').spell_add_list([test_spell01,
+                                                          test_spell02])
         hwl = slp.get_hardware_hints()
         self.assertTrue(set(['Button01', 'Button02', 'Button03']), set(hwl))
 
