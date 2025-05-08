@@ -9,8 +9,8 @@ class TestSpellTrigger(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.name = "Fireball"
-        cls.spell_trigger_actions = [gesture.Pointing_Upwards,
+        cls.name = "Test Spell"
+        cls.spell_trigger_list = [gesture.Pointing_Upwards,
           gesture.Leaning_Forwards_Upwards,
           gesture.Horizontal,
           gesture.Leaning_Forwards_Downwards,
@@ -24,12 +24,12 @@ class TestSpellTrigger(unittest.TestCase):
         st = Spell(name=self.name)
         self.assertEqual(self.name, st.getName())
 
-    def test_TriggerActions(self):
+    def test_TriggerList(self):
         st = Spell(name=self.name)
-        st_got = st.setTriggerActions(self.spell_trigger_actions)
+        st_got = st.setTriggerList(self.spell_trigger_list)
         self.assertEqual(st, st_got)
-        sta_got = st.getTriggerActions()
-        self.assertEqual(self.spell_trigger_actions, sta_got)
+        sta_got = st.getTriggerList()
+        self.assertEqual(self.spell_trigger_list, sta_got)
 
     def test_TriggerTimeout(self):
         st = Spell(name=self.name)

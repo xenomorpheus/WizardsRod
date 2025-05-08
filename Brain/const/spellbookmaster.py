@@ -2,13 +2,9 @@ from spell import Spell
 from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
 from const.spellhardwareconst import SpellHardwareConst as hw
 
+
 class SpellBookMaster():
 
-    __fireball_triggers = [gesture.Pointing_Upwards,
-      gesture.Leaning_Forwards_Upwards,
-      gesture.Horizontal,
-      gesture.Leaning_Forwards_Downwards,
-      gesture.Pointing_Downwards ]
-
-    Fireball = Spell("Fireball").setTriggerActions(__fireball_triggers).setTriggerTimeout(6) \
+    __test_spell_01_triggers = [gesture.Test01, gesture.Test02, gesture.Test03 ]
+    TestSpell01 = Spell("Test Spell 01").setTriggerList(__test_spell_01_triggers).setTriggerTimeout(6) \
         .setHardwareList([hw.ACCELEROMETER])

@@ -6,8 +6,8 @@ class Spell():
 
     def __init__(self, name):
         self.name = name
-        # The actions required to trigger (activate) the spell
-        self.trigger_actions = []
+        # Ordered steps required to trigger the spell
+        self.trigger_list = []
         # Maximum time to complete the spell
         self.trigger_timeout = 0
         # Some spells require hardware, e.g GPS, Accelerometer
@@ -19,12 +19,12 @@ class Spell():
     def getName(self):
         return self.name
 
-    def setTriggerActions(self, trigger_actions):
-        self.trigger_actions = trigger_actions
+    def setTriggerList(self, trigger_list):
+        self.trigger_list = trigger_list
         return self
 
-    def getTriggerActions(self):
-        return self.trigger_actions
+    def getTriggerList(self):
+        return self.trigger_list
 
     def setTriggerTimeout(self, trigger_timeout):
         self.trigger_timeout = trigger_timeout

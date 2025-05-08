@@ -2,16 +2,13 @@ from spelltrigger import SpellTrigger
 
 class SpellTriggerGesture(SpellTrigger):
 
-    def __init__(self, name, gesture):
+    def __init__(self, name):
         self.name = name
-        self.gesture = gesture
 
     def __str__(self):
-        return str(self.getName() + '||'+self.getGesture())
+        return self.getName()
 
     # Only the gesture matters, not the name
     def matchTrigger(self, other):
-        return self.getGesture() == other.getGesture()
+        return self.getName() == other.getName()
 
-    def getGesture(self):
-        return self.gesture
