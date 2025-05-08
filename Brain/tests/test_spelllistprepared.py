@@ -63,8 +63,10 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_accept_events_some_spells_some_events(self):
         """ test """
         triggers = [
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
+            SpellTrigger('test trigger 01',
+                         const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger('test trigger 02',
+                         const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
@@ -79,8 +81,10 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_accept_events_some_spells_unwanted_events(self):
         """ test """
         triggers = [
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
+            SpellTrigger('test trigger 01',
+                         const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger('test trigger 02',
+                         const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         events = [
@@ -107,8 +111,10 @@ class TestSpellListPrepared(unittest.TestCase):
     def test_get_triggered_spells_some_spells(self):
         """ test """
         triggers = [
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_01']),
-            SpellTrigger(const.SPELL_TRIGGER_TYPE['TEST_02'])]
+            SpellTrigger('test trigger 01',
+                         const.SPELL_TRIGGER_TYPE['TEST_01']),
+            SpellTrigger('test trigger 02',
+                         const.SPELL_TRIGGER_TYPE['TEST_02'])]
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
         slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored

@@ -9,9 +9,11 @@ class SpellTrigger():
     """ Each trigger looks at events and determines if the trigger condition
     is met. """
 
+    name: str
     trigger_type: SpellTriggerType
 
-    def __init__(self, trigger_type) -> None:
+    def __init__(self, name: str, trigger_type='none') -> None:
+        self.name = name
         self.trigger_type = trigger_type
 
     def __eq__(self, other: object) -> bool:
@@ -24,7 +26,7 @@ class SpellTrigger():
 
     def get_name(self) -> str:
         """ get the name """
-        return self.get_trigger_type().get_name()
+        return self.name
 
     def get_trigger_type(self) -> SpellTriggerType:
         """ get the trigger_type """

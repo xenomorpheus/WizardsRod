@@ -60,9 +60,9 @@ EVENT = {_TRIGGER_TYPE_STR01: _STT_TEST01,
 # TestSpells are only for unit tests
 
 _SPELL_TEST_01_TRIGGERS = [
-    SpellTrigger(_STT_TEST01),
-    SpellTrigger(_STT_TEST02),
-    SpellTrigger(_STT_TEST03)]
+    SpellTrigger('test trigger 01', _STT_TEST01),
+    SpellTrigger('test trigger 02', _STT_TEST02),
+    SpellTrigger('test trigger 03', _STT_TEST03)]
 _SPELL_TEST_STR_01 = "TEST_SPELL_01"
 _SPELL_TEST_01 = Spell(_SPELL_TEST_STR_01).set_trigger_sequence(
     _SPELL_TEST_01_TRIGGERS).set_trigger_timeout(6) \
