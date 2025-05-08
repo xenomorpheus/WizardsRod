@@ -24,7 +24,7 @@ class ButtonEventGenerator(object):
         '''
         Constructor
         '''
-        self.active: bool = 0
+        self.active = 0
         self.channels = set()
         ''' a list of button integers for the buttons '''
         self.listeners = []

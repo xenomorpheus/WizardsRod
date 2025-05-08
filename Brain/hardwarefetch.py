@@ -21,4 +21,4 @@ class HardwareFetch():
         ''' return hardware object using hint as selector '''
         if hint == 'button':
             return ButtonEventGenerator()
-        raise Exception(f"hardware hint {hint} not recognised")
+        raise Exception()

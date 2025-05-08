@@ -14,7 +14,7 @@ class Staff():
         self.name = name
         self.spell_list_prepared = SpellListPrepared(
             name + ' SpellListPrepared')
-        self.hardware_hints: set = set()
+        self.hardware_hints = set()
         self.hwf = HardwareFetch()
 
     def get_name(self) -> str:

@@ -1,4 +1,5 @@
 
+Currently requires 3.5
 Python3 Setup
 
 sudo apt install python3-pip

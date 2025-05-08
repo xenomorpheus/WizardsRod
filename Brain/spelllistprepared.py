@@ -55,18 +55,18 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_trigger_event_timeout = 0
-        self.spell_dict: Dict[str, Spell] = {}
+        self.spell_dict = {}
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware: Set = set()
+        self.spell_hardware = set()
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted: Dict[str, SpellTrigger] = {}
+        self.spell_triggers_permitted = {}
         """ Only the triggers of the prepared spells. keyed by trigger name """
-        self.event_pending_list: List = []
+        self.event_pending_list = []
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all: Dict[str, List] = {}
+        self.spell_trigger_sequence_all = {}
         """ Spells that have received some of the triggers  """
-        self.spells_triggered: List[Spell] = []
+        self.spells_triggered = []
         self.__recalculate_spell_triggers()
 
     def __recalculate_spell_triggers(self) -> None:
