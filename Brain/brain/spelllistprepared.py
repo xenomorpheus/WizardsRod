@@ -57,9 +57,9 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.spell_trigger_event_timeout = 0
         self.spell_dict = {}
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = set() # type: Set()
+        self.spell_hardware = set()  # type: Set()
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted = set() # type: Set()
+        self.spell_triggers_permitted = set()  # type: Set()
         """ Only the triggers of the prepared spells. keyed by trigger name """
         self.event_pending_list = []
         """ The events in the buffer.
@@ -161,7 +161,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                 self.spell_trigger_sequence_all[spell_name].append(
                     {"trigger_wanted_idx": 1,
                      "timeout": event_created_time +
-                                spell.get_trigger_timeout()})
+                    spell.get_trigger_timeout()})
 
         # Triggered spells now perform their actions
         for spell in spells_triggered:

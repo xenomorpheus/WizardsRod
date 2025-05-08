@@ -56,9 +56,10 @@ class ButtonEventGenerator(Hardware):
         # Setup event on pin channel rising edge. Ignore further edges for
         # 200ms for switch bounce handling.
         # Multiple callback handlers can be added
-        GPIO.add_event_detect(channel, GPIO.RISING,
-                              callback=self._button_callback,
-                                  bouncetime=200)
+        GPIO.add_event_detect(
+            channel, GPIO.RISING,
+            callback=self._button_callback,
+            bouncetime=200)
 
     def channel_remove(self, channel: int) -> None:
         ''' remove a button from those being listened to '''
@@ -76,7 +77,7 @@ class ButtonEventGenerator(Hardware):
 
     def _button_callback(self, the_channel):
         print("Button %d was pushed!" % (the_channel))
-        now = 0 # TODO
+        now = 0  # TODO
         event = StaffEventButton(""+the_channel, now)
         for listener in self.listeners:
             listener.recieve_event(event)
