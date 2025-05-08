@@ -10,6 +10,7 @@ PYTHONPATH=./APA102_Pi:. ./sprite_player_demo.py \
 """
 import sys
 import argparse
+sys.path.insert(0, "APA102_Pi")
 from sprite_player import SpritePlayer
 
 

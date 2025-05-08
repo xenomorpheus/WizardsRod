@@ -10,6 +10,10 @@ PYTHONPATH=./APA102_Pi:. ./led_grid_driver_demo.py
 
 
 """
+
+import sys
+sys.path.insert(0, "APA102_Pi")
+
 from hal9000 import Hal9000
 from knightrider import KnightRider
 

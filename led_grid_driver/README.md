@@ -17,6 +17,12 @@ Produces the following patterns:
   Two liquids of different colours and densities. One run up. Other run down.
 
 
+
+Play a sprite:
+
+   PYTHONPATH=./APA102Pi:. ./sprite_player_demo --sprite sprite/fire_3x100_18.png
+
+
 Software Requirements:
 
     APA102_Pi package. Put it somewhere on the PYTHONPATH
