@@ -21,9 +21,10 @@ class Spell():
         self.trigger_timeout = 0
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """
-        self.hardware_set = []
+        self.hardware_set: List[str] = []
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
         Accelerometer """
+        self.perform_actions_method = None
 
     def get_name(self) -> str:
         """ get the name of the spell """
@@ -57,7 +58,12 @@ class Spell():
         """ get the hardware the spell will need """
         return self.hardware_set
 
-    def perform_actions(self) -> 'Spell':
-        """ the outcome of the spell. e.g. flash lights, make sounds. """
-        # TODO stuff
+    def set_perform_actions(self, perform_actions):
+        """ set the method that is called when the spell run """
+        self.perform_actions_method = perform_actions
         return self
+
+    def perform_actions(self, staff) -> 'Spell':
+        """ the outcome of the spell. e.g. flash lights, make sounds. """
+        self.perform_actions_method(self, staff)
+        return

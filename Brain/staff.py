@@ -52,5 +52,5 @@ class Staff():
             self.spell_list_prepared.accept_events(
                 self.__get_new_staff_events())
             for spell in self.spell_list_prepared.get_triggered_spells():
-                spell.performActions(self)
+                spell.perform_actions(self)
             loops = loops - 1

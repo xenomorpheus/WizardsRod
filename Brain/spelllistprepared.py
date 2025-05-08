@@ -1,9 +1,13 @@
 """
 
-A set of Spells prepared and actively looking to be triggered by StaffEvent objects.
+A set of Spells prepared and actively looking to be triggered by StaffEvent
+objects.
 
 
 """
+from typing import List
+from spell import Spell
+from staffevent import StaffEvent
 
 
 class SpellListPrepared():
@@ -94,29 +98,30 @@ The thinkgeek wizard robe solved this with a reset action (starting position
         """ get the hardware hints """
         return list(self.spell_hardware.keys())
 
-    def spell_add(self, spell) -> 'SpellListPrepared':
+    def spell_add(self, spell: Spell) -> 'SpellListPrepared':
         """ add a spell """
         self.spell_map[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_add_list(self, spelllist) -> 'SpellListPrepared':
+    def spell_add_list(self, spelllist: List[Spell]) -> 'SpellListPrepared':
         """ add a list of spells """
         for spell in spelllist:
             self.spell_map[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_del(self, spell_name) -> 'SpellListPrepared':
+    def spell_del(self, spell_name: str) -> 'SpellListPrepared':
         """ remove a spell """
         if spell_name in self.spell_map:
             del self.spell_map[spell_name]
             self.__recalculate_spell_triggers()
         return self
 
-    def accept_events(self, new_events) -> int:
+    def accept_events(self, new_events: List[StaffEvent]) -> int:
         """
-        accept events. Only keep the events that can trigger the prepared spells.
+        accept events. Only keep the events that can trigger the prepared
+        spells.
         returns a count of the number of events accepted. """
         count = 0
         for event in new_events:

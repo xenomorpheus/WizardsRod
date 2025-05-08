@@ -1,4 +1,4 @@
-
+""" constants """
 
 from spell import Spell
 from spelltrigger import SpellTrigger
