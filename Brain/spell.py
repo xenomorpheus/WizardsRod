@@ -62,7 +62,9 @@ class Spell():
         self.perform_actions_method = perform_actions
         return self
 
-    def perform_actions(self, staff: 'Staff') -> 'Spell':
-        """ the outcome of the spell. e.g. flash lights, make sounds. """
+    def perform_actions(self, staff: 'Staff'):
+        """ this is called automatically when the spell is triggered.
+        This is the outcome of the spell. e.g. flash lights, make sounds. """
+        if not self.perform_actions_method:
+            raise Exception('perform_actions_method not set')
         self.perform_actions_method(self, staff)
-        return self

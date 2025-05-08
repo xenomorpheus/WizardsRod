@@ -12,8 +12,7 @@ class Staff():
 
     def __init__(self, name: str) -> None:
         self.name = name
-        self.spell_list_prepared = SpellListPrepared(
-            name + ' SpellListPrepared')
+        self.spell_list_prepared = SpellListPrepared(self)
         self.hardware_hints = set()
         self.hwf = HardwareFetch()
 

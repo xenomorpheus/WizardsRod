@@ -52,8 +52,9 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
 
 """
 
-    def __init__(self, name: str) -> None:
-        self.name = name
+    def __init__(self, staff: 'Staff') -> None:
+        self.staff = staff
+        """ the staff """
         self.spell_trigger_event_timeout = 0
         self.spell_dict = {}
         """ Prepared spells, keyed by spell name """
@@ -65,8 +66,6 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
         self.spell_trigger_sequence_all = {}
-        """ Spells that have received some of the triggers  """
-        self.spells_triggered = []
         self.__recalculate_spell_triggers()
 
     def __recalculate_spell_triggers(self) -> None:
@@ -84,10 +83,6 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             for hardware in spell.get_hardware_set():
                 self.spell_hardware.add(hardware)
         self.spell_trigger_event_timeout = timeout_max
-
-    def get_name(self) -> str:
-        """ get the name """
-        return self.name
 
     def get_hardware_hints(self) -> set:
         """ get the hardware hints """
@@ -113,18 +108,13 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             self.__recalculate_spell_triggers()
         return self
 
-    def get_spells_triggered(self) -> List:
-        """ return a list of spells that have been triggered. """
-        return self.spells_triggered
-
-    def recieve_events(self, new_events: List[StaffEvent]):
+    def recieve_events(self, new_events: List[StaffEvent]) -> None:
         """ accept events """
         for event in new_events:
             self.recieve_event(event)
 
     def recieve_event(self, event: StaffEvent) -> None:
-        """ TODO not finished
-        Consume staff events. Determine which, if any, spells have had all
+        """ Consume staff events. Determine which, if any, spells have had all
         triggers in sequence, within the timeout period.
         """
 
@@ -132,6 +122,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                for trigger in self.spell_triggers_permitted.values()):
                    return
 
+        spells_triggered = []
         event_created_time = event.get_created()
         for spell_name, sequence_list in self.spell_trigger_sequence_all.items():
             spell = self.spell_dict[spell_name]
@@ -155,7 +146,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                         # all triggers matched
                         sequence["timeout"] = 0
                         # TODO delete from trigger list
-                        self.spells_triggered.append(spell)
+                        spells_triggered.append(spell)
 
         # If zeroth trigger, add the sequence to the list.
         for spell in self.spell_dict.values():
@@ -167,3 +158,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                     {"trigger_wanted_idx": 1,
                      "timeout": event_created_time +
                                 spell.get_trigger_timeout()})
+
+        # Triggered spells now perform their actions
+        for spell in spells_triggered:
+            spell.perform_actions(self.staff)
