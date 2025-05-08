@@ -1,0 +1,6 @@
+events are at a time.  Need to refactor events into time and type.
+
+Need to refactor some events into event types.
+
+Event listeners just need to look for the event type.
+

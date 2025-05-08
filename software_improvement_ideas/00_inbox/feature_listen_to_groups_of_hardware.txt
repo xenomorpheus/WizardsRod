@@ -1,0 +1,12 @@
+Idea:
+
+Listen to various groups of hardware: Buttons, Gestures.
+
+To Do:
+
+What events can cancel a sequence?
+
+The wrong gesture ? Yes if we are listening for gestures.
+
+The wrong button ? Yes if we are listening for buttons.
+
