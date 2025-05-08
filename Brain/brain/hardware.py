@@ -24,3 +24,12 @@ class Hardware():
     def get_type(self) -> str:
         """ get the type """
         return self.type
+
+    def activate(self) -> None:
+        """ make hardware available """
+        pass
+
+    def deactivate(self) -> None:
+        """ finish using hardware """
+        pass
+
