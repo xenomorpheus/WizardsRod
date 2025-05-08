@@ -29,11 +29,11 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual('test trigger', spell_trigger.
                          get_name())
 
-    def test_get_trigger_type(self):
+    def test_get_type(self):
         """ test """
         spell_trigger_type = tests.SPELL_TRIGGER_TYPE['TEST_01']
         spell_trigger = SpellTrigger('my trigger', spell_trigger_type)
-        self.assertEqual(spell_trigger_type, spell_trigger.get_trigger_type())
+        self.assertEqual(spell_trigger_type, spell_trigger.get_type())
 
     def test_equal(self):
         """ test """
@@ -70,13 +70,13 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_is_triggerd_by_with_type(self):
         """ test """
-        spell_trigger = SpellTrigger('TEST_01', trigger_type='foo')
+        spell_trigger = SpellTrigger('TEST_01', type='foo')
         staff_event = StaffEvent('TEST_01', gmtime(), event_type='foo')
         self.assertTrue(spell_trigger.is_triggerd_by(staff_event))
 
     def test_is_triggerd_by_with_wrong_type(self):
         """ test """
-        spell_trigger = SpellTrigger('TEST_01', trigger_type='foo')
+        spell_trigger = SpellTrigger('TEST_01', type='foo')
         staff_event = StaffEvent('TEST_01', gmtime(), event_type='wrong')
         self.assertFalse(spell_trigger.is_triggerd_by(staff_event))
 
