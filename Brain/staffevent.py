@@ -32,7 +32,6 @@ Events - Spells will be triggered by a sequence of these events.
 
     def get_name(self) -> str:
         return self.name
-    
+
     def get_created(self):
         return self.created
-

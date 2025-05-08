@@ -8,7 +8,7 @@ class SpellTrigger():
         self.name = name
 
     def __key(self) -> str:
-        return (self.name)
+        return self.name
 
     def __eq__(self, other: 'SpellTrigger'):
         return (type(self) is type(other)) and (self.get_name() == other.get_name())

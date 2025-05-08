@@ -15,7 +15,7 @@ class TestSpellTrigger(unittest.TestCase):
                                   gesture.Leaning_Forwards_Upwards,
                                   gesture.Horizontal,
                                   gesture.Leaning_Forwards_Downwards,
-                                  gesture.Pointing_Downwards ]
+                                  gesture.Pointing_Downwards]
         cls.spell_trigger_timeout = 6
 
     def test_constructor(self):

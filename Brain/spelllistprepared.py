@@ -112,14 +112,16 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
     def get_triggered_spells(self):
         """ return a list of spells that have been triggered.
 
-        Consume staff events. Determine which, if any, spells have had all triggers in sequence, within the timeout period. """
+        Consume staff events. Determine which, if any, spells have had all triggers in sequence,
+        within the timeout period.
+        """
 
         triggered_spells_list = []
         spell_trigger_sequence_all = self.spell_trigger_sequence_all
 
         # consume staff events.
         event_pending_list = self.event_pending_list
-        while len(event_pending_list):
+        while event_pending_list:
             event = event_pending_list.pop(0)
 
             event_created_time = event.get_created()
@@ -127,7 +129,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
                 spell = self.spell_map[spell_name]
 
                 # Delete partially completed spell sequences if they timeout.
-                sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence["timeout"]]
+                sequence_list[:] = [sequence for sequence in sequence_list
+                                    if event_created_time <= sequence["timeout"]]
 
                 # If spell is waiting for that trigger next, then progress the spell to the next
                 # event or mark as complete.
@@ -150,6 +153,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
                 if spell.get_trigger_sequence()[0].is_triggerd_by(event):
                     if not spell_name in spell_trigger_sequence_all:
                         spell_trigger_sequence_all[spell_name] = []
-                    spell_trigger_sequence_all[spell_name].append({"trigger_wanted_idx" : 1, "timeout" : event_created_time + spell.get_trigger_timeout()})
+                    spell_trigger_sequence_all[spell_name].append(
+                        {"trigger_wanted_idx" : 1,
+                         "timeout" : event_created_time + spell.get_trigger_timeout()})
 
         return triggered_spells_list
