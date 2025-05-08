@@ -94,7 +94,7 @@ The thinkgeek wizard robe solved this with a reset action (starting position
         """ get the name """
         return self.name
 
-    def get_hardware_hints(self):
+    def get_hardware_hints(self) -> List[str]:
         """ get the hardware hints """
         return list(self.spell_hardware.keys())
 

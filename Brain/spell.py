@@ -3,7 +3,7 @@ A specific Spell's definition.
 
 """
 
-from typing import List
+from typing import List, Callable
 from spelltrigger import SpellTrigger
 SpellTriggerSequence = List[SpellTrigger]
 
@@ -16,7 +16,7 @@ class Spell():
     def __init__(self, name: str) -> None:
         self.name = name
         """ Name of the spell """
-        self.trigger_sequence = []
+        self.trigger_sequence: SpellTriggerSequence = []
         """ Ordered steps required to trigger the spell """
         self.trigger_timeout = 0
         """ Maximum time to trigger the spell, from first trigger to last
@@ -24,7 +24,7 @@ class Spell():
         self.hardware_set: List[str] = []
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
         Accelerometer """
-        self.perform_actions_method = None
+        self.perform_actions_method: Callable
 
     def get_name(self) -> str:
         """ get the name of the spell """
@@ -54,11 +54,11 @@ class Spell():
         self.hardware_set = hardware_set
         return self
 
-    def get_hardware_set(self):
+    def get_hardware_set(self) -> List[str]:
         """ get the hardware the spell will need """
         return self.hardware_set
 
-    def set_perform_actions(self, perform_actions):
+    def set_perform_actions(self, perform_actions: Callable) -> 'Spell':
         """ set the method that is called when the spell run """
         self.perform_actions_method = perform_actions
         return self
@@ -66,4 +66,4 @@ class Spell():
     def perform_actions(self, staff) -> 'Spell':
         """ the outcome of the spell. e.g. flash lights, make sounds. """
         self.perform_actions_method(self, staff)
-        return
+        return self

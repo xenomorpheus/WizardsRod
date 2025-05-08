@@ -20,6 +20,7 @@ class Main():  # pylint: disable=too-few-public-methods
 
     @staticmethod
     def spell_perform_actions(spell, staff):
+        """ Perform the actions when the spell is triggered """
         print("Perform Actions called on "+staff+" by spell "+spell)
 
     @staticmethod

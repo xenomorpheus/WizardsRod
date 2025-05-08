@@ -23,6 +23,7 @@ class SpellTrigger():
         return hash((self.trigger_type))
 
     def get_name(self) -> str:
+        """ get the name """
         return self.get_trigger_type().get_name()
 
     def get_trigger_type(self) -> SpellTriggerType:

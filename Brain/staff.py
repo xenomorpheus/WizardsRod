@@ -1,6 +1,7 @@
 
 """ The Staff brings together the prepared spells and the hardware. """
 
+from typing import List
 from spell import Spell
 from spelllistprepared import SpellListPrepared
 
@@ -11,7 +12,7 @@ class Staff():
 
     name: str
     spell_list_prepared: SpellListPrepared
-    # hardware_hints: List(None)
+    hardware_hints: List[str]
 
     def __init__(self, name: str) -> None:
         self.name = name
