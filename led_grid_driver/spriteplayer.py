@@ -10,13 +10,9 @@ from ledgridtemplate import LedGridTemplate
 from unicodedata import bidirectional
 
 
-class Sprite(LedGridTemplate):
+class SpritePlayer(LedGridTemplate):
 
-    def init(self, strip, num_led):
-        """This method is called to initialize a colour program.
-        """
-
-    def set_pix(self, filename):
+    def set_sprite_filename(self, filename):
         im = Image.open(filename, 'r').convert('RGB')
         self.pix = im.load()
         # width, height = im.size
@@ -30,6 +26,16 @@ class Sprite(LedGridTemplate):
         for x in range(width):
           for y in range(height):
             red, blue, green = self.pix[x + sprite_offset, y]  #NOTE RGB swap
+            pprint (" MAX r={}, g={}, b={}".format(red, green, blue))
+            #red = 10 * int(red / 10)
+            #if red < 20 :
+            #red = y
+            #green = 10 * int(green / 10)
+            #if green < 20 :
+            #green = 0
+            #blue = 10 * int(blue / 10)
+            #if blue < 20 :
+            #blue = 0
             self.set_pixel_xy(strip, x, y, red, green, blue)
 
         return 1
