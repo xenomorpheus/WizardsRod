@@ -3,7 +3,7 @@ Simple Script to run a LED display on a Raspberry Pi
 
 Run Script:
 
-   PYTHONPATH=./APA102_Pi:. ./led_grid_demo.py
+   ./led_grid_demo.py
 
 Produces the following patterns:
 
@@ -20,7 +20,9 @@ Produces the following patterns:
 
 Play a sprite:
 
-   PYTHONPATH=./APA102Pi:. ./sprite_player_demo --sprite sprite/fire_3x100_18.png
+   ./sprite_player_demo
+
+   ./sprite_player_demo --sprite sprite/fire_3x100_18.png
 
 
 Software Requirements:
