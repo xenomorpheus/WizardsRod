@@ -37,6 +37,7 @@ class Staff():
 
     def __get_new_staff_events(self):
         # TODO Poll hardware_hints hardware for events
+        todo = self.hardware_hints
         return[]  # TODO
 
     def run(self) -> None:

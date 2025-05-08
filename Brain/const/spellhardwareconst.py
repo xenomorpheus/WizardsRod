@@ -1,10 +1,10 @@
-# Some spells require special hardware
-
-# will probably need to turn these into objects rather than strings.
-# will need to be able to select polling frequency
+""" Some spells require special hardware """
 
 
 class SpellHardwareConst():
+
+    """ Will probably need to turn these into objects rather than strings.
+        Will need to be able to select polling frequency. """
 
     GPS = "GPS"
     ACCELEROMETER = "ACCELEROMETER"

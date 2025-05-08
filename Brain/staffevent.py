@@ -31,7 +31,9 @@ Events - Spells will be triggered by a sequence of these events.
         return hash((self.name, self.created))
 
     def get_name(self) -> str:
+        """ get name """
         return self.name
 
     def get_created(self):
+        """ get time/date event was created """
         return self.created
