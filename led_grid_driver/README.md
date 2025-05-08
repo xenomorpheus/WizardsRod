@@ -3,7 +3,7 @@ Simple Script to run a LED display on a Raspberry Pi
 
 Run Script:
 
-   PYTHONPATH=./APA102_Pi:. ./led_grid_driver_demo.py
+   PYTHONPATH=./APA102_Pi:. ./led_grid_demo.py
 
 Produces the following patterns:
 
