@@ -31,6 +31,7 @@ class ButtonEventGenerator(Hardware):
         """
         Constructor
         """
+        super().__init__(self)
         self.active = 0
         self.channels = set()
         """ a list of button integers for the buttons """

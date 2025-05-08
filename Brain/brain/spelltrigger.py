@@ -7,6 +7,8 @@ class SpellTrigger():
 
     """ Each trigger looks at events and determines if the trigger condition
     is met. """
+    name =""  # type: str
+    type =""  # type: str
 
     def __init__(self, name: str, type='none') -> None:
         self.name = name
@@ -28,7 +30,7 @@ class SpellTrigger():
         """ get the type """
         return self.type
 
-    def is_triggerd_by(self, event: StaffEvent):
+    def is_triggerd_by(self, event: StaffEvent) -> bool:
         """ For simple triggers, the types just need to match. """
         return (issubclass(type(event), StaffEvent)) and (
             self.get_name() == event.get_name() and
