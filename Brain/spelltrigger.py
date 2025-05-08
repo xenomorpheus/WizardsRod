@@ -1,8 +1,13 @@
+""" A Spell has a sequence of triggers that need to be satisfied.  """
+
 from __future__ import absolute_import
 from staffevent import StaffEvent
 
 
 class SpellTrigger():
+
+    """ Each trigger looks at events and determines if the trigger condition
+    is met. """
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -17,6 +22,7 @@ class SpellTrigger():
         return hash(self.__key())
 
     def get_name(self) -> str:
+        """ get the name """
         return self.name
 
     def is_triggerd_by(self, event: StaffEvent):

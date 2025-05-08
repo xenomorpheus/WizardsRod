@@ -1,4 +1,9 @@
+
+""" A sequence of spell triggers """
+
 class SpellTriggerStream():
+
+    """ A sequence of spell triggers """
 
 #    def __init__(self):
 
@@ -7,4 +12,3 @@ class SpellTriggerStream():
 
     def __eq_(self, other):
         return self.__dict__ == other.__dict__
-

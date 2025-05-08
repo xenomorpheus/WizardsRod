@@ -74,23 +74,28 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
         self.spell_trigger_event_timeout = timeout_max
 
     def get_name(self) -> str:
+        """ get the name """
         return self.name
 
     def get_hardware_hints(self):
+        """ get the hardware hints """
         return list(self.spell_hardware.keys())
 
     def spell_add(self, spell) -> 'SpellListPrepared':
+        """ add a spell """
         self.spell_map[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
     def spell_add_list(self, spelllist) -> 'SpellListPrepared':
+        """ add a list of spells """
         for spell in spelllist:
             self.spell_map[spell.get_name()] = spell
         self.__recalculate_spell_triggers()
         return self
 
     def spell_del(self, spell_name) -> 'SpellListPrepared':
+        """ remove a spell """
         if spell_name in self.spell_map:
             del self.spell_map[spell_name]
             self.__recalculate_spell_triggers()
