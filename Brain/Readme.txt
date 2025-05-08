@@ -1,24 +1,17 @@
 
 The smarts of the staff.
 
-A framework to convert staff triggers into staff actions.
+Let us think about it from the use case.  We are going to have a stream of Staff events flowing in.
+We are going to need to know if we have performed the correct events to trigger a Spell.
 
+My thoughts are as follows:
 
-Somatic comparator returns false if not same class.
-
-Otherwise return true IFF the direction component e.g. '442' is equal.
-
-Let us think about it from the use case.  We are going to have a stream of Staff Actions flowing in.  We are going to need to know if we have met the requirements for a Spell.
-
-My first thoughts are as follows.
-
-We have a stream of actions, and new actions are added to an end.
-
-We have a set of "Prepared" spells.
-
-We need to see if any of the prepared spells have been triggered.
-
-We also need to garbage collect, basically throw away useless actions.
+* We will have the concept of a spell - when certain staff events occur in sequence, an effect
+    in generated.
+* We will have a collection of spells which are known, but dormant.
+* We have a set of "Prepared" spells, which we want to fire if certain staff movements (etc) are preformed.
+* We have a stream of events, and new events are added to an end.
+* We need to see if any of the prepared spells have been triggered.
 
 I think something like.
 
@@ -40,16 +33,17 @@ I think something like.
     prepared_spells.spellDel('spell name')
 
     # Some spells might need special hardware, e.g. GPS
-    hw_hints = prepared_spells.getHardwareHings()
+    hw_hints = prepared_spells.getHardwareHints()
 
     # looking for actions to trigger spells
     while(true) {
-        new_action_list = getNewActions(hw_hints= hw_hints) # get new actions
+        new_action_list = getNewActions(hw_hints=hw_hints) # get new actions
         accepted_count = prepared_spells.acceptActions(new_action_list)
         if (accepted_count > 0):
             triggered_spells_list = prepared_spells.getTriggeredSpells()
             for spell in triggered_spells_list:
                 # do spell stuff e.g. sound effects
+                spell.performActions()
     }
 
 
