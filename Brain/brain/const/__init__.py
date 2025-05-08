@@ -9,20 +9,20 @@ from staffevent import StaffEvent
 # Will probably need to turn these into objects rather than strings.
 # Will need to be able to select polling frequency.
 
-HW_GPS = "GPS"
-HW_ACCELEROMETER = "ACCELEROMETER"
-HW_BUTTON = "BUTTON"
+HW_GPS = 'GPS'
+HW_ACCELEROMETER = 'ACCELEROMETER'
+HW_BUTTON = 'BUTTON'
 
 # Generic spell trigger objects
 
 # spell trigger that are gestures AKA movement
-_G_POINTING_UPWARDS = SpellTriggerGesture("POINTING_UPWARDS")
+_G_POINTING_UPWARDS = SpellTriggerGesture('POINTING_UPWARDS')
 _G_LEANING_FORWARDS_UPWARDS = SpellTriggerGesture(
-    "LEANING_FORWARDS_UPWARDS")
-_G_HORIZONTAL = SpellTriggerGesture("HORIZONTAL")
+    'LEANING_FORWARDS_UPWARDS')
+_G_HORIZONTAL = SpellTriggerGesture('HORIZONTAL')
 _G_LEANING_FORWARDS_DOWNWARDS = SpellTriggerGesture(
-    "LEANING_FORWARDS_DOWNWARDS")
-_G_POINTING_DOWNWARDS = SpellTriggerGesture("POINTING_DOWNWARDS")
+    'LEANING_FORWARDS_DOWNWARDS')
+_G_POINTING_DOWNWARDS = SpellTriggerGesture('POINTING_DOWNWARDS')
 
 ST_GESTURE = {'POINTING_UPWARDS': _G_POINTING_UPWARDS,
               'LEANING_FORWARDS_UPWARDS': _G_LEANING_FORWARDS_UPWARDS,

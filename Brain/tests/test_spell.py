@@ -12,7 +12,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.spell_name = "Test Spell"
+        cls.spell_name = 'Test Spell'
         cls.spell_trigger_list = [const.ST_GESTURE['POINTING_UPWARDS'],
                                   const.ST_GESTURE['LEANING_FORWARDS_UPWARDS'],
                                   const.ST_GESTURE['HORIZONTAL'],

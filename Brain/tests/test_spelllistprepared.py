@@ -61,7 +61,7 @@ class TestSpellListPrepared(unittest.TestCase):
         # pylint: disable=R0201
         """ test """
         slp = SpellListPrepared(None)
-        new_events = [tests.EVENT["TEST_01"], tests.EVENT["TEST_02"]]
+        new_events = [tests.EVENT['TEST_01'], tests.EVENT['TEST_02']]
         slp.receive_events(new_events)
 
     # Only accept events that are for our prepared spells
@@ -70,7 +70,7 @@ class TestSpellListPrepared(unittest.TestCase):
         triggers = [
             SpellTrigger('TEST_01'),
             SpellTrigger('TEST_02')]
-        test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
+        test_spell01 = Spell('Test Spell 01').set_trigger_sequence(triggers)
         test_spell01.set_perform_actions(self.perform_action)
         slp = SpellListPrepared(None).spell_add(test_spell01)
         new_events = [
@@ -92,10 +92,10 @@ class TestSpellListPrepared(unittest.TestCase):
         triggers = [
             SpellTrigger('TEST_01'),
             SpellTrigger('TEST_02')]
-        test_spell01 = Spell("test_receives_event_some_spells")
+        test_spell01 = Spell('test_receives_event_some_spells')
         test_spell01.set_trigger_sequence(triggers)
         test_spell01.set_perform_actions(self.perform_action)
-        staff = Staff("The Staff")
+        staff = Staff('The Staff')
         slp = SpellListPrepared(staff).spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
@@ -103,7 +103,7 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent('TEST_02', 4),
             StaffEvent('TEST_03', 4)]
         slp.receive_events(events)
-        self.assertEqual(set([staff.name+"="+test_spell01.name]),
+        self.assertEqual(set([staff.name+'='+test_spell01.name]),
                          self.perform_action_calls)
 
     def test_get_hardware_hints(self):

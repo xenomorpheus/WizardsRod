@@ -134,13 +134,13 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             # Delete partially completed spell sequences if they timeout.
             sequence_list[:] = [sequence for sequence in sequence_list
                                 if event_created_time <=
-                                sequence["timeout"]]
+                                sequence['timeout']]
 
             # If spell is waiting for that trigger next, then progress the
             # spell to the next event or mark as complete.
             trigger_list = spell.get_trigger_sequence()
             for sequence in sequence_list:
-                trigger_wanted_idx = sequence["trigger_wanted_idx"]
+                trigger_wanted_idx = sequence['trigger_wanted_idx']
                 if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
                     if (len(trigger_list) - 1) < trigger_wanted_idx:
                         # progress to waiting for next event in trigger
@@ -148,7 +148,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                         trigger_wanted_idx += 1
                     else:
                         # all triggers matched
-                        sequence["timeout"] = 0
+                        sequence['timeout'] = 0
                         # TODO delete from trigger list
                         spells_triggered.append(spell)
 
@@ -159,8 +159,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                 if spell_name not in self.spell_trigger_sequence_all:
                     self.spell_trigger_sequence_all[spell_name] = []
                 self.spell_trigger_sequence_all[spell_name].append(
-                    {"trigger_wanted_idx": 1,
-                     "timeout": event_created_time +
+                    {'trigger_wanted_idx': 1,
+                     'timeout': event_created_time +
                     spell.get_trigger_timeout()})
 
         # Triggered spells now perform their actions
