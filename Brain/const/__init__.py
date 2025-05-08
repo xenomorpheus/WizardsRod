@@ -15,6 +15,20 @@ _HW_ACCELEROMETER = "ACCELEROMETER"
 HARDWARE = {_HW_GPS: _HW_GPS,
             _HW_ACCELEROMETER: _HW_ACCELEROMETER}
 
+# Generic spell trigger objects
+
+# Only for tests.
+_TRIGGER_TYPE_STR01 = "TEST_01"
+_TRIGGER_TYPE_STR02 = "TEST_02"
+_TRIGGER_TYPE_STR03 = "TEST_03"
+_STT_TEST01 = SpellTriggerType(_TRIGGER_TYPE_STR01)
+_STT_TEST02 = SpellTriggerType(_TRIGGER_TYPE_STR02)
+_STT_TEST03 = SpellTriggerType(_TRIGGER_TYPE_STR03)
+
+SPELL_TRIGGER_TYPE = {_STT_TEST01.get_name(): _STT_TEST01,
+                      _STT_TEST02.get_name(): _STT_TEST02,
+                      _STT_TEST03.get_name(): _STT_TEST03, }
+
 # spell trigger that are gestures AKA movement
 _G_POINTING_UPWARDS = SpellTriggerTypeGesture("POINTING_UPWARDS")
 _G_LEANING_FORWARDS_UPWARDS = SpellTriggerTypeGesture(
@@ -29,21 +43,6 @@ ST_GESTURE = {'POINTING_UPWARDS': _G_POINTING_UPWARDS,
               'HORIZONTAL': _G_HORIZONTAL,
               'LEANING_FORWARDS_DOWNWARDS': _G_LEANING_FORWARDS_DOWNWARDS,
               'POINTING_DOWNWARDS': _G_POINTING_DOWNWARDS}
-
-
-# generic spell trigger objects
-
-# Only for tests.
-_TRIGGER_TYPE_STR01 = "TEST_01"
-_TRIGGER_TYPE_STR02 = "TEST_02"
-_TRIGGER_TYPE_STR03 = "TEST_03"
-_STT_TEST01 = SpellTriggerType(_TRIGGER_TYPE_STR01)
-_STT_TEST02 = SpellTriggerType(_TRIGGER_TYPE_STR02)
-_STT_TEST03 = SpellTriggerType(_TRIGGER_TYPE_STR03)
-
-SPELL_TRIGGER_TYPE = {_STT_TEST01.get_name(): _STT_TEST01,
-                      _STT_TEST02.get_name(): _STT_TEST02,
-                      _STT_TEST03.get_name(): _STT_TEST03, }
 
 # Simple generic events that the staff will generate and look
 #  for in order to trigger spells.
