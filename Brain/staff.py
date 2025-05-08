@@ -15,7 +15,8 @@ class Staff():
 
     def __init__(self, name: str) -> None:
         self.name = name
-        self.spell_list_prepared = SpellListPrepared(name + ' SpellListPrepared')
+        self.spell_list_prepared = SpellListPrepared(
+            name + ' SpellListPrepared')
         self.hardware_hints = []
 
     def get_name(self) -> str:
@@ -48,7 +49,8 @@ class Staff():
         """ looking for staff events to trigger spells  """
         loops = 2
         while loops > 1:
-            self.spell_list_prepared.accept_events(self.__get_new_staff_events())
+            self.spell_list_prepared.accept_events(
+                self.__get_new_staff_events())
             for spell in self.spell_list_prepared.get_triggered_spells():
                 spell.performActions(self)
             loops = loops - 1

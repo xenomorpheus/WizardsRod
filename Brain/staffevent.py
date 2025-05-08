@@ -28,13 +28,15 @@ Events - Spells will be triggered by a sequence of these events.
         self.event_type = event_type
         self.created = created
 
-    def __eq__(self, other: 'StaffEvent'):
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, StaffEvent):
+            return NotImplemented
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
         return hash((self.event_type, self.created))
 
-    def get_event_type(self) -> str:
+    def get_event_type(self) -> SpellTriggerType:
         """ get event_type """
         return self.event_type
 

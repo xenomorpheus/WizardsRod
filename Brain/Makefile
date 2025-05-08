@@ -21,3 +21,8 @@ lint:
 # pip3 install pycodestyle
 pycodestyle:
 	pycodestyle *.py const/*.py tests/*.py
+
+# pip3 install mypy --user
+mypy:
+	mypy *.py const/*.py tests/*.py
+

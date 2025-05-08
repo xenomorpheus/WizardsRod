@@ -16,8 +16,11 @@ class SpellTriggerType():
     def __key(self) -> str:
         return self.name
 
-    def __eq__(self, other: 'SpellTriggerType'):
-        return (type(self) is type(other)) and (self.get_name() == other.get_name())
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, SpellTriggerType):
+            return NotImplemented
+        return (type(self) is type(other)) and (
+            self.get_name() == other.get_name())
 
     def __hash__(self):
         return hash(self.__key())

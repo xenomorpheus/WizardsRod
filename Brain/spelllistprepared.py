@@ -15,30 +15,35 @@ Builder pattern
 
 Notes
 
-We need to throw away actions from the list because we need to keep the processing down,
-and we don't care about events that happened some time ago.
+We need to throw away actions from the list because we need to keep the
+processing down, and we don't care about events that happened some time ago.
 
 The class could have the concept of:
 a)  timeout (seconds) before an action expires (is removed from the list)
 
-We just update this class variable when ever we add/remove spells to the prepared list.
+We just update this class variable when ever we add/remove spells to the
+prepared list.
 
-There are trickier things to consider in the more general case, but we don't need to worry
-too much for now.
+There are trickier things to consider in the more general case, but we don't
+need to worry too much for now.
 
-Consider the case where there is an action in the list that isn't related to any prepared spells.
-The staff may still add the action to the list.  We may wish the prepared spell list to prune out
-actions that aren't components of the prepared spells.
+Consider the case where there is an action in the list that isn't related to
+any prepared spells.
 
-Pretty easy to do, have a map of all actions for prepared spells. Refresh map when spells are
-added/removed.
-Before looking for spells in the action list, remove actions we know we can ignore.
+The staff may still add the action to the list.  We may wish the prepared spell
+list to prune out actions that aren't components of the prepared spells.
 
-The downside of this approach is we may have a sequence of totally random actions, remove
-unwanted actions and somehow have a spell in the prepared list.
+Pretty easy to do, have a map of all actions for prepared spells. Refresh map
+when spells are added/removed.
+Before looking for spells in the action list, remove actions we know we can
+ignore.
+
+The downside of this approach is we may have a sequence of totally random
+actions, remove unwanted actions and somehow have a spell in the prepared list.
 Perhaps the timeout will take care of that.
 
-The thinkgeek wizard robe solved this with a reset action (starting position "mana")
+The thinkgeek wizard robe solved this with a reset action (starting position
+"mana")
 
 """
     name: str
@@ -48,7 +53,6 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
     spell_triggers_permitted: dict
     event_pending_list: list
     spell_trigger_sequence_all: dict
-
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -76,7 +80,8 @@ The thinkgeek wizard robe solved this with a reset action (starting position "ma
         for spell in self.spell_map.values():
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
             for spell_trigger in spell.get_trigger_sequence():
-                self.spell_triggers_permitted[spell_trigger.get_name()] = spell_trigger
+                self.spell_triggers_permitted[spell_trigger.get_name()] = \
+                    spell_trigger
             for hardware in spell.get_hardware_set():
                 self.spell_hardware[hardware] = 1
         self.spell_trigger_event_timeout = timeout_max

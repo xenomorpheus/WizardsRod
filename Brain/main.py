@@ -36,8 +36,7 @@ class Main():  # pylint: disable=too-few-public-methods
             SpellTrigger(GestureType.Leaning_Forwards_Downwards),
             SpellTrigger(GestureType.Pointing_Downwards)]
 
-        fireball = Spell("Fireball").set_trigger_sequence(__fireball_trigger_sequence). \
-            set_trigger_timeout(6). \
+        fireball = Spell("Fireball").set_trigger_sequence(__fireball_trigger_sequence).set_trigger_timeout(6). \
             set_hardware_set([SpellHardwareConst.ACCELEROMETER])
         Staff("MyStaff").spell_add(fireball).run()
 

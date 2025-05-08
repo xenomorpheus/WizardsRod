@@ -7,6 +7,7 @@ from typing import List
 from spelltrigger import SpellTrigger
 SpellTriggerSequence = List[SpellTrigger]
 
+
 class Spell():
 
     """
@@ -18,15 +19,18 @@ class Spell():
         self.trigger_sequence = []
         """ Ordered steps required to trigger the spell """
         self.trigger_timeout = 0
-        """ Maximum time to trigger the spell, from first trigger to last trigger. """
+        """ Maximum time to trigger the spell, from first trigger to last
+        trigger. """
         self.hardware_set = []
-        """ Some spells are triggered by hardware actions. e.g Buttons, GPS, Accelerometer """
+        """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
+        Accelerometer """
 
     def get_name(self) -> str:
         """ get the name of the spell """
         return self.name
 
-    def set_trigger_sequence(self, trigger_sequence: SpellTriggerSequence) -> 'Spell':
+    def set_trigger_sequence(self, trigger_sequence: SpellTriggerSequence
+                             ) -> 'Spell':
         """ set the trigger sequence """
         self.trigger_sequence = trigger_sequence
         return self
