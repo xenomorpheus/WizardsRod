@@ -3,9 +3,17 @@ Simple Script to run a LED display on a Raspberry Pi
 
 Produces the following patterns:
 
-  HAL9000       (vertical)
-  Knight Rider  (horizontal)
-  Cylon         (horizontal)
+  HAL9000
+
+  (Planned)
+  Knight Rider
+  Cylon
+  Galileo Thermometer
+    Show the temperature. Have digital display at the bottom.
+  Sand falling in hour glass
+  Two liquids of different colours and densities. One run up. Other run down.
+
+
 
 Run Script:
 
