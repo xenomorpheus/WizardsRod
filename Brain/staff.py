@@ -30,7 +30,7 @@ class Staff():
         return self
 
     def spell_add_list(self, spelllist) -> 'Staff':
-        """ add a list of spells to ghe prepared list """
+        """ add a list of spells to the prepared list """
         self.spell_list_prepared.spell_add_list(spelllist)
         self.__recalculate_hardware_hints()
         return self
