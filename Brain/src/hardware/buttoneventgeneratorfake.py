@@ -1,0 +1,61 @@
+from typing import List
+from staffeventbutton import StaffEventButton
+
+'''
+Created on 19 Sep. 2019
+
+@author: bruins
+'''
+
+
+class ButtonEventGenerator():
+    '''
+    When hardware buttons are pressed, send StaffEvent objects to
+    listeners that have been previously setup.
+
+    Example.  Each listener will be called with the following.
+
+    listener.recieve_event(StaffEventButton(the_channel, now))
+
+    '''
+
+    def __init__(self):
+        '''
+        Constructor
+        '''
+        self.active = 0
+        self.channels = set()
+        ''' a list of button integers for the buttons '''
+        self.listeners = []
+        ''' a list of objects that have the recieve_event method '''
+
+    def listener_add(self, listener) -> None:
+        ''' add a listener for button events '''
+        self.listeners.append(listener)
+
+    def listener_remove(self, listener) -> None:
+        ''' remove a listener for button events '''
+        self.listeners.remove(listener)
+
+    def channel_add(self, channel: int) -> None:
+        ''' add a button to those being listened to '''
+        if not self.active:
+            raise Exception('activate first')
+
+    def channel_remove(self, channel: int) -> None:
+        ''' remove a button to those being listened to '''
+        self.channels.remove(channel)
+
+    def activate(self):
+        pass
+
+    def deactivate(self):
+        for channel in self.channels:
+            self.channel_remove(channel)
+
+    def _button_callback(self, the_channel):
+        print("Button %d was pushed!" % (the_channel))
+        now = 0 # TODO
+        event = StaffEventButton(""+the_channel, now)
+        for listener in self.listeners:
+            listener.recieve_event(event)

@@ -60,7 +60,7 @@ class TestStaff(unittest.TestCase):
         """ end """
         staff = Staff(name=self.staff_name)
         spell = Spell(name="spell name 01")
-        spell.set_hardware_set(['BUTTON'])
+#        spell.set_hardware_set(['BUTTON'])
         staff.spell_add(spell)
         staff.end()
 

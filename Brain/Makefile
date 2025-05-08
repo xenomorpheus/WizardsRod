@@ -1,28 +1,26 @@
-all: test cover lint
+all: test cover lint mypy checkstyle doco
 
 test:
-	python3 -m pytest tests/*.py
+	PYTHONPATH=src python3 -m pytest tests/*.py
 
 cover:
 	coverage3 erase
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelllistprepared.py
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spell.py
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltriggergesture.py
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_spelltrigger.py
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staffevent.py
-	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staff.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_spelllistprepared.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_spell.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_spelltriggergesture.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_spelltrigger.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_staffevent.py
+	PYTHONPATH=src coverage3 run --branch --omit=tests/\* tests/test_staff.py
 	coverage3 report -m --skip-covered
 
 lint:
-	pylint *.py const/*.py tests/*.py
+	pylint src/ tests/
 
 pycodestyle:
-	pycodestyle *.py const/*.py tests/*.py
+	pycodestyle src/ tests/
 
 mypy:
-	mypy *.py const/*.py tests/*.py
+	mypy src/ tests/
 
-checkstyle:
-	-pylint *.py const/*.py tests/*.py
-	-pycodestyle *.py const/*.py tests/*.py
-	-mypy *.py const/*.py tests/*.py
+doco:
+	PYTHONPATH=src pdoc3 --html -o doc/ src/ tests/
