@@ -14,15 +14,12 @@ cover:
 	PYTHONPATH=. coverage3 run --branch --omit=tests/\* tests/test_staff.py
 	coverage3 report -m --skip-covered
 
-# python3 -m pip install pylint --user
 lint:
 	pylint *.py const/*.py tests/*.py
 
-# pip3 install pycodestyle
 pycodestyle:
 	pycodestyle *.py const/*.py tests/*.py
 
-# pip3 install mypy --user
 mypy:
 	mypy *.py const/*.py tests/*.py
 

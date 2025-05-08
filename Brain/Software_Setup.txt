@@ -10,3 +10,4 @@ pip3 install coverage
 # Python style checking
 python3 -m pip install pylint --user
 python3 -m pip install mypy --user
+python3 -m pip install pycodestyle --user
