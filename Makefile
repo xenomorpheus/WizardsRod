@@ -1,3 +1,7 @@
+
+default:
+	echo "TODO"
+
 init:
 	# TODO remove --user
 	pip3 install --user -r requirements.txt
