@@ -19,15 +19,6 @@ HARDWARE = {_HW_GPS: _HW_GPS,
 
 # Generic spell trigger objects
 
-# Only for tests.
-_STT_TEST01 = "TEST_01"
-_STT_TEST02 = "TEST_02"
-_STT_TEST03 = "TEST_03"
-
-SPELL_TRIGGER_TYPE = {_STT_TEST01: _STT_TEST01,
-                      _STT_TEST02: _STT_TEST02,
-                      _STT_TEST03: _STT_TEST03, }
-
 # spell trigger that are gestures AKA movement
 _G_POINTING_UPWARDS = SpellTriggerGesture("POINTING_UPWARDS")
 _G_LEANING_FORWARDS_UPWARDS = SpellTriggerGesture(
@@ -53,28 +44,3 @@ ST_BUTTON = {'BUTTON1': _B_1,
              'BUTTON3': _B_3,
              'BUTTON4': _B_4, }
 
-# Simple generic events that the staff will generate and look
-#  for in order to trigger spells.
-
-# Only for test spells
-_SE_TEST_01 = StaffEvent(_STT_TEST01, 0)
-_SE_TEST_01 = StaffEvent(_STT_TEST02, 0)
-_SE_TEST_03 = StaffEvent(_STT_TEST03, 0)
-
-EVENT = {_STT_TEST01: _SE_TEST_01,
-         _STT_TEST03: _SE_TEST_01,
-         _STT_TEST02: _SE_TEST_03}
-
-# A master list of spells.
-# TestSpells are only for unit tests
-
-_SPELL_TEST_01_TRIGGERS = [
-    SpellTrigger('test trigger 01', _STT_TEST01),
-    SpellTrigger('test trigger 02', _STT_TEST02),
-    SpellTrigger('test trigger 03', _STT_TEST03)]
-_SPELL_TEST_STR_01 = "TEST_SPELL_01"
-_SPELL_TEST_01 = Spell(_SPELL_TEST_STR_01).set_trigger_sequence(
-    _SPELL_TEST_01_TRIGGERS).set_trigger_timeout(6) \
-    .set_hardware_set(set(_HW_ACCELEROMETER))
-
-MASTER_SPELLBOOK = {_SPELL_TEST_STR_01: _SPELL_TEST_01}
