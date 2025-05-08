@@ -1,13 +1,13 @@
 from led_grid import LedGrid
 from unicodedata import bidirectional
 
+
 class KnightRider(LedGrid):
     """ The classic red dot moving side to side like KnightRider (and Cylons)
     is displayed on a LED grid. """
 
     eye_c = 0xFF0000  # red
     background_c = 0x000000  # black
-
 
     def init(self, strip, num_led):
         """This method is called to initialize a colour program.
@@ -25,7 +25,7 @@ class KnightRider(LedGrid):
         offset = int(abs(half_steps - current_step) / half_steps * remainder_height)
         offset_increasing = current_step >= half_steps
 
-        for i in range (eye_height):
+        for i in range(eye_height):
             self.set_line_y_rgb(strip, offset + i, self.eye_c)
         if (offset_increasing):
             self.set_line_y_rgb(strip, offset, self.background_c)

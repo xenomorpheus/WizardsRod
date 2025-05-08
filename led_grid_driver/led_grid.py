@@ -1,5 +1,6 @@
 from colorcycletemplate import ColorCycleTemplate
 
+
 class LedGrid(ColorCycleTemplate):
     """ convert (x,y) coordinate into absolute pixel on a single strip.
     Left top corner is (0,0).
@@ -16,7 +17,7 @@ class LedGrid(ColorCycleTemplate):
     def get_x(self):
         return self.x_size
 
-    def set_y(self, y_size ):
+    def set_y(self, y_size):
         self.y_size = y_size
 
     def get_y(self):
@@ -28,7 +29,7 @@ class LedGrid(ColorCycleTemplate):
         The grid is formed by a snake pattern, starting to the
         right, and folding below.  """
         pixel = (self.x_size - 1 - x) * self.y_size
-        if (x % 2 == 0 ):
+        if (x % 2 == 0):
             pixel += y
         else:
             pixel += self.y_size - 1 - y

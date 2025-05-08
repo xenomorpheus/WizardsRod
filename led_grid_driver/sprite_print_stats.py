@@ -15,12 +15,13 @@ It will print RGB values of the image. If the image is large redirect the output
 from PIL import Image
 from pprint import pprint
 
+
 class SpritePrint:
 
     def __init__(self):
         pass
 
-    def sprite_print_stats(self, filename): 
+    def sprite_print_stats(self, filename):
 
         SPRITE_WIDTH = 3
         im = Image.open(filename, 'r').convert('RGB')
@@ -47,10 +48,10 @@ class SpritePrint:
                     green_min = min(green, green_min)
                     blue_min = min(blue, blue_min)
             print("Sprite=%d" % sprite_idx)
-            pprint (" max RGB values r={}, g={}, b={}".format(red_max, green_max, blue_max))
-            pprint (" min RGB values r={}, g={}, b={}".format(red_min, green_min, blue_min))
+            pprint(" max RGB values r={}, g={}, b={}".format(red_max, green_max, blue_max))
+            pprint(" min RGB values r={}, g={}, b={}".format(red_min, green_min, blue_min))
 
 if __name__ == "__main__":
-    FILENAME = 'sprite/fire_dark_3x100_18.png'  # image can be in gif jpeg or png format 
+    FILENAME = 'sprite/fire_dark_3x100_18.png'  # image can be in gif jpeg or png format
     sp = SpritePrint()
     sp = sp.sprite_print_stats(filename=FILENAME)

@@ -19,14 +19,14 @@ Y_SIZE = 100
 NUM_LED = X_SIZE * Y_SIZE
 
 
-print ('HAL9000')
+print('HAL9000')
 MY_CYCLE = Hal9000(num_led=NUM_LED, pause_value=0.1, num_cycles=1,
                    global_brightness=40)
 MY_CYCLE.set_x(X_SIZE)
 MY_CYCLE.set_y(Y_SIZE)
 MY_CYCLE.start()
 
-print ('KnightRider')
+print('KnightRider')
 MY_CYCLE = KnightRider(num_led=NUM_LED, pause_value=0.000,
                        num_steps_per_cycle=100, num_cycles=4,
                        global_brightness=40)
@@ -34,7 +34,7 @@ MY_CYCLE.set_x(X_SIZE)
 MY_CYCLE.set_y(Y_SIZE)
 MY_CYCLE.start()
 
-#print ('Sprite')
+#print('Sprite')
 #MY_CYCLE = Sprite(num_led=NUM_LED, pause_value=0.0000,
 #                       num_steps_per_cycle=1, num_cycles=10,
 #                       global_brightness=80)
@@ -42,4 +42,4 @@ MY_CYCLE.start()
 #MY_CYCLE.set_y(Y_SIZE)
 #MY_CYCLE.start()
 
-print ('Finished the test')
+print('Finished the test')

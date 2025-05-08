@@ -1,5 +1,6 @@
 from led_grid import LedGrid
 
+
 class Hal9000(LedGrid):
     """ This class dispays the Hal9000 text and a red dot on a 2 dimensional LED grid """
 
@@ -104,7 +105,6 @@ class Hal9000(LedGrid):
             self.set_xy_rgb(strip, 2, cursor, self.letters_c)
             cursor += 1
             self.set_line_y_rgb(strip, cursor, self.letters_c)
-
 
     def update(self, strip, num_led, num_steps_per_cycle, current_step,
                current_cycle):

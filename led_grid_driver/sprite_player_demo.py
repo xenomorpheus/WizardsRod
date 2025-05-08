@@ -17,7 +17,7 @@ class SpritePlayerDemo:
     def sprite_player_demo(sprite_filename, x_size=3, y_size=100):
         num_led = x_size * y_size
 
-        print ('Sprite')
+        print('Sprite')
 
         sprite_player = SpritePlayer(num_led=num_led, pause_value=0.0, # 9.050,
                                num_steps_per_cycle=1, num_cycles=10,
@@ -27,7 +27,7 @@ class SpritePlayerDemo:
         sprite_player.set_sprite_filename(sprite_filename)
         sprite_player.start()
 
-        print ('Finished the test')
+        print('Finished the test')
 
 
 if __name__ == "__main__":
