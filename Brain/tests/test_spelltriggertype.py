@@ -20,23 +20,24 @@ class TestSpellTriggerType(unittest.TestCase):
 
     def test_equal(self):
         """ test """
-        spell_trigger1 = SpellTriggerType('Abracadabra')
-        spell_trigger2 = SpellTriggerType('Abracadabra')
-        spell_trigger3 = SpellTriggerType('Abracadabra2')
-        self.assertEqual(spell_trigger1, spell_trigger2)
-        self.assertNotEqual(spell_trigger1, spell_trigger3)
-        self.assertTrue(spell_trigger1.__eq__(spell_trigger2), "basic equals")
+        spell_trigger_type1 = SpellTriggerType('Abracadabra')
+        spell_trigger_type2 = SpellTriggerType('Abracadabra')
+        spell_trigger_type3 = SpellTriggerType('Abracadabra2')
+        self.assertEqual(spell_trigger_type1, spell_trigger_type2)
+        self.assertNotEqual(spell_trigger_type1, spell_trigger_type3)
+        self.assertTrue(spell_trigger_type1.__eq__(spell_trigger_type2),
+                        "basic equals")
 
     def test_hash(self):
         """ test """
-        spell_trigger1 = SpellTriggerType('Abracadabra')
-        spell_trigger2 = SpellTriggerType('Abracadabra')
-        spell_trigger3 = SpellTriggerType('Abracadabra2')
-        self.assertEqual(spell_trigger1.__hash__(),
-                         spell_trigger2.__hash__(),
+        spell_trigger_type1 = SpellTriggerType('Abracadabra')
+        spell_trigger_type2 = SpellTriggerType('Abracadabra')
+        spell_trigger_type3 = SpellTriggerType('Abracadabra2')
+        self.assertEqual(spell_trigger_type1.__hash__(),
+                         spell_trigger_type2.__hash__(),
                          'hash spell_trigger1 and spell_trigger2')
-        self.assertNotEqual(spell_trigger1.__hash__(),
-                            spell_trigger3.__hash__(),
+        self.assertNotEqual(spell_trigger_type1.__hash__(),
+                            spell_trigger_type3.__hash__(),
                             'hash spell_trigger1 and spell_trigger3')
 
 
