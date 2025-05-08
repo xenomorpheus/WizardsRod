@@ -5,10 +5,9 @@ objects.
 
 
 """
-from typing import List, Dict, Set
+from typing import List
 from spell import Spell
 from staffevent import StaffEvent
-from spelltrigger import SpellTrigger
 
 
 class SpellListPrepared():
