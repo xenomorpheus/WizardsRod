@@ -10,15 +10,15 @@ class TestSpellTriggerTypeGesture(unittest.TestCase):
 
     def test_constructor(self):
         """ test """
-        stg = SpellTriggerTypeGesture('Abracadabra')
+        stg = SpellTriggerTypeGesture('gesture')
         self.assertTrue(isinstance(stg, SpellTriggerTypeGesture))
 
     # Only the gesture matters, not the name
     def test_match_trigger(self):
         """ test """
-        stg1 = SpellTriggerTypeGesture('Abracadabra1')
-        stg2 = SpellTriggerTypeGesture('Abracadabra1')
-        stg3 = SpellTriggerTypeGesture('Abracadabra2')
+        stg1 = SpellTriggerTypeGesture('gesture1')
+        stg2 = SpellTriggerTypeGesture('gesture1')
+        stg3 = SpellTriggerTypeGesture('gesture2')
         self.assertEqual(stg1, stg2)
         self.assertNotEqual(stg1, stg3)
 
