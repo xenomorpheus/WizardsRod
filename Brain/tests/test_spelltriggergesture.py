@@ -4,28 +4,29 @@ from time import gmtime
 
 from spelltriggergesture import SpellTriggerGesture
 from staffevent import StaffEvent
-from const.staffeventconst import StaffEventConst as event
 
 
 class TestSpellTriggerGesture(unittest.TestCase):
 
     def test_constructor(self):
-        st = SpellTriggerGesture('Abracadabra')
+        stg = SpellTriggerGesture('Abracadabra')
+        self.assertTrue( isinstance(stg, SpellTriggerGesture) )
+
 
     # Only the gesture matters, not the name
-    def test_matchTrigger(self):
-        st1 = SpellTriggerGesture('Abracadabra1')
-        st2 = SpellTriggerGesture('Abracadabra1')
-        st3 = SpellTriggerGesture('Abracadabra2')
-        self.assertEqual(st1, st2)
-        self.assertNotEqual(st1, st3)
+    def test_match_trigger(self):
+        stg1 = SpellTriggerGesture('Abracadabra1')
+        stg2 = SpellTriggerGesture('Abracadabra1')
+        stg3 = SpellTriggerGesture('Abracadabra2')
+        self.assertEqual(stg1, stg2)
+        self.assertNotEqual(stg1, stg3)
 
 
-    def test_isTriggerdBy(self):
+    def test_is_triggerd_by(self):
         name = 'Button1'
-        st = SpellTriggerGesture(name)
-        se = StaffEvent(name, gmtime())
-        self.assertTrue(st.isTriggerdBy(se))
+        stg = SpellTriggerGesture(name)
+        staff_event = StaffEvent(name, gmtime())
+        self.assertTrue(stg.is_triggerd_by(staff_event))
 
 if __name__ == '__main__':
     unittest.main()

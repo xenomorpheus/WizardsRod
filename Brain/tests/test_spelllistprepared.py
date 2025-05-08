@@ -16,107 +16,107 @@ class TestSpellListPrepared(unittest.TestCase):
         cls.spell = SpellBookMaster.TestSpell01
 
     def test_constructor(self):
-        self.longMessage=True
+        self.long_message=True
         slp = SpellListPrepared(name='MyList')
         self.assertFalse(slp is None, 'must not be None')
 
-    def test_getName(self):
-        self.longMessage=True
+    def test_get_name(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
-        self.assertEqual('MyList', slp.getName())
+        self.assertEqual('MyList', slp.get_name())
 
-    def test_spellAdd(self):
-        self.longMessage=True
+    def test_spell_add(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
-        slp_got = slp.spellAdd(self.spell)
+        slp_got = slp.spell_add(self.spell)
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
-    def test_spellAddList(self):
-        self.longMessage=True
+    def test_spell_add_list(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
-        slp_got = slp.spellAddList([self.spell])
+        slp_got = slp.spell_add_list([self.spell])
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
-    def test_spellDel(self):
-        self.longMessage=True
+    def test_spell_del(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
-        slp_got = slp.spellDel(self.spell.name)
+        slp_got = slp.spell_del(self.spell.name)
         self.assertEqual(slp, slp_got, 'builder pattern. must be object')
 
-    def test_acceptEvents_no_spells_no_events(self):
-        self.longMessage=True
+    def test_accept_events_no_spells_no_events(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
         new_events = []
-        accepted_count = slp.acceptEvents(new_events)
+        accepted_count = slp.accept_events(new_events)
         self.assertEqual(0, accepted_count)
 
-    def test_acceptEvents_no_spells_some_events(self):
-        self.longMessage=True
+    def test_accept_events_no_spells_some_events(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
         new_events = [event.Test01, event.Test02]
-        accepted_count = slp.acceptEvents(new_events)
+        accepted_count = slp.accept_events(new_events)
         self.assertEqual(0, accepted_count)
 
-    def test_acceptEvents_some_spells_some_events(self):
-        self.longMessage=True
+    def test_accept_events_some_spells_some_events(self):
+        self.long_message=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
-        slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
+        test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
+        slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.getName(), 4),
-            StaffEvent(gesture.Test02.getName(), 4),
-            StaffEvent(gesture.Test03.getName(), 4)]
-        accepted_count = slp.acceptEvents(events)
+            StaffEvent(gesture.Test01.get_name(), 4),
+            StaffEvent(gesture.Test02.get_name(), 4),
+            StaffEvent(gesture.Test03.get_name(), 4)]
+        accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
     # Only accept events that are for our prepared spells
-    def test_acceptEvents_some_spells_unwanted_events(self):
-        self.longMessage=True
+    def test_accept_events_some_spells_unwanted_events(self):
+        self.long_message=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
-        slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
+        test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
+        slp = SpellListPrepared('MyList').spell_add(test_spell01)
         events = [
             StaffEvent("Event 03", 4)]
-        accepted_count_got = slp.acceptEvents(events)
+        accepted_count_got = slp.accept_events(events)
         self.assertEqual(0, accepted_count_got, 'accepted count')
 
-    def test_getTriggeredSpells_no_spells_no_events(self):
-        self.longMessage=True
+    def test_get_triggered_spells_no_spells_no_events(self):
+        self.long_message=True
         slp = SpellListPrepared('MyList')
         new_events = []
-        slp.acceptEvents(new_events)
-        triggerd_spells = slp.getTriggeredSpells()
+        slp.accept_events(new_events)
+        triggerd_spells = slp.get_triggered_spells()
         self.assertEqual([], triggerd_spells)
 
-    def test_getTriggeredSpells_one_spells_no_events(self):
-        self.longMessage=True
-        slp = SpellListPrepared('MyList').spellAdd(self.spell)
+    def test_get_triggered_spells_one_spells_no_events(self):
+        self.long_message=True
+        slp = SpellListPrepared('MyList').spell_add(self.spell)
         new_events = []
-        slp.acceptEvents(new_events)
-        triggerd_spells = slp.getTriggeredSpells()
+        slp.accept_events(new_events)
+        triggerd_spells = slp.get_triggered_spells()
         self.assertEqual([], triggerd_spells, 'no triggered spells')
 
-    def test_getTriggeredSpells_some_spells(self):
-        self.longMessage=True
+    def test_get_triggered_spells_some_spells(self):
+        self.long_message=True
         triggers = [gesture.Test01, gesture.Test02 ]
-        TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
-        slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
+        test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
+        slp = SpellListPrepared('MyList').spell_add(test_spell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.getName(), 4),
-            StaffEvent(gesture.Test02.getName(), 4),
-            StaffEvent(gesture.Test03.getName(), 4)]
-        accepted_count = slp.acceptEvents(events)
+            StaffEvent(gesture.Test01.get_name(), 4),
+            StaffEvent(gesture.Test02.get_name(), 4),
+            StaffEvent(gesture.Test03.get_name(), 4)]
+        accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
-        self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')
+        self.assertEqual([test_spell01], slp.get_triggered_spells(), 'triggered spells')
 
-    def test_getHardwareHints(self):
-        self.longMessage=True
-        TestSpell01 = Spell("Test Spell 01").setHardwareSet([ 'Button01'])
-        TestSpell02 = Spell("Test Spell 02").setHardwareSet([ 'Button02', 'Button03'])
-        slp = SpellListPrepared('MyList').spellAddList([TestSpell01,TestSpell02])
-        hwl = slp.getHardwareHints()
+    def test_get_hardware_hints(self):
+        self.long_message=True
+        test_spell01 = Spell("Test Spell 01").set_hardware_set([ 'Button01'])
+        test_spell02 = Spell("Test Spell 02").set_hardware_set([ 'Button02', 'Button03'])
+        slp = SpellListPrepared('MyList').spell_add_list([test_spell01,test_spell02])
+        hwl = slp.get_hardware_hints()
         self.assertTrue(set([ 'Button01','Button02', 'Button03']), set(hwl))
 
 if __name__ == '__main__':

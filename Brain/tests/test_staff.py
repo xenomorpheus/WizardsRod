@@ -14,12 +14,12 @@ class TestStaff(unittest.TestCase):
         cls.name = "Test Staff"
 
     def test_constructor(self):
-        st = Staff(name=self.name)
-        self.assertTrue( isinstance(st, Staff) )
+        staff = Staff(name=self.name)
+        self.assertTrue( isinstance(staff, Staff) )
 
-    def test_getName(self):
-        st = Staff(name=self.name)
-        self.assertEqual(self.name, st.getName())
+    def test_get_name(self):
+        staff = Staff(name=self.name)
+        self.assertEqual(self.name, staff.get_name())
 
 if __name__ == '__main__':
     unittest.main()

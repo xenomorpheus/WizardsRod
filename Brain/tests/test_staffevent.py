@@ -2,36 +2,36 @@ from __future__ import absolute_import
 import unittest
 
 from staffevent import StaffEvent
-from const.spelltriggergestureconst import SpellTriggerGestureConst as gesture
 
 
 class TestStaffEvent(unittest.TestCase):
 
     def test_constructor(self):
-        st = StaffEvent("Test Event 01", 0)
+        staff_event = StaffEvent("Test Event 01", 0)
+        self.assertTrue( isinstance(staff_event, StaffEvent) )
 
-    def test_getName(self):
-        st = StaffEvent("Test Event 01", 0)
-        self.assertEqual("Test Event 01", st.getName())
+    def test_get_name(self):
+        staff_event = StaffEvent("Test Event 01", 0)
+        self.assertEqual("Test Event 01", staff_event.get_name())
 
-    def test_getCreated(self):
-        st = StaffEvent("Test Event 01", 99)
-        self.assertEqual(99, st.getCreated())
+    def test_get_created(self):
+        staff_event = StaffEvent("Test Event 01", 99)
+        self.assertEqual(99, staff_event.get_created())
 
     def test_equal(self):
-        st1 = StaffEvent("Test Event 01", 4)
-        st2 = StaffEvent("Test Event 01", 4)
-        st3 = StaffEvent("Test Event 02", 4)
-        self.assertTrue(st1.__eq__(st2))
-        self.assertEqual(st1, st2)
-        self.assertNotEqual(st1, st3)
+        staff_event1 = StaffEvent("Test Event 01", 4)
+        staff_event2 = StaffEvent("Test Event 01", 4)
+        staff_event3 = StaffEvent("Test Event 02", 4)
+        self.assertTrue(staff_event1.__eq__(staff_event2))
+        self.assertEqual(staff_event1, staff_event2)
+        self.assertNotEqual(staff_event1, staff_event3)
 
     def test_hash(self):
-        st1 = StaffEvent("Test Event 01", 4)
-        st2 = StaffEvent("Test Event 01", 4)
-        st3 = StaffEvent("Test Event 02", 4)
-        self.assertEqual(st1.__hash__(), st2.__hash__(), 'hash st1 and st2')
-        self.assertNotEqual(st1.__hash__(), st3.__hash__(), 'hash st1 and st3')
+        staff_event1 = StaffEvent("Test Event 01", 4)
+        staff_event2 = StaffEvent("Test Event 01", 4)
+        staff_event3 = StaffEvent("Test Event 02", 4)
+        self.assertEqual(staff_event1.__hash__(), staff_event2.__hash__(), 'hash staff_event1 and staff_event2')
+        self.assertNotEqual(staff_event1.__hash__(), staff_event3.__hash__(), 'hash staff_event1 and staff_event3')
 
 if __name__ == '__main__':
     unittest.main()

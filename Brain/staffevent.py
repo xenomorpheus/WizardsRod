@@ -24,9 +24,9 @@ class StaffEvent():
     def __hash__(self):
         return hash((self.name, self.created))
 
-    def getName(self) -> str:
+    def get_name(self) -> str:
         return self.name
     
-    def getCreated(self):
+    def get_created(self):
         return self.created
 

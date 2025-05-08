@@ -12,40 +12,40 @@ class TestSpellTrigger(unittest.TestCase):
     def setUpClass(cls):
         cls.name = "Test Spell"
         cls.spell_trigger_list = [gesture.Pointing_Upwards,
-          gesture.Leaning_Forwards_Upwards,
-          gesture.Horizontal,
-          gesture.Leaning_Forwards_Downwards,
-          gesture.Pointing_Downwards ]
+            gesture.Leaning_Forwards_Upwards,
+            gesture.Horizontal,
+            gesture.Leaning_Forwards_Downwards,
+            gesture.Pointing_Downwards ]
         cls.spell_trigger_timeout = 6
 
     def test_constructor(self):
-        st = Spell(name=self.name)
-        self.assertTrue( isinstance(st, Spell) )
+        spell = Spell(name=self.name)
+        self.assertTrue( isinstance(spell, Spell) )
 
-    def test_getName(self):
-        st = Spell(name=self.name)
-        self.assertEqual(self.name, st.getName())
+    def test_get_name(self):
+        spell = Spell(name=self.name)
+        self.assertEqual(self.name, spell.get_name())
 
-    def test_TriggerSequence(self):
-        st = Spell(name=self.name)
-        st_got = st.setTriggerSequence(self.spell_trigger_list)
-        self.assertEqual(st, st_got)
-        sta_got = st.getTriggerSequence()
+    def test_trigger_sequence(self):
+        spell = Spell(name=self.name)
+        st_got = spell.set_trigger_sequence(self.spell_trigger_list)
+        self.assertEqual(spell, st_got)
+        sta_got = spell.get_trigger_sequence()
         self.assertEqual(self.spell_trigger_list, sta_got)
 
-    def test_TriggerTimeout(self):
-        st = Spell(name=self.name)
-        st_got = st.setTriggerTimeout(self.spell_trigger_timeout)
-        self.assertEqual(st, st_got)
-        stt_got = st.getTriggerTimeout()
+    def test_trigger_timeout(self):
+        spell = Spell(name=self.name)
+        st_got = spell.set_trigger_timeout(self.spell_trigger_timeout)
+        self.assertEqual(spell, st_got)
+        stt_got = spell.get_trigger_timeout()
         self.assertEqual(self.spell_trigger_timeout, stt_got)
 
-    def test_HardwareSet(self):
+    def test_hardware_set(self):
         hwlist = [hw.ACCELEROMETER]
-        st = Spell(name=self.name)
-        st_got = st.setHardwareSet(hwlist)
-        self.assertEqual(st, st_got)
-        hw_got = st.getHardwareSet()
+        spell = Spell(name=self.name)
+        st_got = spell.set_hardware_set(hwlist)
+        self.assertEqual(spell, st_got)
+        hw_got = spell.get_hardware_set()
         self.assertEqual(hwlist, hw_got)
 
 

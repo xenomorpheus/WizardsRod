@@ -8,25 +8,25 @@ class Staff():
         self.spell_list_prepared = SpellListPrepared(name + ' SpellListPrepared')
         self.hardware_hints = []
 
-    def getName(self) -> str:
+    def get_name(self) -> str:
         return self.name
 
-    def spellAdd(self, spell: Spell) -> 'Staff':
-        self.spell_list_prepared.spellAdd(spell)
+    def spell_add(self, spell: Spell) -> 'Staff':
+        self.spell_list_prepared.spell_add(spell)
         self.__recalculate_hardware_hints()
         return self
 
-    def spellAddList(self, spelllist) -> 'Staff':
-        self.spell_list_prepared.spellAddList(spelllist)
+    def spell_add_list(self, spelllist) -> 'Staff':
+        self.spell_list_prepared.spell_add_list(spelllist)
         self.__recalculate_hardware_hints()
         return self
 
     def __recalculate_hardware_hints(self) -> None:
-        hardware_hints_new = self.spell_list_prepared.getHardwareHints()
+        hardware_hints_new = self.spell_list_prepared.get_hardware_hints()
         # TODO add/remove hardware
         self.hardware_hints = hardware_hints_new
 
-    def __getNewStaffEvents(self):
+    def __get_new_staff_events(self):
         # TODO Poll hardware_hints hardware for events
         return[] # TODO
 
@@ -35,7 +35,7 @@ class Staff():
         # looking for staff events to trigger spells
         loops = 2
         while loops > 1:
-            self.spell_list_prepared.acceptEvents(self.__getNewStaffEvents())
-            for spell in self.spell_list_prepared.getTriggeredSpells():
-                spell.performActions(staff)
+            self.spell_list_prepared.accept_events(self.__get_new_staff_events())
+            for spell in self.spell_list_prepared.get_triggered_spells():
+                spell.performActions(self)
             loops = loops - 1
