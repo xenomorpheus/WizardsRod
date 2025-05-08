@@ -22,4 +22,20 @@ Keeping with the theme of a wizards staff, we introduce various concepts:
 
 
 
+Currently requires python 3.5 or greater
 
+sudo apt install python3-pip
+
+# Unit testing in Python 3
+python3 -m pip install pytest
+python3 -m pip install coverage
+
+# Python style checking
+python3 -m pip install pylint --user
+python3 -m pip install mypy --user
+python3 -m pip install pycodestyle --user
+
+# TODO
+# Was I using pydoc previously?
+# python3 -m pip install pydoc --user
+# python3 -m pip install pdoc3 --user
