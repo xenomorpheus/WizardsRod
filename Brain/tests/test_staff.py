@@ -40,12 +40,16 @@ class TestStaff(unittest.TestCase):
         got = staff.spell_add_list(spell_list)
         self.assertEqual(staff, got, "return staff")
 
-    def test_run(self):
-        """ test """
+    def test_spell_activate(self):
+        """ test that a spell is activated by events """
+        # TODO create a spell that is activated by an event
+        # TODO get the staff to listen for the event
+        # TODO send the event
+        # TODO check the spell activated
         staff = Staff(name=self.staff_name)
         spell = Spell(name="spell name 01")
         staff.spell_add(spell)
-        staff.run()
+        # TODO lots
 
 
 if __name__ == '__main__':

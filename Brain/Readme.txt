@@ -8,8 +8,10 @@ Keeping with the theme of a wizards staff, we introduce various concepts:
     for the particular sequence of events that trigger the spell. Once triggered the spell controls various actions on the staff.
 
   staff event - A hardware event on the staff e.g. button press, staff moved horizontal, GPS location reached, time reached, prox-card reader, etc.
+       staff events are immutable.
 
   trigger - Code that recognises a staff event.
+       triggers are immutable.
 
   trigger sequence - A sequence of trigger events to listen for.
 

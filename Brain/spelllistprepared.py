@@ -5,9 +5,10 @@ objects.
 
 
 """
-from typing import List
+from typing import List, Dict, Set
 from spell import Spell
 from staffevent import StaffEvent
+from spelltrigger import SpellTrigger
 
 
 class SpellListPrepared():
@@ -42,11 +43,11 @@ when spells are added/removed.
 Before looking for spells in the action list, remove actions we know we can
 ignore.
 
-The downside of this approach is we may have a sequence of totally random
+The down-side of this approach is we may have a sequence of totally random
 actions, remove unwanted actions and somehow have a spell in the prepared list.
 Perhaps the timeout will take care of that.
 
-The thinkgeek wizard robe solved this with a reset action (starting position
+The Thinkgeek wizard robe solved this with a reset action (starting position
 "mana")
 
 """
@@ -54,17 +55,18 @@ The thinkgeek wizard robe solved this with a reset action (starting position
     def __init__(self, name: str) -> None:
         self.name = name
         self.spell_trigger_event_timeout = 0
-        self.spell_dict = {}
+        self.spell_dict: Dict[str, Spell] = {}
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = set()
+        self.spell_hardware: Set = set()
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted = {}
+        self.spell_triggers_permitted: Dict[str, SpellTrigger] = {}
         """ Only the triggers of the prepared spells. keyed by trigger name """
-        self.event_pending_list = []
+        self.event_pending_list: List = []
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all = {}
+        self.spell_trigger_sequence_all: Dict[str, List] = {}
         """ Spells that have received some of the triggers  """
+        self.spells_triggered: List[Spell] = []
         self.__recalculate_spell_triggers()
 
     def __recalculate_spell_triggers(self) -> None:
@@ -124,57 +126,48 @@ The thinkgeek wizard robe solved this with a reset action (starting position
                 count += 1
         return count
 
-    # TODO not finished
-    def get_triggered_spells(self):
-        """ return a list of spells that have been triggered.
+    def get_spells_triggered(self) -> List:
+        """ return a list of spells that have been triggered. """
+        return self.spells_triggered
 
-        TODO not finished
+    def recieve_event(self, event: StaffEvent) -> None:
+        """ TODO not finished
         Consume staff events. Determine which, if any, spells have had all
         triggers in sequence, within the timeout period.
         """
 
-        triggered_spells_list = []
-        spell_trigger_sequence_all = self.spell_trigger_sequence_all
+        event_created_time = event.get_created()
+        for spell_name, sequence_list in self.spell_trigger_sequence_all.items():
+            spell = self.spell_dict[spell_name]
 
-        # consume staff events.
-        event_pending_list = self.event_pending_list
-        while event_pending_list:
-            event = event_pending_list.pop(0)
+            # Delete partially completed spell sequences if they timeout.
+            sequence_list[:] = [sequence for sequence in sequence_list
+                                if event_created_time <=
+                                sequence["timeout"]]
 
-            event_created_time = event.get_created()
-            for spell_name, sequence_list in spell_trigger_sequence_all.items():
-                spell = self.spell_dict[spell_name]
+            # If spell is waiting for that trigger next, then progress the
+            # spell to the next event or mark as complete.
+            trigger_list = spell.get_trigger_sequence()
+            for sequence in sequence_list:
+                trigger_wanted_idx = sequence["trigger_wanted_idx"]
+                if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
+                    if (len(trigger_list) - 1) < trigger_wanted_idx:
+                        # progress to waiting for next event in trigger
+                        # sequence
+                        trigger_wanted_idx += 1
+                    else:
+                        # all triggers matched
+                        sequence["timeout"] = 0
+                        # TODO delete from trigger list
+                        self.spells_triggered.append(spell)
 
-                # Delete partially completed spell sequences if they timeout.
-                sequence_list[:] = [sequence for sequence in sequence_list
-                                    if event_created_time <=
-                                    sequence["timeout"]]
-
-                # If spell is waiting for that trigger next, then progress the
-                # spell to the next event or mark as complete.
-                trigger_list = spell.get_trigger_sequence()
-                for sequence in sequence_list:
-                    trigger_wanted_idx = sequence["trigger_wanted_idx"]
-                    if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
-                        if (len(trigger_list) - 1) < trigger_wanted_idx:
-                            # progress to waiting for next event in trigger
-                            # sequence
-                            trigger_wanted_idx += 1
-                        else:
-                            # all triggers matched
-                            sequence["timeout"] = 0
-                            # TODO delete from trigger list
-                            triggered_spells_list.append(spell)
-
-            # If zeroth trigger, add the sequence to the list.
-            for spell in self.spell_dict.values():
-                spell_name = spell.name
-                if spell.get_trigger_sequence()[0].is_triggerd_by(event):
-                    if spell_name not in spell_trigger_sequence_all:
-                        spell_trigger_sequence_all[spell_name] = []
-                    spell_trigger_sequence_all[spell_name].append(
-                        {"trigger_wanted_idx": 1,
-                         "timeout": event_created_time +
-                                    spell.get_trigger_timeout()})
-
-        return triggered_spells_list
+        # If zeroth trigger, add the sequence to the list.
+        for spell in self.spell_dict.values():
+            spell_name = spell.name
+            if spell.get_trigger_sequence()[0].is_triggerd_by(event):
+                if spell_name not in self.spell_trigger_sequence_all:
+                    self.spell_trigger_sequence_all[spell_name] = []
+                self.spell_trigger_sequence_all[spell_name].append(
+                    {"trigger_wanted_idx": 1,
+                     "timeout": event_created_time +
+                                spell.get_trigger_timeout()})

@@ -88,23 +88,23 @@ class TestSpellListPrepared(unittest.TestCase):
         accepted_count_got = slp.accept_events(events)
         self.assertEqual(0, accepted_count_got, 'accepted count')
 
-    def test_get_triggered_spells_no_spells_no_events(self):
+    def test_get_spells_triggered_no_spells_no_events(self):
         """ test """
         slp = SpellListPrepared('MyList')
         new_events = []
         slp.accept_events(new_events)
-        triggerd_spells = slp.get_triggered_spells()
+        triggerd_spells = slp.get_spells_triggered()
         self.assertEqual([], triggerd_spells)
 
-    def test_get_triggered_spells_one_spells_no_events(self):
+    def test_get_spells_triggered_one_spells_no_events(self):
         """ test """
         slp = SpellListPrepared('MyList').spell_add(self.spell)
         new_events = []
         slp.accept_events(new_events)
-        triggerd_spells = slp.get_triggered_spells()
+        triggerd_spells = slp.get_spells_triggered()
         self.assertEqual([], triggerd_spells, 'no triggered spells')
 
-    def test_get_triggered_spells_some_spells(self):
+    def test_get_spells_triggered_some_spells(self):
         """ test """
         triggers = [
             SpellTrigger('TEST_01'),
@@ -118,7 +118,7 @@ class TestSpellListPrepared(unittest.TestCase):
             StaffEvent('TEST_03', 4)]
         accepted_count = slp.accept_events(events)
         self.assertEqual(2, accepted_count, 'accepted count')
-        self.assertEqual([test_spell01], slp.get_triggered_spells(),
+        self.assertEqual([test_spell01], slp.get_spells_triggered(),
                          'triggered spells')
 
     def test_get_hardware_hints(self):

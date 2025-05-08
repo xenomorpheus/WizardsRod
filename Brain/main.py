@@ -44,7 +44,8 @@ class Main():  # pylint: disable=too-few-public-methods
             __fireball_trigger_sequence).set_trigger_timeout(6). \
             set_hardware_set([const.HARDWARE["ACCELEROMETER"]]). \
             set_perform_actions(Main.spell_perform_actions)
-        Staff("MyStaff").spell_add(fireball).run()
+        Staff("MyStaff").spell_add(fireball)
+        # TODO send events. Check for spell triggered
 
 
 if __name__ == '__main__':

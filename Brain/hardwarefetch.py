@@ -6,7 +6,8 @@ Created on 19 Sep. 2019
 
 from hardware.buttoneventgenerator import ButtonEventGenerator
 
-class HardwareFetch(object):
+
+class HardwareFetch():
     '''
     HardwareFetch
     '''
@@ -17,6 +18,7 @@ class HardwareFetch(object):
         '''
 
     def get(self, hint: str):
-        if str == 'button':
+        ''' return hardware object using hint as selector '''
+        if hint == 'button':
             return ButtonEventGenerator()
-        return
+        raise Exception(f"hardware hint {hint} not recognised")
