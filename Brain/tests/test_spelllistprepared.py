@@ -63,9 +63,9 @@ class TestSpellListPrepared(unittest.TestCase):
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.getName(), gesture.Test01, 4),
-            StaffEvent(gesture.Test02.getName(), gesture.Test02, 4),
-            StaffEvent(gesture.Test03.getName(), gesture.Test03, 4)]
+            StaffEvent(gesture.Test01.getName(), 4),
+            StaffEvent(gesture.Test02.getName(), 4),
+            StaffEvent(gesture.Test03.getName(), 4)]
         accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
 
@@ -76,7 +76,7 @@ class TestSpellListPrepared(unittest.TestCase):
         TestSpell01 = Spell("Test Spell 01").setTriggerSequence(triggers)
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         events = [
-            StaffEvent("Event 03", gesture.Test03, 4)]
+            StaffEvent("Event 03", 4)]
         accepted_count_got = slp.acceptEvents(events)
         self.assertEqual(0, accepted_count_got, 'accepted count')
 
@@ -103,9 +103,9 @@ class TestSpellListPrepared(unittest.TestCase):
         slp = SpellListPrepared('MyList').spellAdd(TestSpell01)
         # Gesture Test03 will be ignored
         events = [
-            StaffEvent(gesture.Test01.getName(), gesture.Test01, 4),
-            StaffEvent(gesture.Test02.getName(), gesture.Test02, 4),
-            StaffEvent(gesture.Test03.getName(), gesture.Test03, 4)]
+            StaffEvent(gesture.Test01.getName(), 4),
+            StaffEvent(gesture.Test02.getName(), 4),
+            StaffEvent(gesture.Test03.getName(), 4)]
         accepted_count = slp.acceptEvents(events)
         self.assertEqual(2, accepted_count, 'accepted count')
         self.assertEqual([TestSpell01], slp.getTriggeredSpells(), 'triggered spells')

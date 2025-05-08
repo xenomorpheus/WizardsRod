@@ -23,7 +23,7 @@ class TestSpellTriggerGesture(unittest.TestCase):
     def test_isTriggerdBy(self):
         name = 'Button1'
         st = SpellTriggerGesture(name)
-        se = StaffEvent(name, st, gmtime())
+        se = StaffEvent(name, gmtime())
         self.assertTrue(st.isTriggerdBy(se))
 
 if __name__ == '__main__':

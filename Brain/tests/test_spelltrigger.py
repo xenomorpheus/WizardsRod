@@ -19,10 +19,11 @@ class TestSpellTrigger(unittest.TestCase):
         st3 = SpellTrigger('Abracadabra2')
         self.assertEqual(st1, st2)
         self.assertNotEqual(st1, st3)
+        self.assertTrue(st1.__eq__(st2), "basic equals")
 
     def test_isTriggerdBy(self):
         st = SpellTrigger('Button1')
-        se = StaffEvent(st.getName(), st, gmtime())
+        se = StaffEvent(st.getName(), gmtime())
         self.assertTrue(st.isTriggerdBy(se))
 
 if __name__ == '__main__':
