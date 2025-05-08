@@ -9,3 +9,5 @@ class SpellTriggerGestureConst():
     Leaning_Forwards_Downwards = SpellTriggerGesture("Leaning forwards downwards", 435)
     Pointing_Downwards = SpellTriggerGesture("Pointing downwards", 447)
 
+    # Not to be used for spells
+    Testing_Only = SpellTriggerGesture("Test Gesture", -1)

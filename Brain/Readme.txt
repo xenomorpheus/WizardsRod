@@ -23,21 +23,31 @@ We also need to garbage collect, basically throw away useless actions.
 I think something like.
 
 
-spell1 = Spell(name="Fireball", components=( Somatic(442, 'Pointing Upwards'), Somatic(424, Horizonta'),...))
-spell2 = ...
-spell3 = ...
+    __fireball_triggers = [SpellTriggerGestureConst.Pointing_Upwards,
+      SpellTriggerGestureConst.Leaning_Forwards_Upwards,
+      SpellTriggerGestureConst.Horizontal,
+      SpellTriggerGestureConst.Leaning_Forwards_Downwards,
+      SpellTriggerGestureConst.Pointing_Downwards ]
 
-# preparing a spell list
-prepared_spells = PreparedSpells(spell_list=(spell1, spell2, spell3))
-prepared_spells.add(spell4)
-prepared_spells.remove(name='spell name')
+    spell1 = Spell("Fireball").setTriggerActions(__fireball_triggers).setTriggerTimeout(6)
+    spell2 = ...
+    spell3 = ...
 
-# looking for actions to trigger spells
-while(true) {
-    action_list.append_actions()
-    triggered_spells_list = prepared_spells.process_actions(actions=action_list)
-    # do spell stuff e.g. sound effects
-}
+    # preparing a spell list
+    prepared_spells = PreparedSpells('my prepared spell list')
+    prepared_spells.spellAddList([spell1, spell2, spell3])
+    prepared_spells.spellAdd(spell4)
+    prepared_spells.spellDel('spell name')
+
+    # looking for actions to trigger spells
+    while(true) {
+        new_action_list = ...# get new actions
+        accepted_count = prepared_spells.acceptActions(new_action_list)
+        if (accepted_count > 0):
+            triggered_spells_list = prepared_spells.getTriggeredSpells()
+            for spell in triggered_spells_list:
+                # do spell stuff e.g. sound effects
+    }
 
 
 Notes about PreparedSpells class.
@@ -45,9 +55,7 @@ We need to throw away actions from the list because we need to keep the processi
 
 The PreparedSpells class could have the concept of:
 a)  timeout (seconds) before an action expires (is removed from the list)
-b)  action_count_max  - maximum number of actions to keep in the list.
 
-We can easily calculate action_count_max, it is the spell with the largest number of components
 We just update this class variable when ever we add/remove spells to the prepared list.
 
 There are trickier things to consider in the more general case, but we don't need to worry too much for now.
