@@ -1,4 +1,8 @@
 # Only for tests.
+from staffevent import StaffEvent
+from spelltrigger import SpellTrigger
+from spell import Spell
+import const
 
 # Spell triggers that trigger a spell event
 
@@ -30,7 +34,7 @@ _SPELL_TEST_01_TRIGGERS = [
 _SPELL_TEST_STR_01 = "TEST_SPELL_01"
 _SPELL_TEST_01 = Spell(_SPELL_TEST_STR_01).set_trigger_sequence(
     _SPELL_TEST_01_TRIGGERS).set_trigger_timeout(6) \
-    .set_hardware_set(set(_HW_ACCELEROMETER))
+    .set_hardware_set(set(const.HW_ACCELEROMETER))
 
 # A master list of spells.
 # TODO MASTER_SPELLBOOK = {_SPELL_TEST_STR_01: _SPELL_TEST_01}

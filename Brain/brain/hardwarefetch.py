@@ -6,7 +6,7 @@ Created on 19 Sep. 2019
 
 # from hardware.buttoneventgenerator import ButtonEventGenerator
 
-from hardware.buttoneventgeneratorfake import ButtonEventGenerator
+from hardware.buttoneventgenerator import ButtonEventGenerator
 
 
 class HardwareFetch():

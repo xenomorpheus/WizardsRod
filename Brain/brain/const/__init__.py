@@ -10,11 +10,11 @@ from staffevent import StaffEvent
 # Will need to be able to select polling frequency.
 
 _HW_GPS = "GPS"
-_HW_ACCELEROMETER = "ACCELEROMETER"
+HW_ACCELEROMETER = "ACCELEROMETER"
 _HW_BUTTON = "BUTTON"
 
 HARDWARE = {_HW_GPS: _HW_GPS,
-            _HW_ACCELEROMETER: _HW_ACCELEROMETER,
+            HW_ACCELEROMETER: HW_ACCELEROMETER,
             _HW_BUTTON: _HW_BUTTON}
 
 # Generic spell trigger objects
