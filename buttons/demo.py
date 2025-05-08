@@ -7,8 +7,11 @@ def button_callback(channel):
 
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
-pin_num: int = 10
-GPIO.setup(pin_num, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set pin pin_num to be an input pin and set initial value to be pulled low (off)
-GPIO.add_event_detect(pin_num, GPIO.RISING, callback=button_callback)  # Setup event on pin pin_num rising edge
+channel: int = 10
+GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Set pin channel to be an input pin and set initial value to be pulled low (off)
+# Setup event on pin channel rising edge. Ignore furhter edges for 200ms for switch bounce handling
+# Multiple callback handlers can be added
+GPIO.add_event_detect(channel, GPIO.RISING, callback=button_callback, bouncetime=200)
 message = input("Press enter to quit\n\n")  # Run until someone presses enter
+GPIO.remove_event_detect(channel)
 GPIO.cleanup()  # Clean up
