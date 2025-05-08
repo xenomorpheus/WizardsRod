@@ -7,11 +7,12 @@ except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
     fake_rpigpio.utils.install()
 
-class Main():  # pylint: disable=too-few-public-methods
-    """ Some examples to show how to call the code.  """
 
-def button_callback(the_channel: int):
-    print("Button %d was pushed!" % (the_channel))
+class Main():  # pylint: disable=too-few-public-methods
+    """ Some examples to show how to call the code."""
+
+    def button_callback(the_channel: int):
+        print("Button %d was pushed!" % (the_channel))
 
     @staticmethod
     def main():
@@ -19,15 +20,16 @@ def button_callback(the_channel: int):
         GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
         channel: int = 10
         GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        # Set pin channel to be an input pin and set initial value to be pulled low
-        #    (off).
-        # Setup event on pin channel rising edge. Ignore further edges for 200ms for
-        #    switch bounce handling
+        # Set pin channel to be an input pin and set initial value to
+        # be pulled low (off).
+        # Setup event on pin channel rising edge. Ignore further edges
+        # for 200ms for switch bounce handling
         # Multiple callback handlers can be added
 
-        GPIO.add_event_detect(channel, GPIO.RISING, callback=button_callback,
-                              bouncetime=200)
-        message = input("Press enter to quit\n\n")  # Run until someone presses enter
+        GPIO.add_event_detect(channel, GPIO.RISING,
+                              callback=Main.button_callback, bouncetime=200)
+        # Run until someone presses enter
+        message = input("Press enter to quit\n\n")
         GPIO.remove_event_detect(channel)
         GPIO.cleanup()  # Clean up
 
