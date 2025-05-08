@@ -23,6 +23,8 @@ class Spell():
         """ Name of the spell """
         self.trigger_sequence = []  # type: SpellTriggerSequence
         """ Ordered steps required to trigger the spell """
+        self.reset_trigger_set = set()  # type: Set[SpellTrigger]
+        """ TODO: Any of these spell triggers will abort every trigger sequence """
         self.trigger_timeout = 0  # type: int
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """

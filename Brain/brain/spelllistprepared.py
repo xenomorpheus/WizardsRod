@@ -118,8 +118,8 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
             self.receive_event(event)
 
     def receive_event(self, event: StaffEvent) -> None:
-        """ Consume staff events. Determine which, if any, spells have had all
-        triggers in sequence, within the timeout period.
+        """ Consume staff events. Determine which spells, if any, have had all
+        triggers in sequence, and within the timeout period.
         """
 
         if not any(trigger.is_triggerd_by(event)
