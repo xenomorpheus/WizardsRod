@@ -1,7 +1,7 @@
 from typing import List
 # Import Raspberry Pi GPIO library
 try:
-    import RPi.GPIO
+    import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
     fake_rpigpio.utils.install()
