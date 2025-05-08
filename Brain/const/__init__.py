@@ -2,6 +2,7 @@
 
 from spell import Spell
 from spelltrigger import SpellTrigger
+from spelltriggerbutton import SpellTriggerButton
 from spelltriggergesture import SpellTriggerGesture
 from staffevent import StaffEvent
 
@@ -10,9 +11,11 @@ from staffevent import StaffEvent
 
 _HW_GPS = "GPS"
 _HW_ACCELEROMETER = "ACCELEROMETER"
+_HW_BUTTON = "BUTTON"
 
 HARDWARE = {_HW_GPS: _HW_GPS,
-            _HW_ACCELEROMETER: _HW_ACCELEROMETER}
+            _HW_ACCELEROMETER: _HW_ACCELEROMETER,
+            _HW_BUTTON: _HW_BUTTON}
 
 # Generic spell trigger objects
 
@@ -39,6 +42,16 @@ ST_GESTURE = {'POINTING_UPWARDS': _G_POINTING_UPWARDS,
               'HORIZONTAL': _G_HORIZONTAL,
               'LEANING_FORWARDS_DOWNWARDS': _G_LEANING_FORWARDS_DOWNWARDS,
               'POINTING_DOWNWARDS': _G_POINTING_DOWNWARDS}
+
+_B_1 = SpellTriggerButton('1')
+_B_2 = SpellTriggerButton('2')
+_B_3 = SpellTriggerButton('3')
+_B_4 = SpellTriggerButton('4')
+
+ST_BUTTON = { 'BUTTON1': _B_1,
+              'BUTTON2': _B_2,
+              'BUTTON3': _B_3,
+              'BUTTON4': _B_4,}
 
 # Simple generic events that the staff will generate and look
 #  for in order to trigger spells.

@@ -9,7 +9,7 @@ Created on 19 Sep. 2019
 '''
 
 
-class ButtonEventGenerator(object):
+class ButtonEventGenerator():
     '''
     When hardware buttons are pressed send StaffEvent objects to
     listeners that have been previously setup.

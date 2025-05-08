@@ -39,3 +39,8 @@ class Staff():
         for hardware_hint in hardware_hints_new - self.hardware_hints:
             self.hwf.get(hardware_hint).activate()
         self.hardware_hints = hardware_hints_new
+
+    def end(self) -> 'Staff':
+        """ shut down the hardware """
+        for hardware_hint in self.hardware_hints:
+            self.hwf.get(hardware_hint).deactivate()
