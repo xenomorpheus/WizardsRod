@@ -23,3 +23,6 @@ Keeping with the theme of a wizards staff, we introduce various concepts:
 
 
 Currently requires python 3.5 or greater
+
+Development on non-pi environment
+https://pypi.org/project/fake-rpigpio/

@@ -8,7 +8,7 @@ from spell import Spell
 from spelltrigger import SpellTrigger
 from staff import Staff
 from staffevent import StaffEvent
-import const
+import tests
 
 
 class TestSpellListPrepared(unittest.TestCase):
@@ -61,7 +61,7 @@ class TestSpellListPrepared(unittest.TestCase):
         # pylint: disable=R0201
         """ test """
         slp = SpellListPrepared(None)
-        new_events = [const.EVENT["TEST_01"], const.EVENT["TEST_02"]]
+        new_events = [tests.EVENT["TEST_01"], tests.EVENT["TEST_02"]]
         slp.receive_events(new_events)
 
     # Only accept events that are for our prepared spells

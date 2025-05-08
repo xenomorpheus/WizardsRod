@@ -1,5 +1,11 @@
 from typing import List
-import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
+# Import Raspberry Pi GPIO library
+try:
+    import RPi.GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import fake_rpigpio.utils
+    fake_rpigpio.utils.install()
+
 from staffeventbutton import StaffEventButton
 
 '''
