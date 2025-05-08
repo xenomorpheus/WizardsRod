@@ -11,10 +11,10 @@ class Staff():
 
     """ The Staff brings together the prepared spells and the hardware. """
 
-    name: str
-    spell_list_prepared: SpellListPrepared
-    hardware_hints: set
-    hwf: HardwareFetch
+    #name: str
+    #spell_list_prepared: SpellListPrepared
+    #hardware_hints: set
+    #hwf: HardwareFetch
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -49,7 +49,7 @@ class Staff():
 
     def __get_new_staff_events(self) -> List:
         """ "Poll hardware_hints hardware for events """
-        events: List = []
+        events = []
         for hardware_hint in self.hardware_hints:
             hardware = self.hwf.get(hardware_hint)
             events.append(hardware.get_events())

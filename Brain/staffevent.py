@@ -19,9 +19,9 @@ Events - Spells will be triggered by a sequence of these events.
 * Reaching a GPS location
 
     """
-    name: str
-    created: int
-    event_type: str
+    #name: str
+    #created: int
+    #event_type: str
 
     def __init__(self, name, created, event_type='none') -> None:
         self.name = name

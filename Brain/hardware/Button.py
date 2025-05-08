@@ -13,8 +13,8 @@ class Button(object):
     '''
     classdocs
     '''
-    channels: set(int)
-    listeners: List(callable)
+    #channels: set(int)
+    #listeners: List(callable)
 
     def __init__(self, listeners, channels):
         '''
