@@ -15,8 +15,7 @@ class TestSpellListPrepared(unittest.TestCase):
     """ test """
 
 
-    @classmethod
-    def setUp(cls):
+    def setUp(self):
         """ setup all tests """
         self.perform_action_calls = set()
 
