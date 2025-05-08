@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 
 Some examples to show how to call the code.
@@ -50,7 +51,7 @@ class Main():  # pylint: disable=too-few-public-methods
             set_hardware_set(set([const.HARDWARE["BUTTON"]])). \
             set_perform_actions(Main.spell_perform_actions)
         staff = Staff("MyStaff").spell_add(fireball)
-        input("> press return to exit")
+        input("> Waiting for BUTTON1 then BUTTON2. Press return to exit")
         staff.end()
 
     @staticmethod
