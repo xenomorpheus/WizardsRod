@@ -22,7 +22,7 @@ cover:
 
 lint:
 	@echo "===== Lint ====="
-	pylint brain/ tests/ || true
+	pylint --exit-zero brain/ tests/ || true
 
 pycodestyle:
 	@echo "===== pycodestyle ====="
