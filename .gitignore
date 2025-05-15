@@ -20,5 +20,5 @@
 # no idea
 share/
 
-# virtualenv python environment manager
-env
+# Machine generated (extracted) docs
+docs/generated
