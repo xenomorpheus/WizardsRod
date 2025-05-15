@@ -1,5 +1,5 @@
+"""The Staff brings together the prepared spells and the hardware."""
 
-""" The Staff brings together the prepared spells and the hardware. """
 from typing import Dict
 from spell import Spell
 from spelllistprepared import SpellListPrepared
@@ -7,9 +7,8 @@ from hardware import Hardware
 from hardwarefetch import HardwareFetch
 
 
-class Staff():
-
-    """ The Staff brings together the prepared spells and the hardware. """
+class Staff:
+    """The Staff brings together the prepared spells and the hardware."""
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -21,17 +20,17 @@ class Staff():
         """ hardware interface objects. keyed by hardware hint string """
 
     def get_name(self) -> str:
-        """ get the name """
+        """get the name"""
         return self.name
 
-    def spell_add(self, spell: Spell) -> 'Staff':
-        """ add a spell to the prepared list """
+    def spell_add(self, spell: Spell) -> "Staff":
+        """add a spell to the prepared list"""
         self.spell_list_prepared.spell_add(spell)
         self.__recalculate_hardware()
         return self
 
-    def spell_add_list(self, spelllist) -> 'Staff':
-        """ add a list of spells to the prepared list """
+    def spell_add_list(self, spelllist) -> "Staff":
+        """add a list of spells to the prepared list"""
         self.spell_list_prepared.spell_add_list(spelllist)
         self.__recalculate_hardware()
         return self
@@ -46,13 +45,13 @@ class Staff():
             self.hardware[hardware_hint] = hardware
             hardware.activate()
 
-    def end(self) -> 'Staff':
-        """ shut down the hardware """
+    def end(self) -> "Staff":
+        """shut down the hardware"""
         for hardware_hint in list(self.hardware.keys()):
             self.hardware[hardware_hint].deactivate()
             del self.hardware[hardware_hint]
         return self
 
     def __del__(self):
-        """ destructor """
+        """destructor"""
         self.end()

@@ -9,23 +9,24 @@ from hardware import Hardware
 from buttoneventgenerator import ButtonEventGenerator
 
 
-class HardwareFetch():
+class HardwareFetch:
     """
     HardwareFetch
     """
+
     generator = {}  # type: Dict[str, Hardware]
 
     def __init__(self):
         """
         Constructor
         """
-        self.generator['BUTTON'] = ButtonEventGenerator()
+        self.generator["BUTTON"] = ButtonEventGenerator()
 
     def __str__(self):
         return self.__class__.__name__
 
     def get(self, hint: str) -> Hardware:
-        """ return hardware object using hint as selector """
+        """return hardware object using hint as selector"""
         if hint in self.generator:
             return self.generator[hint]
-        raise Exception("Hint "+hint+" not known")
+        raise Exception("Hint " + hint + " not known")

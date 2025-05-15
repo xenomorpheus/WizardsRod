@@ -1,4 +1,5 @@
-""" test """
+"""test"""
+
 from __future__ import absolute_import
 import unittest
 
@@ -7,32 +8,32 @@ from spell import Spell
 
 
 class TestStaff(unittest.TestCase):
-    """ test """
+    """test"""
 
     @classmethod
     def setUpClass(cls):
-        """ test """
+        """test"""
         cls.staff_name = "Test Staff"
 
     def test_constructor(self):
-        """ test """
+        """test"""
         staff = Staff(name=self.staff_name)
         self.assertTrue(isinstance(staff, Staff))
 
     def test_get_name(self):
-        """ test """
+        """test"""
         staff = Staff(name=self.staff_name)
         self.assertEqual(self.staff_name, staff.get_name())
 
     def test_spell_add(self):
-        """ test """
+        """test"""
         staff = Staff(name=self.staff_name)
         spell = Spell(name="spell name 01")
         got = staff.spell_add(spell)
         self.assertEqual(staff, got, "return staff")
 
     def test_spell_add_list(self):
-        """ test """
+        """test"""
         staff = Staff(name=self.staff_name)
         spell1 = Spell(name="spell name 01")
         spell2 = Spell(name="spell name 02")
@@ -41,7 +42,7 @@ class TestStaff(unittest.TestCase):
         self.assertEqual(staff, got, "return staff")
 
     def test_spell_activate(self):
-        """ test that a spell is activated by events """
+        """test that a spell is activated by events"""
         # TODO create a spell that is activated by an event
         # TODO get the staff to listen for the event
         # TODO send the event
@@ -52,18 +53,18 @@ class TestStaff(unittest.TestCase):
         # TODO lots
 
     def test_end(self):
-        """ end """
+        """end"""
         staff = Staff(name=self.staff_name)
         staff.end()
 
     def test_end_with_hardware(self):
-        """ end """
+        """end"""
         staff = Staff(name=self.staff_name)
         spell = Spell(name="spell name 01")
-#        spell.set_hardware_set([const.HW_BUTTON])
+        #        spell.set_hardware_set([const.HW_BUTTON])
         staff.spell_add(spell)
         staff.end()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

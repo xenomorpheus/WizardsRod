@@ -1,16 +1,16 @@
-""" spell trigger """
+"""spell trigger"""
 
 from staffevent import StaffEvent
 
 
-class SpellTrigger():
+class SpellTrigger:
+    """Each trigger looks at events and determines if the trigger condition
+    is met."""
 
-    """ Each trigger looks at events and determines if the trigger condition
-    is met. """
     name = ""  # type: str
     spelltrigger_type = ""  # type: str
 
-    def __init__(self, name: str, spelltrigger_type='none') -> None:
+    def __init__(self, name: str, spelltrigger_type="none") -> None:
         self.name = name
         self.spelltrigger_type = spelltrigger_type
 
@@ -23,15 +23,15 @@ class SpellTrigger():
         return hash((self.name, self.spelltrigger_type))
 
     def get_name(self) -> str:
-        """ get the name """
+        """get the name"""
         return self.name
 
     def get_spelltrigger_type(self) -> str:
-        """ get the spelltrigger_type """
+        """get the spelltrigger_type"""
         return self.spelltrigger_type
 
     def is_triggerd_by(self, event: StaffEvent) -> bool:
-        """ For simple triggers, the types just need to match. """
+        """For simple triggers, the types just need to match."""
         return (issubclass(type(event), StaffEvent)) and (
-            self.get_name() == event.get_name() and
-            self.get_spelltrigger_type() == event.get_staffevent_type())
+            self.get_name() == event.get_name() and self.get_spelltrigger_type() == event.get_staffevent_type()
+        )

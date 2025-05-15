@@ -1,4 +1,5 @@
-""" test """
+"""test"""
+
 from __future__ import absolute_import
 import unittest
 
@@ -8,31 +9,32 @@ import const
 
 
 class TestSpellTrigger(unittest.TestCase):
-    """ test """
+    """test"""
 
     @classmethod
     def setUpClass(cls):
-        cls.spell_name = 'Test Spell'
-        cls.spell_trigger_list = [const.ST_GESTURE['POINTING_UPWARDS'],
-                                  const.ST_GESTURE['LEANING_FORWARDS_UPWARDS'],
-                                  const.ST_GESTURE['HORIZONTAL'],
-                                  const.
-                                  ST_GESTURE['LEANING_FORWARDS_DOWNWARDS'],
-                                  const.ST_GESTURE['POINTING_DOWNWARDS']]
+        cls.spell_name = "Test Spell"
+        cls.spell_trigger_list = [
+            const.ST_GESTURE["POINTING_UPWARDS"],
+            const.ST_GESTURE["LEANING_FORWARDS_UPWARDS"],
+            const.ST_GESTURE["HORIZONTAL"],
+            const.ST_GESTURE["LEANING_FORWARDS_DOWNWARDS"],
+            const.ST_GESTURE["POINTING_DOWNWARDS"],
+        ]
         cls.spell_trigger_timeout = 6
 
     def test_constructor(self):
-        """ test """
+        """test"""
         spell = Spell(name=self.spell_name)
         self.assertTrue(isinstance(spell, Spell))
 
     def test_get_name(self):
-        """ test """
+        """test"""
         spell = Spell(name=self.spell_name)
         self.assertEqual(self.spell_name, spell.get_name())
 
     def test_trigger_sequence(self):
-        """ test """
+        """test"""
         spell = Spell(name=self.spell_name)
         st_got = spell.set_trigger_sequence(self.spell_trigger_list)
         self.assertEqual(spell, st_got)
@@ -40,7 +42,7 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(self.spell_trigger_list, sta_got)
 
     def test_trigger_timeout(self):
-        """ test """
+        """test"""
         spell = Spell(name=self.spell_name)
         st_got = spell.set_trigger_timeout(self.spell_trigger_timeout)
         self.assertEqual(spell, st_got)
@@ -48,7 +50,7 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(self.spell_trigger_timeout, stt_got)
 
     def test_hardware_set(self):
-        """ test """
+        """test"""
         hw_set = set([const.HW_ACCELEROMETER])
         spell = Spell(name=self.spell_name)
         st_got = spell.set_hardware_set(hw_set)
@@ -58,16 +60,16 @@ class TestSpellTrigger(unittest.TestCase):
 
     @staticmethod
     def spell_callback(spell: Spell, staff: Staff):
-        """ test """
-        print("callback spell="+spell.get_name()+", staff="+staff.get_name())
+        """test"""
+        print("callback spell=" + spell.get_name() + ", staff=" + staff.get_name())
 
     def test_perform_actions(self):
-        """ test """
+        """test"""
         spell = Spell(name=self.spell_name)
         spell.set_perform_actions(self.spell_callback)
         cb_got = spell.get_perform_actions()
         self.assertEqual(self.spell_callback, cb_got)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

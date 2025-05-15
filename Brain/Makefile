@@ -1,4 +1,10 @@
-all: pycodestyle lint mypy test cover docs
+all: autoformat pycodestyle lint mypy test cover docs
+
+
+autoformat:
+	@echo "===== autoformat ====="
+	black --line-length=120  brain/ tests/
+
 
 test:
 	python3 --version
@@ -15,13 +21,20 @@ cover:
 	coverage3 report -m --skip-covered
 
 lint:
+	@echo "===== Lint ====="
 	pylint brain/ tests/ || true
 
 pycodestyle:
-	pycodestyle brain/ tests/
+	@echo "===== pycodestyle ====="
+	pycodestyle --max-line-length=120 brain/ tests/
 
 mypy:
+	@echo "===== MyPy ====="
 	mypy brain/ tests/ || true
 
 docs:
+	@echo "===== Docs ====="
 	pdoc3 --force --html -o doc/ brain/ tests/
+
+pipupdate:
+	pip --disable-pip-version-check list --outdated --format=json | python -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))" | xargs -n1 pip install -U

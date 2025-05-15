@@ -1,5 +1,3 @@
-
-
 """
 An event that occurs on the staff.
 
@@ -8,23 +6,22 @@ An event that occurs on the staff.
 from time import gmtime
 
 
-class StaffEvent():
+class StaffEvent:
+    """
+
+    Events - Spells will be triggered by a sequence of these events.
+
+    * A button is pressed.
+    * A gesture/stamp of the staff
+    * A temperature change
+    * A pressure change
+    * Reaching a GPS location
+
+    Events are immutable
 
     """
 
-Events - Spells will be triggered by a sequence of these events.
-
-* A button is pressed.
-* A gesture/stamp of the staff
-* A temperature change
-* A pressure change
-* Reaching a GPS location
-
-Events are immutable
-
-    """
-
-    def __init__(self, name, created=gmtime(), staffevent_type='none') -> None:
+    def __init__(self, name, created=gmtime(), staffevent_type="none") -> None:
         self.name = name
         self.created = created
         self.staffevent_type = staffevent_type
@@ -38,13 +35,13 @@ Events are immutable
         return hash((self.name, self.created, self.staffevent_type))
 
     def get_name(self) -> str:
-        """ get name """
+        """get name"""
         return self.name
 
     def get_created(self) -> int:
-        """ get time/date event was created """
+        """get time/date event was created"""
         return self.created
 
     def get_staffevent_type(self) -> str:
-        """ get staffevent_type """
+        """get staffevent_type"""
         return self.staffevent_type

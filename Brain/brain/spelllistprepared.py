@@ -5,52 +5,52 @@ objects.
 
 
 """
+
 from typing import Any, Dict, List, Set
 from spell import Spell
 from staffevent import StaffEvent
 from spelltrigger import SpellTrigger
 
 
-class SpellListPrepared():
-
+class SpellListPrepared:
     """
 
 
-Builder pattern
+    Builder pattern
 
-Notes
+    Notes
 
-We need to throw away actions from the list because we need to keep the
-processing down, and we don't care about events that happened some time ago.
+    We need to throw away actions from the list because we need to keep the
+    processing down, and we don't care about events that happened some time ago.
 
-The class could have the concept of:
-a)  timeout (seconds) before an action expires (is removed from the list)
+    The class could have the concept of:
+    a)  timeout (seconds) before an action expires (is removed from the list)
 
-We just update this class variable when ever we add/remove spells to the
-prepared list.
+    We just update this class variable when ever we add/remove spells to the
+    prepared list.
 
-There are trickier things to consider in the more general case, but we don't
-need to worry too much for now.
+    There are trickier things to consider in the more general case, but we don't
+    need to worry too much for now.
 
-Consider the case where there is an action in the list that isn't related to
-any prepared spells.
+    Consider the case where there is an action in the list that isn't related to
+    any prepared spells.
 
-The staff may still add the action to the list.  We may wish the prepared spell
-list to prune out actions that aren't components of the prepared spells.
+    The staff may still add the action to the list.  We may wish the prepared spell
+    list to prune out actions that aren't components of the prepared spells.
 
-Pretty easy to do, have a map of all actions for prepared spells. Refresh map
-when spells are added/removed.
-Before looking for spells in the action list, remove actions we know we can
-ignore.
+    Pretty easy to do, have a map of all actions for prepared spells. Refresh map
+    when spells are added/removed.
+    Before looking for spells in the action list, remove actions we know we can
+    ignore.
 
-The down-side of this approach is we may have a sequence of totally random
-actions, remove unwanted actions and somehow have a spell in the prepared list.
-Perhaps the timeout will take care of that.
+    The down-side of this approach is we may have a sequence of totally random
+    actions, remove unwanted actions and somehow have a spell in the prepared list.
+    Perhaps the timeout will take care of that.
 
-The Thinkgeek wizard robe solved this with a reset action (starting position
-"mana")
+    The Thinkgeek wizard robe solved this with a reset action (starting position
+    "mana")
 
-"""
+    """
 
     def __init__(self) -> None:
         self.spell_trigger_event_timeout = 0
@@ -63,8 +63,7 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.event_pending_list = []  # type: List[StaffEvent]
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all = {}\
-            # type: Dict[Spell, List[Dict[str, Any]]]
+        self.spell_trigger_sequence_all = {}  # type: Dict[Spell, List[Dict[str, Any]]]
         """ For each prepared spell, a sequence of indexes to that spell's
         triggers. Each spell trigger sequence may have repeats of triggers.
         Analogy: entering a numeric security code needs to support
@@ -88,33 +87,33 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         self.spell_trigger_event_timeout = timeout_max
 
     def get_hardware_hints(self) -> set:
-        """ get the hardware hints """
+        """get the hardware hints"""
         return self.spell_hardware
 
-    def spell_add(self, spell: Spell) -> 'SpellListPrepared':
-        """ add a spell to the list of prepared spells. This will
-        automatically handle connections to any required hardware. """
+    def spell_add(self, spell: Spell) -> "SpellListPrepared":
+        """add a spell to the list of prepared spells. This will
+        automatically handle connections to any required hardware."""
         self.spell_list.append(spell)
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_add_list(self, spell_list: List[Spell]) -> 'SpellListPrepared':
-        """ add a list of spells """
+    def spell_add_list(self, spell_list: List[Spell]) -> "SpellListPrepared":
+        """add a list of spells"""
         # TODO check spell has triggers
         for spell in spell_list:
             self.spell_list.append(spell)
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_del(self, spell: Spell) -> 'SpellListPrepared':
-        """ remove a spell """
+    def spell_del(self, spell: Spell) -> "SpellListPrepared":
+        """remove a spell"""
         if spell in self.spell_list:
             self.spell_list.remove(spell)
             self.__recalculate_spell_triggers()
         return self
 
     def receive_events(self, new_events: List[StaffEvent]) -> List[Spell]:
-        """ accept events """
+        """accept events"""
         spells_triggered = []  # type: List[Spell]
         for event in new_events:
             for spell in self.receive_event(event):
@@ -122,27 +121,24 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
         return spells_triggered
 
     def receive_event(self, event: StaffEvent) -> List[Spell]:
-        """ Consume staff events. Determine which spells, if any, have had all
+        """Consume staff events. Determine which spells, if any, have had all
         triggers in sequence, and within the timeout period.
         """
         spells_triggered = []  # type: List[Spell]
-        if not any(trigger.is_triggerd_by(event)
-                   for trigger in self.spell_triggers_permitted):
+        if not any(trigger.is_triggerd_by(event) for trigger in self.spell_triggers_permitted):
             return spells_triggered
         event_created_time = event.get_created()
         for spell, sequence_list in self.spell_trigger_sequence_all.items():
 
             # Delete partially completed spell sequences if they have
             # timed out.
-            sequence_list[:] = [sequence for sequence in sequence_list
-                                if event_created_time <=
-                                sequence['timeout']]
+            sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence["timeout"]]
 
             # If spell is waiting for that trigger next, then progress the
             # spell to the next event or mark as complete.
             trigger_list = spell.get_trigger_sequence()
             for sequence in sequence_list:
-                trigger_wanted_idx = sequence['trigger_wanted_idx']
+                trigger_wanted_idx = sequence["trigger_wanted_idx"]
                 if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
                     if (len(trigger_list) - 1) < trigger_wanted_idx:
                         # progress to waiting for next event in trigger
@@ -150,19 +146,17 @@ The Thinkgeek wizard robe solved this with a reset action (starting position
                         trigger_wanted_idx += 1
                     else:
                         # all triggers matched
-                        sequence['timeout'] = 0
+                        sequence["timeout"] = 0
                         # TODO delete from list
                         spells_triggered.append(spell)
 
         # If zeroth trigger, add the sequence to the list.
         for spell in self.spell_list:
-            if len(spell.get_trigger_sequence()) > 0 and \
-                    spell.get_trigger_sequence()[0].is_triggerd_by(event):
+            if len(spell.get_trigger_sequence()) > 0 and spell.get_trigger_sequence()[0].is_triggerd_by(event):
                 if spell not in self.spell_trigger_sequence_all:
                     self.spell_trigger_sequence_all[spell] = []
                 self.spell_trigger_sequence_all[spell].append(
-                    {'trigger_wanted_idx': 1,
-                     'timeout': event_created_time +
-                        spell.get_trigger_timeout()})
+                    {"trigger_wanted_idx": 1, "timeout": event_created_time + spell.get_trigger_timeout()}
+                )
 
         return spells_triggered

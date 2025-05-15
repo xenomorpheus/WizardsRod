@@ -1,11 +1,10 @@
-""" hardware base class """
+"""hardware base class"""
 
 
-class Hardware():
+class Hardware:
+    """hardware base class."""
 
-    """ hardware base class. """
-
-    def __init__(self, name: str, hardware_type='none') -> None:
+    def __init__(self, name: str, hardware_type="none") -> None:
         self.name = name
         self.hardware_type = hardware_type
 
@@ -18,15 +17,15 @@ class Hardware():
         return hash((self.name, self.hardware_type))
 
     def get_name(self) -> str:
-        """ get the name """
+        """get the name"""
         return self.name
 
     def get_hardware_type(self) -> str:
-        """ get the hardware_type """
+        """get the hardware_type"""
         return self.hardware_type
 
     def activate(self) -> None:
-        """ make hardware available """
+        """make hardware available"""
 
     def deactivate(self) -> None:
-        """ finish using hardware """
+        """finish using hardware"""

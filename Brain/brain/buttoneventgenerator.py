@@ -5,11 +5,13 @@ Created on 19 Sep. 2019
 """
 
 from typing import List, Set
+
 # Import Raspberry Pi GPIO library
 try:
     import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
+
     fake_rpigpio.utils.install()
 
 from hardware import Hardware
@@ -28,7 +30,7 @@ class ButtonEventGenerator(Hardware):
     """
 
     def __init__(self):
-        """ Constructor """
+        """Constructor"""
         super().__init__(self)
         self.active = False  # type: bool
         self.channels = set()  # type: Set
@@ -40,17 +42,17 @@ class ButtonEventGenerator(Hardware):
         return hash((self.active, self.channels, self.listeners))
 
     def listener_add(self, listener) -> None:
-        """ add a listener for button events """
+        """add a listener for button events"""
         self.listeners.append(listener)
 
     def listener_remove(self, listener) -> None:
-        """ remove a listener for button events """
+        """remove a listener for button events"""
         self.listeners.remove(listener)
 
     def channel_add(self, channel: int) -> None:
-        """ add a button to those being listened to """
+        """add a button to those being listened to"""
         if not self.active:
-            raise Exception('activate first')
+            raise Exception("activate first")
         self.channels.add(channel)
         GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         # Set pin channel to be an input pin and set initial value to be
@@ -58,13 +60,10 @@ class ButtonEventGenerator(Hardware):
         # Setup event on pin channel rising edge. Ignore further edges for
         # 200ms for switch bounce handling.
         # Multiple callback handlers can be added
-        GPIO.add_event_detect(
-            channel, GPIO.RISING,
-            callback=self._button_callback,
-            bouncetime=200)
+        GPIO.add_event_detect(channel, GPIO.RISING, callback=self._button_callback, bouncetime=200)
 
     def channel_remove(self, channel: int) -> None:
-        """ remove a button from those being listened to """
+        """remove a button from those being listened to"""
         self.channels.remove(channel)
         GPIO.remove_event_detect(channel)
 
