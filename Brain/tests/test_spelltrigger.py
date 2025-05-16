@@ -40,17 +40,14 @@ class TestSpellTrigger(unittest.TestCase):
         spell_trigger3 = SpellTrigger("trigger 02", tests.SPELL_TRIGGER_TYPE["TEST_02"])
         self.assertEqual(spell_trigger1, spell_trigger2)
         self.assertNotEqual(spell_trigger1, spell_trigger3)
-        self.assertTrue(spell_trigger1.__eq__(spell_trigger2), "basic equals")
 
     def test_hash(self):
         """test"""
         spell_trigger1 = SpellTrigger("trigger 01", tests.SPELL_TRIGGER_TYPE["TEST_01"])
         spell_trigger2 = SpellTrigger("trigger 01", tests.SPELL_TRIGGER_TYPE["TEST_01"])
         spell_trigger3 = SpellTrigger("trigger 02", tests.SPELL_TRIGGER_TYPE["TEST_02"])
-        self.assertEqual(spell_trigger1.__hash__(), spell_trigger2.__hash__(), "hash spell_trigger1 and spell_trigger2")
-        self.assertNotEqual(
-            spell_trigger1.__hash__(), spell_trigger3.__hash__(), "hash spell_trigger1 and spell_trigger3"
-        )
+        self.assertEqual(hash(spell_trigger1), hash(spell_trigger2), "hash spell_trigger1 and spell_trigger2")
+        self.assertNotEqual(hash(spell_trigger1), hash(spell_trigger3), "hash spell_trigger1 and spell_trigger3")
 
     def test_is_triggerd_by(self):
         """test"""

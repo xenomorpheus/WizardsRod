@@ -79,7 +79,7 @@ class ButtonEventGenerator(Hardware):
         self.active = False
 
     def _button_callback(self, channel: int) -> None:
-        print("Button %d was pushed!" % (channel))
+        print("Button {%d} was pushed!".format(channel))
         now = 0  # TODO
         event = StaffEventButton(str(channel), now)
         for listener in self.listeners:

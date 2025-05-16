@@ -39,7 +39,6 @@ class TestStaffEvent(unittest.TestCase):
         staff_event1 = StaffEvent("TEST_01", 4)
         staff_event2 = StaffEvent("TEST_01", 4)
         staff_event3 = StaffEvent("TEST_02", 4)
-        self.assertTrue(staff_event1.__eq__(staff_event2))
         self.assertEqual(staff_event1, staff_event2)
         self.assertNotEqual(staff_event1, staff_event3)
         self.assertNotEqual(staff_event1, 1)
@@ -49,8 +48,8 @@ class TestStaffEvent(unittest.TestCase):
         staff_event1 = StaffEvent("TEST_01", 4)
         staff_event2 = StaffEvent("TEST_01", 4)
         staff_event3 = StaffEvent("TEST_02", 4)
-        self.assertEqual(staff_event1.__hash__(), staff_event2.__hash__(), "hash staff_event1 and staff_event2")
-        self.assertNotEqual(staff_event1.__hash__(), staff_event3.__hash__(), "hash staff_event1 and staff_event3")
+        self.assertEqual(hash(staff_event1), hash(staff_event2), "hash staff_event1 and staff_event2")
+        self.assertNotEqual(hash(staff_event1), hash(staff_event3), "hash staff_event1 and staff_event3")
 
 
 if __name__ == "__main__":
