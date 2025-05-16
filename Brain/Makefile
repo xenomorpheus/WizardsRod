@@ -5,6 +5,17 @@ autoformat:
 	@echo "===== autoformat ====="
 	black --line-length=120  brain/ tests/
 
+pycodestyle:
+	@echo "===== pycodestyle ====="
+	pycodestyle --max-line-length=120 brain/ tests/
+
+lint:
+	@echo "===== Lint ====="
+	pylint --exit-zero brain/ tests/ || true
+
+mypy:
+	@echo "===== MyPy ====="
+	mypy brain/ tests/ || true
 
 test:
 	python3 --version
@@ -19,18 +30,6 @@ cover:
 	coverage3 run --branch --append --source=brain tests/test_staffevent.py
 	coverage3 run --branch --append --source=brain tests/test_staff.py
 	coverage3 report -m --skip-covered
-
-lint:
-	@echo "===== Lint ====="
-	pylint --exit-zero brain/ tests/ || true
-
-pycodestyle:
-	@echo "===== pycodestyle ====="
-	pycodestyle --max-line-length=120 brain/ tests/
-
-mypy:
-	@echo "===== MyPy ====="
-	mypy brain/ tests/ || true
 
 docs:
 	@echo "===== Docs ====="
