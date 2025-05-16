@@ -29,4 +29,4 @@ class HardwareFetch:
         """return hardware object using hint as selector"""
         if hint in self.generator:
             return self.generator[hint]
-        raise Exception("Hint " + hint + " not known")
+        raise IOError("Hint " + hint + " not known")
