@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 
-Some examples to show how to call the code.
+Example of how to use the gesture event system.
+
+Listen for POINTING_UPWARDS, LEANING_FORWARDS_UPWARDS, HORIZONTAL,
+LEANING_FORWARDS_DOWNWARDS, and POINTING_DOWNWARDS.
 
 """
 

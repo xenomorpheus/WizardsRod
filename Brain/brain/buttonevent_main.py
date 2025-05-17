@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 
-Some examples to show how to call the code.
+Example code to show how to use the button event system.
+
+Listen for BUTTON1 then BUTTON2.
 
 """
 
