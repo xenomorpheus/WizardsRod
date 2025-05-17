@@ -51,13 +51,6 @@ class Spell:
         """get the name of the spell"""
         return self.name
 
-    def print(self) -> "Spell":
-        """TODO remove. print the spell"""
-        print("spell " + self.name)
-        for trigger in self.trigger_sequence:
-            print(trigger.get_name())
-        return self
-
     def set_trigger_sequence(self, trigger_sequence: SpellTriggerSequence) -> "Spell":
         """set the trigger sequence"""
         self.trigger_sequence = []
