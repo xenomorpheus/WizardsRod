@@ -3,9 +3,9 @@
 from __future__ import absolute_import
 import unittest
 
-from spell import Spell
-from staff import Staff
-import const
+from brain.spell import Spell
+from brain.staff import Staff
+from brain.const import ST_GESTURE, HW_ACCELEROMETER
 
 
 class TestSpellTrigger(unittest.TestCase):
@@ -15,11 +15,11 @@ class TestSpellTrigger(unittest.TestCase):
     def setUpClass(cls):
         cls.spell_name = "Test Spell"
         cls.spell_trigger_list = [
-            const.ST_GESTURE["POINTING_UPWARDS"],
-            const.ST_GESTURE["LEANING_FORWARDS_UPWARDS"],
-            const.ST_GESTURE["HORIZONTAL"],
-            const.ST_GESTURE["LEANING_FORWARDS_DOWNWARDS"],
-            const.ST_GESTURE["POINTING_DOWNWARDS"],
+            ST_GESTURE["POINTING_UPWARDS"],
+            ST_GESTURE["LEANING_FORWARDS_UPWARDS"],
+            ST_GESTURE["HORIZONTAL"],
+            ST_GESTURE["LEANING_FORWARDS_DOWNWARDS"],
+            ST_GESTURE["POINTING_DOWNWARDS"],
         ]
         cls.spell_trigger_timeout = 6
 
@@ -51,7 +51,7 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_hardware_set(self):
         """test"""
-        hw_set = set([const.HW_ACCELEROMETER])
+        hw_set = set([HW_ACCELEROMETER])
         spell = Spell(name=self.spell_name)
         st_got = spell.set_hardware_set(hw_set)
         self.assertEqual(spell, st_got)
@@ -63,11 +63,11 @@ class TestSpellTrigger(unittest.TestCase):
         """test"""
         print("callback spell=" + spell.get_name() + ", staff=" + staff.get_name())
 
-    def test_perform_actions(self):
+    def test_perform_action(self):
         """test"""
         spell = Spell(name=self.spell_name)
-        spell.set_perform_actions(self.spell_callback)
-        cb_got = spell.get_perform_actions()
+        spell.set_perform_action(self.spell_callback)
+        cb_got = spell.get_perform_action()
         self.assertEqual(self.spell_callback, cb_got)
 
 

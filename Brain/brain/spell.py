@@ -9,8 +9,8 @@ The definition of a spell.
 """
 
 from typing import Callable, List, Optional, Set
-from spelltrigger import SpellTrigger
-from hardware import Hardware
+from brain.spelltrigger import SpellTrigger
+from brain.hardware import Hardware
 
 SpellTriggerSequence = List[SpellTrigger]
 
@@ -32,7 +32,7 @@ class Spell:
         self.hardware_set = set()  # type: Set[Hardware]
         """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
         Accelerometer """
-        self.perform_actions = []  # type: Optional[List[Callable]]
+        self.perform_action = None  # type: Optional[Callable]
         """ code to call when trigger sequence completed """
 
     def __hash__(self):
@@ -43,7 +43,7 @@ class Spell:
                 tuple(self.reset_trigger_set),
                 self.trigger_timeout,
                 tuple(self.hardware_set),
-                self.perform_actions,
+                self.perform_action,
             )
         )
 
@@ -89,11 +89,11 @@ class Spell:
         """get the hardware the spell will need"""
         return self.hardware_set
 
-    def set_perform_actions(self, perform_actions: Optional[List[Callable]] = None) -> "Spell":
+    def set_perform_action(self, perform_action: Optional[Callable] = None) -> "Spell":
         """set the method that is called when the spell run"""
-        self.perform_actions = perform_actions
+        self.perform_action = perform_action
         return self
 
-    def get_perform_actions(self) -> Optional[List[Callable]]:
+    def get_perform_action(self) -> Optional[Callable]:
         """get the method that is called when the spell run"""
-        return self.perform_actions
+        return self.perform_action

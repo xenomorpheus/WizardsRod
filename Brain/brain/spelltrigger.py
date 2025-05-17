@@ -1,6 +1,6 @@
 """spell trigger"""
 
-from staffevent import StaffEvent
+from brain.staffevent import StaffEvent
 
 
 class SpellTrigger:

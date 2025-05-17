@@ -1,10 +1,10 @@
 """The Staff brings together the prepared spells and the hardware."""
 
 from typing import Dict
-from spell import Spell
-from spelllistprepared import SpellListPrepared
-from hardware import Hardware
-from hardwarefetch import HardwareFetch
+from brain.spell import Spell
+from brain.spelllistprepared import SpellListPrepared
+from brain.hardware import Hardware
+from brain.hardwarefetch import HardwareFetch
 
 
 class Staff:

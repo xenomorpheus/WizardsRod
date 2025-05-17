@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 import unittest
 
-from staffeventbutton import StaffEventButton
+from brain.staffeventbutton import StaffEventButton
 
 
 class TestStaffEventButton(unittest.TestCase):

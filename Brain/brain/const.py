@@ -1,10 +1,7 @@
 """constants. Not for tests."""
 
-from spell import Spell
-from spelltrigger import SpellTrigger
-from spelltriggerbutton import SpellTriggerButton
-from spelltriggergesture import SpellTriggerGesture
-from staffevent import StaffEvent
+from brain.spelltriggerbutton import SpellTriggerButton
+from brain.spelltriggergesture import SpellTriggerGesture
 
 # Will probably need to turn these into objects rather than strings.
 # Will need to be able to select polling frequency.

@@ -14,8 +14,8 @@ except (RuntimeError, ModuleNotFoundError):
 
     fake_rpigpio.utils.install()
 
-from hardware import Hardware
-from staffeventbutton import StaffEventButton
+from brain.hardware import Hardware
+from brain.staffeventbutton import StaffEventButton
 
 
 class ButtonEventGenerator(Hardware):

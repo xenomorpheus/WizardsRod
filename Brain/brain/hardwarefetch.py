@@ -5,8 +5,8 @@ Created on 19 Sep. 2019
 """
 
 from typing import Dict
-from hardware import Hardware
-from buttoneventgenerator import ButtonEventGenerator
+from brain.hardware import Hardware
+from brain.buttoneventgenerator import ButtonEventGenerator
 
 
 class HardwareFetch:

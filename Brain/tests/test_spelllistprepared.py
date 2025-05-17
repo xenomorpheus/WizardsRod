@@ -3,10 +3,10 @@
 from __future__ import absolute_import
 import unittest
 
-from spelllistprepared import SpellListPrepared
-from spell import Spell
-from spelltrigger import SpellTrigger
-from staffevent import StaffEvent
+from brain.spelllistprepared import SpellListPrepared
+from brain.spell import Spell
+from brain.spelltrigger import SpellTrigger
+from brain.staffevent import StaffEvent
 import tests
 
 

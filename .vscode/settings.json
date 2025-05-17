@@ -12,4 +12,7 @@
         "Brain/brain"
     ],
     "restructuredtext.confPath": "",
+    "python.analysis.extraPaths": [
+        "./Brain/brain"
+    ],
 }

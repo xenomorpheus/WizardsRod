@@ -3,8 +3,8 @@
 from __future__ import absolute_import
 import unittest
 
-from staff import Staff
-from spell import Spell
+from brain.staff import Staff
+from brain.spell import Spell
 
 
 class TestStaff(unittest.TestCase):

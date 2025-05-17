@@ -1,7 +1,7 @@
 """A spell trigger that looks for movement"""
 
 from __future__ import absolute_import
-from spelltrigger import SpellTrigger
+from brain.spelltrigger import SpellTrigger
 
 
 class SpellTriggerButton(SpellTrigger):

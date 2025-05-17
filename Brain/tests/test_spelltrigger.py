@@ -3,8 +3,8 @@
 from __future__ import absolute_import
 import unittest
 
-from spelltrigger import SpellTrigger
-from staffevent import StaffEvent
+from brain.spelltrigger import SpellTrigger
+from brain.staffevent import StaffEvent
 import tests
 
 

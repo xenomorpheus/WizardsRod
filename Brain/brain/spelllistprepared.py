@@ -7,9 +7,9 @@ objects.
 """
 
 from typing import Any, Dict, List, Set
-from spell import Spell
-from staffevent import StaffEvent
-from spelltrigger import SpellTrigger
+from brain.spell import Spell
+from brain.staffevent import StaffEvent
+from brain.spelltrigger import SpellTrigger
 
 
 class SpellListPrepared:

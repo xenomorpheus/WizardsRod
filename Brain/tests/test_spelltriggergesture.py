@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 import unittest
 
-from spelltriggergesture import SpellTriggerGesture
+from brain.spelltriggergesture import SpellTriggerGesture
 
 
 class TestSpellTriggerGesture(unittest.TestCase):

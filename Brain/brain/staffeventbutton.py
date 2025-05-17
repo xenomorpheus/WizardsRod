@@ -5,7 +5,7 @@ Events - A button is pressed.
 """
 
 from time import gmtime
-from staffevent import StaffEvent
+from brain.staffevent import StaffEvent
 
 
 class StaffEventButton(StaffEvent):
