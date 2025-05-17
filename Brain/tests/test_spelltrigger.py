@@ -41,6 +41,12 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(spell_trigger1, spell_trigger2)
         self.assertNotEqual(spell_trigger1, spell_trigger3)
 
+    def test_eq_not_implemented(self):
+        """test"""
+        spell_trigger1 = SpellTrigger("trigger 01", tests.SPELL_TRIGGER_TYPE["TEST_01"])
+        result = spell_trigger1.__eq__("Non SpellTrigger")
+        assert result is NotImplemented
+
     def test_hash(self):
         """test"""
         spell_trigger1 = SpellTrigger("trigger 01", tests.SPELL_TRIGGER_TYPE["TEST_01"])
