@@ -8,7 +8,7 @@ Some examples to show how to call the code.
 from __future__ import absolute_import
 from brain.spell import Spell
 from brain.staff import Staff
-from brain.const import HW_ACCELEROMETER, HW_BUTTON, ST_BUTTON, ST_GESTURE
+from brain.const import HW_ACCELEROMETER, ST_GESTURE
 
 
 class Main:  # pylint: disable=too-few-public-methods
@@ -43,26 +43,9 @@ class Main:  # pylint: disable=too-few-public-methods
         staff.end()
 
     @staticmethod
-    def _button_example():
-        """Button example"""
-        st_button = ST_BUTTON
-        __fireball_trigger_sequence = [st_button["BUTTON1"], st_button["BUTTON2"]]
-
-        fireball = (
-            Spell("Button Test")
-            .set_trigger_sequence(__fireball_trigger_sequence)
-            .set_trigger_timeout(6)
-            .set_hardware_set(set([HW_BUTTON]))
-            .set_perform_action(Main.spell_perform_action)
-        )
-        staff = Staff("MyStaff").spell_add(fireball)
-        input("> Waiting for BUTTON1 then BUTTON2. Press return to exit")
-        staff.end()
-
-    @staticmethod
     def main():
         """main"""
-        Main._button_example()
+        Main._accelerator_example()
 
 
 if __name__ == "__main__":
