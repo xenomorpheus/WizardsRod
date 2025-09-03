@@ -1,23 +1,36 @@
-This code is the orchestration of the wizards staff.  The wizards staff has a micro-controller running a bunch of sensors, emitters and other hardware.  The aim is when the staff is moved in certain ways, and/or buttons pressed, certain lights and other effects are triggered.
+Overview:
 
-Keeping with the theme of a wizards staff, we introduce various concepts:
+This code is the orchestration of the wizards rod.  The wizards rod has a micro-controller running a 
+bunch of sensors, emitters and other hardware.  The aim is when the rod is moved in certain ways, 
+and/or buttons pressed, certain lights and other effects are triggered.
 
-  spell - Is a definition of what staff effects we want to happen when a sequence of events are received in a particular time period.
 
-  prepared spells - Any number of spells can be chosen to be prepared. A prepared spell is actively monitoring sensors on the staff looking
-    for the particular sequence of events that trigger the spell. Once triggered the spell controls various actions on the staff.
+Exec Summary:
 
-  staff event - A hardware event on the staff e.g. button press, staff moved horizontal, GPS location reached, time reached, prox-card reader, etc.
-       staff events are immutable.
+cd Brain
+make
 
-  trigger - Code that recognises a staff event.
+
+Concepts:
+
+Keeping with the theme of a wizards rod, we introduce various concepts:
+
+  spell - Is a definition of what rod effects we want to happen when a sequence of events are received in a particular time period.
+
+  prepared spells - Any number of spells can be chosen to be prepared. A prepared spell is actively monitoring sensors on the rod looking
+    for the particular sequence of events that trigger the spell. Once triggered the spell controls various actions on the rod.
+
+  rod event - A hardware event on the rod e.g. button press, rod moved horizontal, GPS location reached, time reached, prox-card reader, etc.
+       rod events are immutable.
+
+  trigger - Code that recognises a rod event.
        triggers are immutable.
 
   trigger sequence - A sequence of trigger events to listen for.
 
   trigger time-out - The maximum time to wait for an entire trigger sequence.
 
-  action - Some staff output e.g. flash lights, play sound, blutooth communication, etc.
+  action - Some rod output e.g. flash lights, play sound, blutooth communication, etc.
 
 
 

@@ -11,7 +11,8 @@ Developer
 Suggestion is to use virtualenv to manage project environment and dependencies
 
     https://realpython.com/python-virtual-environments-a-primer/
-    python3 -m venv  ~/Desktop/staff/env      # Create environment
-    source ~/Desktop/staff/env/bin/activate   # Activate (start using) the enviroment
-    pip3 install RPi.GPIO                     # Install packages
-    pip3 freeze > requirements.txt            # Update the required list of packages
+    python3 -m venv  .venv                             # Create environment
+    . .venv/bin/activate                               # Activate (start using) the enviroment
+    pip3 install -r requirements_development_TODO.txt  # Install packages
+    cd Brain
+    make
