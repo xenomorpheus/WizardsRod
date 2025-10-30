@@ -72,7 +72,7 @@ class Spell:
         return self.trigger_timeout
 
     def set_hardware_set(self, hardware_set: set) -> "Spell":
-        """set the hardware the spell will need"""
+        """set the collection of hardware the spell will need"""
         self.hardware_set = set()
         for hardware in hardware_set:
             self.hardware_set.add(hardware)

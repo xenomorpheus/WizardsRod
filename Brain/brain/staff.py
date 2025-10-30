@@ -1,13 +1,15 @@
 """The Staff brings together the prepared spells and the hardware."""
 
+import logging
+
 from typing import Dict
 from brain.spell import Spell
 from brain.spelllistprepared import SpellListPrepared
 from brain.hardware import Hardware
 from brain.hardwarefetch import HardwareFetch
-import logging
 
 logger = logging.getLogger(__name__)
+
 
 class Staff:
     """The Staff brings together the prepared spells and the hardware."""
@@ -48,13 +50,13 @@ class Staff:
 
         # Deactivate and remove hardware no longer needed
         for hardware_hint in self.hardware.keys() - hardware_hints_new:
-            logging.debug(f"Deactivating hardware: {hardware_hint}")
+            logging.debug("Deactivating hardware: %s", hardware_hint)
             self.hardware[hardware_hint].deactivate()
             del self.hardware[hardware_hint]
 
         # Activate and add newly needed hardware
         for hardware_hint in hardware_hints_new - self.hardware.keys():
-            logging.debug(f"Activating hardware: {hardware_hint}")
+            logging.debug("Activating hardware: %s", hardware_hint)
             hardware = self.hwf.get(hardware_hint)
             self.hardware[hardware_hint] = hardware
             hardware.activate()

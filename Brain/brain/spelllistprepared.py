@@ -15,7 +15,6 @@ from brain.spelltrigger import SpellTrigger
 class SpellListPrepared:
     """
 
-
     Builder pattern
 
     Notes

@@ -31,7 +31,7 @@ class ButtonEventGenerator(Hardware):
 
     def __init__(self):
         """Constructor"""
-        super().__init__(self)
+        super().__init__(self, "BUTTON")
         self.active = False  # type: bool
         self.channels = set()  # type: Set
         """ a list of button integers for the buttons """
@@ -52,7 +52,7 @@ class ButtonEventGenerator(Hardware):
     def channel_add(self, channel: int) -> None:
         """add a button to those being listened to"""
         if not self.active:
-            raise Exception("activate first")
+            raise RuntimeError("ButtonEventGenerator not active")
         self.channels.add(channel)
         GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         # Set pin channel to be an input pin and set initial value to be

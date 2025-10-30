@@ -1,7 +1,8 @@
 """
-Created on 19 Sep. 2019
+Used to fetch hardware interfaces using hardware hints.
 
-@author: bruins
+e.g. "BUTTON" for button event generator hardware.
+
 """
 
 from typing import Dict

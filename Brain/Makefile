@@ -22,6 +22,7 @@ test:
 
 cover:
 	coverage3 erase
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_hardwarefetch.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spell.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltrigger.py
