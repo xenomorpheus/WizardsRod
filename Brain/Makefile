@@ -22,12 +22,13 @@ test:
 
 cover:
 	coverage3 erase
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spell.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltriggergesture.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltrigger.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staffevent.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltriggergesture.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staff.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staffevent.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staffeventbutton.py
 	coverage3 report -m --skip-covered
 
 docs:
