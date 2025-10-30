@@ -36,9 +36,19 @@ class TestStaff(unittest.TestCase):
         """test"""
         staff = Staff(name=self.staff_name)
         spell1 = Spell(name="spell name 01")
+        spell1.set_hardware_set({"BUTTON"})
         spell2 = Spell(name="spell name 02")
         spell_list = [spell1, spell2]
         got = staff.spell_add_list(spell_list)
+        self.assertEqual(staff, got, "return staff")
+
+    def test_spell_del(self):
+        """test"""
+        staff = Staff(name=self.staff_name)
+        spell = Spell(name="spell name 01")
+        spell.set_hardware_set({"BUTTON"})
+        staff.spell_add(spell)
+        got = staff.spell_del(spell)
         self.assertEqual(staff, got, "return staff")
 
     def test_spell_activate(self):

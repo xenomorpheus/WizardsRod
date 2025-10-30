@@ -35,11 +35,21 @@ class Staff:
         self.__recalculate_hardware()
         return self
 
+    def spell_del(self, spell: Spell) -> "Staff":
+        """remove a spell from the prepared list"""
+        self.spell_list_prepared.spell_del(spell)
+        self.__recalculate_hardware()
+        return self
+
     def __recalculate_hardware(self) -> None:
         hardware_hints_new = self.spell_list_prepared.get_hardware_hints()
+
+        # Deactivate and remove hardware no longer needed
         for hardware_hint in self.hardware.keys() - hardware_hints_new:
             self.hardware[hardware_hint].deactivate()
             del self.hardware[hardware_hint]
+
+        # Activate and add newly needed hardware
         for hardware_hint in hardware_hints_new - self.hardware.keys():
             hardware = self.hwf.get(hardware_hint)
             self.hardware[hardware_hint] = hardware
