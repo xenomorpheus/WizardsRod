@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 import unittest
+import logging
 
 from brain.staff import Staff
 from brain.spell import Spell
@@ -14,6 +15,7 @@ class TestStaff(unittest.TestCase):
     def setUpClass(cls):
         """test"""
         cls.staff_name = "Test Staff"
+        logging.basicConfig(level=logging.DEBUG)
 
     def test_constructor(self):
         """test"""
