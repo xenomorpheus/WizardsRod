@@ -3,9 +3,9 @@ Need unit tests.
 
 Need a way of adding events to unit tests.
 
-Thought - a way of adding events to a staff in general. A time sorted list of events.
+Thought - a way of adding events to a rod in general. A time sorted list of events.
 
-staff.events_add(event_list)
+rod.events_add(event_list)
 
 
 

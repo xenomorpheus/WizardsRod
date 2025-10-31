@@ -1,6 +1,6 @@
 """
 
-A set of Spells prepared and actively looking to be triggered by StaffEvent
+A set of Spells prepared and actively looking to be triggered by RodEvent
 objects.
 
 
@@ -8,7 +8,7 @@ objects.
 
 from typing import Any, Dict, List, Set
 from brain.spell import Spell
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 from brain.spelltrigger import SpellTrigger
 
 
@@ -34,7 +34,7 @@ class SpellListPrepared:
     Consider the case where there is an action in the list that isn't related to
     any prepared spells.
 
-    The staff may still add the action to the list.  We may wish the prepared spell
+    The rod may still add the action to the list.  We may wish the prepared spell
     list to prune out actions that aren't components of the prepared spells.
 
     Pretty easy to do, have a map of all actions for prepared spells. Refresh map
@@ -59,7 +59,7 @@ class SpellListPrepared:
         """ special hardware requirements. e.g. generate triggers """
         self.spell_triggers_permitted = set()  # type: Set[SpellTrigger]
         """ Only the triggers of the prepared spells. keyed by trigger name """
-        self.event_pending_list = []  # type: List[StaffEvent]
+        self.event_pending_list = []  # type: List[RodEvent]
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
         self.spell_trigger_sequence_all = {}  # type: Dict[Spell, List[Dict[str, Any]]]
@@ -111,7 +111,7 @@ class SpellListPrepared:
             self.__recalculate_spell_triggers()
         return self
 
-    def receive_events(self, new_events: List[StaffEvent]) -> List[Spell]:
+    def receive_events(self, new_events: List[RodEvent]) -> List[Spell]:
         """accept events"""
         spells_triggered = []  # type: List[Spell]
         for event in new_events:
@@ -119,8 +119,8 @@ class SpellListPrepared:
                 spells_triggered.append(spell)
         return spells_triggered
 
-    def receive_event(self, event: StaffEvent) -> List[Spell]:
-        """Consume staff events. Determine which spells, if any, have had all
+    def receive_event(self, event: RodEvent) -> List[Spell]:
+        """Consume rod events. Determine which spells, if any, have had all
         triggers in sequence, and within the timeout period.
         """
         spells_triggered = []  # type: List[Spell]

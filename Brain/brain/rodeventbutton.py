@@ -5,10 +5,10 @@ Events - A button is pressed.
 """
 
 from time import gmtime
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 
 
-class StaffEventButton(StaffEvent):
+class RodEventButton(RodEvent):
     """Events - A button is pressed."""
 
     def __init__(self, name, created=gmtime(), event_type="BUTTON") -> None:

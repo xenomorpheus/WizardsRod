@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import unittest
 
 from brain.spelltrigger import SpellTrigger
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 import tests
 
 
@@ -58,19 +58,19 @@ class TestSpellTrigger(unittest.TestCase):
     def test_is_triggerd_by(self):
         """test"""
         trigger = SpellTrigger("TEST_01")
-        event = StaffEvent("TEST_01")
+        event = RodEvent("TEST_01")
         self.assertTrue(trigger.is_triggerd_by(event))
 
     def test_is_triggerd_by_with_type(self):
         """test"""
         trigger = SpellTrigger("TEST_01", spelltrigger_type="foo")
-        event = StaffEvent("TEST_01", staffevent_type="foo")
+        event = RodEvent("TEST_01", rodevent_type="foo")
         self.assertTrue(trigger.is_triggerd_by(event))
 
     def test_is_triggerd_by_with_wrong_type(self):
         """test"""
         trigger = SpellTrigger("TEST_01", spelltrigger_type="foo")
-        event = StaffEvent("TEST_01", staffevent_type="wrong")
+        event = RodEvent("TEST_01", rodevent_type="wrong")
         self.assertFalse(trigger.is_triggerd_by(event))
 
 

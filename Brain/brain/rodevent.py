@@ -1,18 +1,18 @@
 """
-An event that occurs on the staff.
+An event that occurs on the rod.
 
 """
 
 from time import gmtime
 
 
-class StaffEvent:
+class RodEvent:
     """
 
     Events - Spells will be triggered by a sequence of these events.
 
     * A button is pressed.
-    * A gesture/stamp of the staff
+    * A gesture/stamp of the rod
     * A temperature change
     * A pressure change
     * Reaching a GPS location
@@ -21,18 +21,18 @@ class StaffEvent:
 
     """
 
-    def __init__(self, name, created=gmtime(), staffevent_type="none") -> None:
+    def __init__(self, name, created=gmtime(), rodevent_type="none") -> None:
         self.name = name
         self.created = created
-        self.staffevent_type = staffevent_type
+        self.rodevent_type = rodevent_type
 
     def __eq__(self, other: object) -> bool:
-        if not isinstance(other, StaffEvent):
+        if not isinstance(other, RodEvent):
             return NotImplemented
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.name, self.created, self.staffevent_type))
+        return hash((self.name, self.created, self.rodevent_type))
 
     def get_name(self) -> str:
         """get name"""
@@ -42,6 +42,6 @@ class StaffEvent:
         """get time/date event was created"""
         return self.created
 
-    def get_staffevent_type(self) -> str:
-        """get staffevent_type"""
-        return self.staffevent_type
+    def get_rodevent_type(self) -> str:
+        """get rodevent_type"""
+        return self.rodevent_type

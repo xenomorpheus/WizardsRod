@@ -1,6 +1,6 @@
 """Constants. Only for tests"""
 
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 from brain.spelltrigger import SpellTrigger
 from brain.spell import Spell
 from brain.const import HW_ACCELEROMETER
@@ -17,12 +17,12 @@ SPELL_TRIGGER_TYPE = {
     _STT_TEST03: _STT_TEST03,
 }
 
-# Simple generic events that the staff will generate and look
+# Simple generic events that the rod will generate and look
 #  for in order to trigger spells.
 
-_SE_TEST_01 = StaffEvent(_STT_TEST01, 0)
-_SE_TEST_01 = StaffEvent(_STT_TEST02, 0)
-_SE_TEST_03 = StaffEvent(_STT_TEST03, 0)
+_SE_TEST_01 = RodEvent(_STT_TEST01, 0)
+_SE_TEST_01 = RodEvent(_STT_TEST02, 0)
+_SE_TEST_03 = RodEvent(_STT_TEST03, 0)
 
 EVENT = {_STT_TEST01: _SE_TEST_01, _STT_TEST03: _SE_TEST_01, _STT_TEST02: _SE_TEST_03}
 

@@ -27,9 +27,9 @@ cover:
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltrigger.py
 	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltriggergesture.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staff.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staffevent.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_staffeventbutton.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rod.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rodevent.py
+	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rodeventbutton.py
 	coverage3 report -m --skip-covered
 
 docs:

@@ -15,17 +15,17 @@ except (RuntimeError, ModuleNotFoundError):
     fake_rpigpio.utils.install()
 
 from brain.hardware import Hardware
-from brain.staffeventbutton import StaffEventButton
+from brain.rodeventbutton import RodEventButton
 
 
 class ButtonEventGenerator(Hardware):
     """
-    When hardware buttons are pressed send StaffEvent objects to
+    When hardware buttons are pressed send RodEvent objects to
     listeners that have been previously setup.
 
     Example.  Each listener will be called with the following.
 
-    listener.recieve_event(StaffEventButton(channel, now))
+    listener.recieve_event(RodEventButton(channel, now))
 
     """
 
@@ -81,6 +81,6 @@ class ButtonEventGenerator(Hardware):
     def _button_callback(self, channel: int) -> None:
         print(f"Button {channel} was pushed!")
         now = 0  # TODO
-        event = StaffEventButton(str(channel), now)
+        event = RodEventButton(str(channel), now)
         for listener in self.listeners:
             listener.recieve_event(event)

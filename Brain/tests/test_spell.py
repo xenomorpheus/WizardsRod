@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import unittest
 
 from brain.spell import Spell
-from brain.staff import Staff
+from brain.rod import Rod
 from brain.const import ST_GESTURE, HW_ACCELEROMETER
 
 
@@ -59,9 +59,9 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(hw_set, hw_got)
 
     @staticmethod
-    def spell_callback(spell: Spell, staff: Staff):
+    def spell_callback(spell: Spell, rod: Rod):
         """test"""
-        print("callback spell=" + spell.get_name() + ", staff=" + staff.get_name())
+        print("callback spell=" + spell.get_name() + ", rod=" + rod.get_name())
 
     def test_perform_action(self):
         """test"""

@@ -1,4 +1,4 @@
-"""The Staff brings together the prepared spells and the hardware."""
+"""The Rod brings together the prepared spells and the hardware."""
 
 import logging
 
@@ -11,8 +11,8 @@ from brain.hardwarefetch import HardwareFetch
 logger = logging.getLogger(__name__)
 
 
-class Staff:
-    """The Staff brings together the prepared spells and the hardware."""
+class Rod:
+    """The Rod brings together the prepared spells and the hardware."""
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -27,19 +27,19 @@ class Staff:
         """get the name"""
         return self.name
 
-    def spell_add(self, spell: Spell) -> "Staff":
+    def spell_add(self, spell: Spell) -> "Rod":
         """add a spell to the prepared list"""
         self.spell_list_prepared.spell_add(spell)
         self.__recalculate_hardware()
         return self
 
-    def spell_add_list(self, spelllist) -> "Staff":
+    def spell_add_list(self, spelllist) -> "Rod":
         """add a list of spells to the prepared list"""
         self.spell_list_prepared.spell_add_list(spelllist)
         self.__recalculate_hardware()
         return self
 
-    def spell_del(self, spell: Spell) -> "Staff":
+    def spell_del(self, spell: Spell) -> "Rod":
         """remove a spell from the prepared list"""
         self.spell_list_prepared.spell_del(spell)
         self.__recalculate_hardware()
@@ -61,7 +61,7 @@ class Staff:
             self.hardware[hardware_hint] = hardware
             hardware.activate()
 
-    def end(self) -> "Staff":
+    def end(self) -> "Rod":
         """shut down the hardware"""
         for hardware_hint in list(self.hardware.keys()):
             self.hardware[hardware_hint].deactivate()

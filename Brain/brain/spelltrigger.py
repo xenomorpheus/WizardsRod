@@ -1,6 +1,6 @@
 """spell trigger"""
 
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 
 
 class SpellTrigger:
@@ -30,8 +30,8 @@ class SpellTrigger:
         """get the spelltrigger_type"""
         return self.spelltrigger_type
 
-    def is_triggerd_by(self, event: StaffEvent) -> bool:
+    def is_triggerd_by(self, event: RodEvent) -> bool:
         """For simple triggers, the types just need to match."""
-        return (issubclass(type(event), StaffEvent)) and (
-            self.get_name() == event.get_name() and self.get_spelltrigger_type() == event.get_staffevent_type()
+        return (issubclass(type(event), RodEvent)) and (
+            self.get_name() == event.get_name() and self.get_spelltrigger_type() == event.get_rodevent_type()
         )

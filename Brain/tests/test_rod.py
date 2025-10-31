@@ -4,78 +4,78 @@ from __future__ import absolute_import
 import unittest
 import logging
 
-from brain.staff import Staff
+from brain.rod import Rod
 from brain.spell import Spell
 
 
-class TestStaff(unittest.TestCase):
+class TestRod(unittest.TestCase):
     """test"""
 
     @classmethod
     def setUpClass(cls):
         """test"""
-        cls.staff_name = "Test Staff"
+        cls.rod_name = "Test Rod"
         logging.basicConfig(level=logging.DEBUG)
 
     def test_constructor(self):
         """test"""
-        staff = Staff(name=self.staff_name)
-        self.assertTrue(isinstance(staff, Staff))
+        rod = Rod(name=self.rod_name)
+        self.assertTrue(isinstance(rod, Rod))
 
     def test_get_name(self):
         """test"""
-        staff = Staff(name=self.staff_name)
-        self.assertEqual(self.staff_name, staff.get_name())
+        rod = Rod(name=self.rod_name)
+        self.assertEqual(self.rod_name, rod.get_name())
 
     def test_spell_add(self):
         """test"""
-        staff = Staff(name=self.staff_name)
+        rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
-        got = staff.spell_add(spell)
-        self.assertEqual(staff, got, "return staff")
+        got = rod.spell_add(spell)
+        self.assertEqual(rod, got, "return rod")
 
     def test_spell_add_list(self):
         """test"""
-        staff = Staff(name=self.staff_name)
+        rod = Rod(name=self.rod_name)
         spell1 = Spell(name="spell name 01")
         spell1.set_hardware_set({"BUTTON"})
         spell2 = Spell(name="spell name 02")
         spell_list = [spell1, spell2]
-        got = staff.spell_add_list(spell_list)
-        self.assertEqual(staff, got, "return staff")
+        got = rod.spell_add_list(spell_list)
+        self.assertEqual(rod, got, "return rod")
 
     def test_spell_del(self):
         """test"""
-        staff = Staff(name=self.staff_name)
+        rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
         spell.set_hardware_set({"BUTTON"})
-        staff.spell_add(spell)
-        got = staff.spell_del(spell)
-        self.assertEqual(staff, got, "return staff")
+        rod.spell_add(spell)
+        got = rod.spell_del(spell)
+        self.assertEqual(rod, got, "return rod")
 
     def test_spell_activate(self):
         """test that a spell is activated by events"""
         # TODO create a spell that is activated by an event
-        # TODO get the staff to listen for the event
+        # TODO get the rod to listen for the event
         # TODO send the event
         # TODO check the spell activated
-        staff = Staff(name=self.staff_name)
+        rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
-        staff.spell_add(spell)
+        rod.spell_add(spell)
         # TODO lots
 
     def test_end(self):
         """end"""
-        staff = Staff(name=self.staff_name)
-        staff.end()
+        rod = Rod(name=self.rod_name)
+        rod.end()
 
     def test_end_with_hardware(self):
         """end"""
-        staff = Staff(name=self.staff_name)
+        rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
         #        spell.set_hardware_set([const.HW_BUTTON])
-        staff.spell_add(spell)
-        staff.end()
+        rod.spell_add(spell)
+        rod.end()
 
 
 if __name__ == "__main__":

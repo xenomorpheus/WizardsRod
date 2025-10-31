@@ -6,7 +6,7 @@ import unittest
 from brain.spelllistprepared import SpellListPrepared
 from brain.spell import Spell
 from brain.spelltrigger import SpellTrigger
-from brain.staffevent import StaffEvent
+from brain.rodevent import RodEvent
 import tests
 
 
@@ -59,7 +59,7 @@ class TestSpellListPrepared(unittest.TestCase):
         test_spell01 = Spell("Test Spell 01").set_trigger_sequence(triggers)
 
         slp = SpellListPrepared().spell_add(test_spell01)
-        new_events = [StaffEvent("Event 03", 4)]
+        new_events = [RodEvent("Event 03", 4)]
         self.assertEqual([], slp.receive_events(new_events))
 
     def test_receive_events_one_spells_no_events(self):
@@ -76,7 +76,7 @@ class TestSpellListPrepared(unittest.TestCase):
         test_spell01.set_trigger_sequence(triggers)
         slp = SpellListPrepared().spell_add(test_spell01)
         # Gesture Test03 will be ignored
-        new_events = [StaffEvent("TEST_01", 4), StaffEvent("TEST_02", 4), StaffEvent("TEST_03", 4)]
+        new_events = [RodEvent("TEST_01", 4), RodEvent("TEST_02", 4), RodEvent("TEST_03", 4)]
         self.assertEqual([test_spell01], slp.receive_events(new_events))
 
     def test_get_hardware_hints(self):
