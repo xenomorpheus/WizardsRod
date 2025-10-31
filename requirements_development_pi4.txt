@@ -30,7 +30,7 @@ Pygments==2.19.2
 pylint==3.3.9
 pyparsing==3.2.5
 pytest==8.4.2
-pytokens==0.1.10
+pytokens==0.2.0
 pytz==2025.2
 rpi-ws281x==5.0.0
 RPi.bme280==0.2.4
@@ -38,9 +38,9 @@ RPi.GPIO==0.7.1
 smbus==1.1.post2
 smbus2==0.5.0
 toml==0.10.2
-tomli==2.2.1
+tomli==2.3.0
 tomlkit==0.13.3
 typed-ast==1.5.5
 typing_extensions==4.15.0
-wrapt==1.17.3
+wrapt==2.0.0
 zipp==3.23.0
