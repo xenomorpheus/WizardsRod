@@ -15,22 +15,29 @@ Concepts:
 
 Keeping with the theme of a wizards rod, we introduce various concepts:
 
-  spell - Is a definition of what rod effects we want to happen when a sequence of events are received in a particular time period.
+  Rod - has a Spell List Prepared. 
+        A rod also maintains a set of active hardware drivers needed by the current set of prepared spells.
 
-  prepared spells - Any number of spells can be chosen to be prepared. A prepared spell is actively monitoring sensors on the rod looking
-    for the particular sequence of events that trigger the spell. Once triggered the spell controls various actions on the rod.
+  Spell - Is a definition of a Trigger Sequence to be received, within in a trigger time-out period, then what Actions perform.
 
-  rod event - A hardware event on the rod e.g. button press, rod moved horizontal, GPS location reached, time reached, prox-card reader, etc.
-       rod events are immutable.
+  Spell List Prepared - A set of Spells that are actively looking for Rod Events to complete their Trigger Sequences.
+     A Spell List Prepared knows the hardware required to generate events of all of the Spells.
+     As Rod Events are received the Spell List Prepared will track the Trigger Sequences of each spell, and if 
+     a Triggger Sequence completes, run the Spell's Action.
 
-  trigger - Code that recognises a rod event.
-       triggers are immutable.
+  Rod Event - A hardware event on the rod e.g. button press, rod moved horizontal, GPS location reached, time reached, prox-card reader, etc.
+       Rod Events are used by Spell Triggers.
+       Rod Events are immutable.
 
-  trigger sequence - A sequence of trigger events to listen for.
+  Spell Trigger - Code that recognises a Rod Event.
+       Spell Triggers are immutable.
+       Spell Triggers have a type which is a hint to what hardware driver is needed to generate that type of Rod Event.
+
+  Trigger Sequence - A sequence of Spell Triggers.
 
   trigger time-out - The maximum time to wait for an entire trigger sequence.
 
-  action - Some rod output e.g. flash lights, play sound, blutooth communication, etc.
+  Action - Some rod output e.g. flash lights, play sound, blutooth communication, etc.
 
 
 
