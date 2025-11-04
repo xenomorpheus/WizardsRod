@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import unittest
 
 from brain.spelllistprepared import SpellListPrepared
-from brain.spell import Spell
+from brain.spell import Spell, SpellTriggerSequence
 from brain.spelltrigger import SpellTrigger
 from brain.rodevent import RodEvent
 import tests
@@ -81,8 +81,10 @@ class TestSpellListPrepared(unittest.TestCase):
 
     def test_get_hardware_hints(self):
         """test"""
-        test_spell01 = Spell("Test Spell 01").set_hardware_set(["Button01"])
-        test_spell02 = Spell("Test Spell 02").set_hardware_set(["Button02", "Button03"])
+        test_spell01 = Spell("Test Spell 01").set_trigger_sequence(
+            [SpellTrigger("Trigger 01", "Button01"), SpellTrigger("Trigger 02", "Button02")]
+        )
+        test_spell02 = Spell("Test Spell 02").set_trigger_sequence([SpellTrigger("Trigger 03", "Button03")])
         slp = SpellListPrepared().spell_add_list([test_spell01, test_spell02])
         hwl = slp.get_hardware_hints()
         self.assertEqual(set(["Button01", "Button02", "Button03"]), set(hwl))

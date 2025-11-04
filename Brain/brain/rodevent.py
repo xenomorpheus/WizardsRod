@@ -4,6 +4,8 @@ An event that occurs on the rod.
 """
 
 from time import gmtime
+from typing import Set
+from brain.hardware import Hardware
 
 
 class RodEvent:
@@ -19,12 +21,18 @@ class RodEvent:
 
     Events are immutable
 
+    Hardware hints - Events can specify hardware they need to be generated using
+    strings.
+
     """
 
     def __init__(self, name, created=gmtime(), event_type="none") -> None:
         self.name = name
         self.created = created
         self.event_type = event_type
+        self.hardware_hint_set = set()  # type: Set[Hardware]
+        """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
+        Accelerometer """
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, RodEvent):
@@ -45,3 +53,14 @@ class RodEvent:
     def get_event_type(self) -> str:
         """get event_type"""
         return self.event_type
+
+    def set_hardware_hint_set(self, hardware_set: set) -> "RodEvent":
+        """set the collection of hardware the event will need"""
+        self.hardware_hint_set = set()
+        for hardware in hardware_set:
+            self.hardware_hint_set.add(hardware)
+        return self
+
+    def get_hardware_hint_set(self) -> set:
+        """get the hardware the event will need"""
+        return self.hardware_hint_set

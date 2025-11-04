@@ -38,7 +38,6 @@ class TestRod(unittest.TestCase):
         """test"""
         rod = Rod(name=self.rod_name)
         spell1 = Spell(name="spell name 01")
-        spell1.set_hardware_set({"BUTTON"})
         spell2 = Spell(name="spell name 02")
         spell_list = [spell1, spell2]
         got = rod.spell_add_list(spell_list)
@@ -48,7 +47,6 @@ class TestRod(unittest.TestCase):
         """test"""
         rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
-        spell.set_hardware_set({"BUTTON"})
         rod.spell_add(spell)
         got = rod.spell_del(spell)
         self.assertEqual(rod, got, "return rod")

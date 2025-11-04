@@ -11,7 +11,7 @@ LEANING_FORWARDS_DOWNWARDS, and POINTING_DOWNWARDS.
 from __future__ import absolute_import
 from brain.spell import Spell
 from brain.rod import Rod
-from brain.const import HW_ACCELEROMETER, ST_GESTURE
+from brain.const import ST_GESTURE
 
 
 class Main:  # pylint: disable=too-few-public-methods
@@ -38,7 +38,6 @@ class Main:  # pylint: disable=too-few-public-methods
             Spell("Gesture Test")
             .set_trigger_sequence(__fireball_trigger_sequence)
             .set_trigger_timeout(6)
-            .set_hardware_set(set([HW_ACCELEROMETER]))
             .set_perform_action(Main.spell_perform_action)
         )
         rod = Rod("MyRod").spell_add(fireball)

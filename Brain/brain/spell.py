@@ -10,7 +10,6 @@ The definition of a spell.
 
 from typing import Callable, List, Optional, Set
 from brain.spelltrigger import SpellTrigger
-from brain.hardware import Hardware
 
 SpellTriggerSequence = List[SpellTrigger]
 
@@ -29,9 +28,6 @@ class Spell:
         self.trigger_timeout = 0  # type: int
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """
-        self.hardware_set = set()  # type: Set[Hardware]
-        """ Some spells are triggered by hardware actions. e.g Buttons, GPS,
-        Accelerometer """
         self.perform_action = None  # type: Optional[Callable]
         """ code to call when trigger sequence completed """
 
@@ -42,7 +38,6 @@ class Spell:
                 tuple(self.trigger_sequence),
                 tuple(self.reset_trigger_set),
                 self.trigger_timeout,
-                tuple(self.hardware_set),
                 self.perform_action,
             )
         )
@@ -70,17 +65,6 @@ class Spell:
     def get_trigger_timeout(self):
         """get the trigger timeout"""
         return self.trigger_timeout
-
-    def set_hardware_set(self, hardware_set: set) -> "Spell":
-        """set the collection of hardware the spell will need"""
-        self.hardware_set = set()
-        for hardware in hardware_set:
-            self.hardware_set.add(hardware)
-        return self
-
-    def get_hardware_set(self) -> set:
-        """get the hardware the spell will need"""
-        return self.hardware_set
 
     def set_perform_action(self, perform_action: Optional[Callable] = None) -> "Spell":
         """set the method that is called when the spell run"""

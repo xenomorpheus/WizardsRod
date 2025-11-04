@@ -31,7 +31,7 @@ class TestSpellTrigger(unittest.TestCase):
         """test"""
         trigger_type = tests.TRIGGER_TYPE["TEST_01"]
         trigger = SpellTrigger("my trigger", trigger_type)
-        self.assertEqual(trigger_type, trigger.get_spelltrigger_type())
+        self.assertEqual(trigger_type, trigger.get_trigger_type())
 
     def test_equal(self):
         """test"""
@@ -63,13 +63,13 @@ class TestSpellTrigger(unittest.TestCase):
 
     def test_is_triggerd_by_with_type(self):
         """test"""
-        trigger = SpellTrigger("TEST_01", spelltrigger_type="foo")
+        trigger = SpellTrigger("TEST_01", trigger_type="foo")
         event = RodEvent("TEST_01", event_type="foo")
         self.assertTrue(trigger.is_triggerd_by(event))
 
     def test_is_triggerd_by_with_wrong_type(self):
         """test"""
-        trigger = SpellTrigger("TEST_01", spelltrigger_type="foo")
+        trigger = SpellTrigger("TEST_01", trigger_type="foo")
         event = RodEvent("TEST_01", event_type="wrong")
         self.assertFalse(trigger.is_triggerd_by(event))
 

@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import unittest
 
 from brain.rodevent import RodEvent
+from brain.const import HW_ACCELEROMETER
 
 
 class TestRodEvent(unittest.TestCase):
@@ -50,6 +51,13 @@ class TestRodEvent(unittest.TestCase):
         rod_event3 = RodEvent("TEST_02", 4)
         self.assertEqual(hash(rod_event1), hash(rod_event2), "hash rod_event1 and rod_event2")
         self.assertNotEqual(hash(rod_event1), hash(rod_event3), "hash rod_event1 and rod_event3")
+
+    def test_event_type(self):
+        """test"""
+        event_type = HW_ACCELEROMETER
+        event = RodEvent("TEST_01", 0, event_type)
+        event_type_got = event.get_event_type()
+        self.assertEqual(event_type, event_type_got)
 
 
 if __name__ == "__main__":

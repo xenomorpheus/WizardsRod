@@ -5,7 +5,7 @@ import unittest
 
 from brain.spell import Spell
 from brain.rod import Rod
-from brain.const import ST_GESTURE, HW_ACCELEROMETER
+from brain.const import ST_GESTURE
 
 
 class TestSpellTrigger(unittest.TestCase):
@@ -48,15 +48,6 @@ class TestSpellTrigger(unittest.TestCase):
         self.assertEqual(spell, st_got)
         tt_got = spell.get_trigger_timeout()
         self.assertEqual(self.trigger_timeout, tt_got)
-
-    def test_hardware_set(self):
-        """test"""
-        hw_set = set([HW_ACCELEROMETER])
-        spell = Spell(name=self.spell_name)
-        st_got = spell.set_hardware_set(hw_set)
-        self.assertEqual(spell, st_got)
-        hw_got = spell.get_hardware_set()
-        self.assertEqual(hw_set, hw_got)
 
     @staticmethod
     def spell_callback(spell: Spell, rod: Rod):

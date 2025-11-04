@@ -34,12 +34,7 @@ _SPELL_TEST_01_TRIGGERS = [
     SpellTrigger("test trigger 03", _TT_TEST03),
 ]
 _SPELL_TEST_STR_01 = "TEST_SPELL_01"
-_SPELL_TEST_01 = (
-    Spell(_SPELL_TEST_STR_01)
-    .set_trigger_sequence(_SPELL_TEST_01_TRIGGERS)
-    .set_trigger_timeout(6)
-    .set_hardware_set(set(HW_ACCELEROMETER))
-)
+_SPELL_TEST_01 = Spell(_SPELL_TEST_STR_01).set_trigger_sequence(_SPELL_TEST_01_TRIGGERS).set_trigger_timeout(6)
 
 # A master list of spells.
 # TODO MASTER_SPELLBOOK = {_SPELL_TEST_STR_01: _SPELL_TEST_01}

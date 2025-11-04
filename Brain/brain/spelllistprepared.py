@@ -55,7 +55,7 @@ class SpellListPrepared:
         self.spell_trigger_event_timeout = 0
         self.spell_list = []  # type: List[Spell]
         """ Prepared spells, keyed by spell name """
-        self.spell_hardware = set()  # type: Set[str]
+        self.hardware_hints = set()  # type: Set[str]
         """ special hardware requirements. e.g. generate triggers """
         self.spell_triggers_permitted = set()  # type: Set[SpellTrigger]
         """ Only the triggers of the prepared spells. keyed by trigger name """
@@ -75,19 +75,18 @@ class SpellListPrepared:
         # Update the list of hardware we are monitoring.
         self.spell_trigger_event_timeout = 0
         self.spell_triggers_permitted.clear()
-        self.spell_hardware.clear()
+        self.hardware_hints.clear()
         timeout_max = 0
         for spell in self.spell_list:
             timeout_max = max(timeout_max, spell.get_trigger_timeout())
             for trigger in spell.get_trigger_sequence():
                 self.spell_triggers_permitted.add(trigger)
-            for hardware in spell.get_hardware_set():
-                self.spell_hardware.add(hardware)
+                self.hardware_hints.add(trigger.get_trigger_type())
         self.spell_trigger_event_timeout = timeout_max
 
     def get_hardware_hints(self) -> set:
         """get the hardware hints"""
-        return self.spell_hardware
+        return self.hardware_hints
 
     def spell_add(self, spell: Spell) -> "SpellListPrepared":
         """add a spell to the list of prepared spells. This will

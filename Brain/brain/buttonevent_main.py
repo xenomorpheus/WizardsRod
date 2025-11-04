@@ -10,7 +10,7 @@ Listen for BUTTON1 then BUTTON2.
 from __future__ import absolute_import
 from brain.spell import Spell
 from brain.rod import Rod
-from brain.const import HW_BUTTON, ST_BUTTON
+from brain.const import ST_BUTTON
 
 
 class Main:  # pylint: disable=too-few-public-methods
@@ -24,14 +24,10 @@ class Main:  # pylint: disable=too-few-public-methods
     @staticmethod
     def _button_example():
         """Button example"""
-        st_button = ST_BUTTON
-        __fireball_trigger_sequence = [st_button["BUTTON1"], st_button["BUTTON2"]]
-
         fireball = (
             Spell("Button Test")
-            .set_trigger_sequence(__fireball_trigger_sequence)
+            .set_trigger_sequence([ST_BUTTON["BUTTON1"], ST_BUTTON["BUTTON2"]])
             .set_trigger_timeout(6)
-            .set_hardware_set(set([HW_BUTTON]))
             .set_perform_action(Main.spell_perform_action)
         )
         rod = Rod("MyRod").spell_add(fireball)
