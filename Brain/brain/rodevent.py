@@ -54,13 +54,3 @@ class RodEvent:
         """get event_type"""
         return self.event_type
 
-    def set_hardware_hint_set(self, hardware_set: set) -> "RodEvent":
-        """set the collection of hardware the event will need"""
-        self.hardware_hint_set = set()
-        for hardware in hardware_set:
-            self.hardware_hint_set.add(hardware)
-        return self
-
-    def get_hardware_hint_set(self) -> set:
-        """get the hardware the event will need"""
-        return self.hardware_hint_set
