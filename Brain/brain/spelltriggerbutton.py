@@ -1,4 +1,4 @@
-"""A spell trigger that looks for movement"""
+"""A spell trigger that looks for button press"""
 
 from __future__ import absolute_import
 from brain.spelltrigger import SpellTrigger

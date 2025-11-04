@@ -12,7 +12,7 @@ HW_BUTTON = "BUTTON"
 
 # Generic spell trigger objects
 
-# spell trigger that are gestures AKA movement
+# spell trigger that are gestures AKA rod movement
 _G_POINTING_UPWARDS = SpellTriggerGesture("POINTING_UPWARDS")
 _G_LEANING_FORWARDS_UPWARDS = SpellTriggerGesture("LEANING_FORWARDS_UPWARDS")
 _G_HORIZONTAL = SpellTriggerGesture("HORIZONTAL")
