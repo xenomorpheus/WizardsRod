@@ -21,10 +21,10 @@ class RodEvent:
 
     """
 
-    def __init__(self, name, created=gmtime(), rodevent_type="none") -> None:
+    def __init__(self, name, created=gmtime(), event_type="none") -> None:
         self.name = name
         self.created = created
-        self.rodevent_type = rodevent_type
+        self.event_type = event_type
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, RodEvent):
@@ -32,7 +32,7 @@ class RodEvent:
         return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.name, self.created, self.rodevent_type))
+        return hash((self.name, self.created, self.event_type))
 
     def get_name(self) -> str:
         """get name"""
@@ -42,6 +42,6 @@ class RodEvent:
         """get time/date event was created"""
         return self.created
 
-    def get_rodevent_type(self) -> str:
-        """get rodevent_type"""
-        return self.rodevent_type
+    def get_event_type(self) -> str:
+        """get event_type"""
+        return self.event_type

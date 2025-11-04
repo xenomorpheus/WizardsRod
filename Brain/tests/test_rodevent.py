@@ -17,7 +17,7 @@ class TestRodEvent(unittest.TestCase):
     def test_constructor_with_type(self):
         """test"""
         event = RodEvent("TEST_01", 0, "sometype")
-        self.assertEqual("sometype", event.get_rodevent_type())
+        self.assertEqual("sometype", event.get_event_type())
 
     def test_get_name(self):
         """test"""
@@ -29,10 +29,10 @@ class TestRodEvent(unittest.TestCase):
         event = RodEvent("TEST_01", 99)
         self.assertEqual(99, event.get_created())
 
-    def test_get_rodevent_type(self):
+    def test_get_event_type(self):
         """test"""
         event = RodEvent("TEST_01", 0)
-        self.assertEqual("none", event.get_rodevent_type())
+        self.assertEqual("none", event.get_event_type())
 
     def test_equal(self):
         """test"""

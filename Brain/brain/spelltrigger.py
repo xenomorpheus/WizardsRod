@@ -33,5 +33,5 @@ class SpellTrigger:
     def is_triggerd_by(self, event: RodEvent) -> bool:
         """For simple triggers, the types just need to match."""
         return (issubclass(type(event), RodEvent)) and (
-            self.get_name() == event.get_name() and self.get_spelltrigger_type() == event.get_rodevent_type()
+            self.get_name() == event.get_name() and self.get_spelltrigger_type() == event.get_event_type()
         )

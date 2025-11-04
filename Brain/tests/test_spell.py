@@ -21,7 +21,7 @@ class TestSpellTrigger(unittest.TestCase):
             ST_GESTURE["LEANING_FORWARDS_DOWNWARDS"],
             ST_GESTURE["POINTING_DOWNWARDS"],
         ]
-        cls.spell_trigger_timeout = 6
+        cls.trigger_timeout = 6
 
     def test_constructor(self):
         """test"""
@@ -44,10 +44,10 @@ class TestSpellTrigger(unittest.TestCase):
     def test_trigger_timeout(self):
         """test"""
         spell = Spell(name=self.spell_name)
-        st_got = spell.set_trigger_timeout(self.spell_trigger_timeout)
+        st_got = spell.set_trigger_timeout(self.trigger_timeout)
         self.assertEqual(spell, st_got)
-        stt_got = spell.get_trigger_timeout()
-        self.assertEqual(self.spell_trigger_timeout, stt_got)
+        tt_got = spell.get_trigger_timeout()
+        self.assertEqual(self.trigger_timeout, tt_got)
 
     def test_hardware_set(self):
         """test"""
