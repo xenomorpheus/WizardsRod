@@ -58,7 +58,3 @@ class TestRodEvent(unittest.TestCase):
         event = RodEvent("TEST_01", 0, event_type)
         event_type_got = event.get_event_type()
         self.assertEqual(event_type, event_type_got)
-
-
-if __name__ == "__main__":
-    unittest.main()

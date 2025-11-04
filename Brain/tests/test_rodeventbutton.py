@@ -14,6 +14,3 @@ class TestRodEventButton(unittest.TestCase):
         event = RodEventButton("TEST_01")
         self.assertTrue(isinstance(event, RodEventButton))
 
-
-if __name__ == "__main__":
-    unittest.main()

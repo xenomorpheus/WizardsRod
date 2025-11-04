@@ -73,6 +73,3 @@ class TestSpellTrigger(unittest.TestCase):
         event = RodEvent("TEST_01", event_type="wrong")
         self.assertFalse(trigger.is_triggerd_by(event))
 
-
-if __name__ == "__main__":
-    unittest.main()

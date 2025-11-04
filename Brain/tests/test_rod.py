@@ -74,7 +74,3 @@ class TestRod(unittest.TestCase):
         #        spell.set_hardware_set([const.HW_BUTTON])
         rod.spell_add(spell)
         rod.end()
-
-
-if __name__ == "__main__":
-    unittest.main()

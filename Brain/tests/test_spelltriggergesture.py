@@ -22,7 +22,3 @@ class TestSpellTriggerGesture(unittest.TestCase):
         stg3 = SpellTriggerGesture("gesture2")
         self.assertEqual(stg1, stg2)
         self.assertNotEqual(stg1, stg3)
-
-
-if __name__ == "__main__":
-    unittest.main()

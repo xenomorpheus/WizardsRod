@@ -30,7 +30,3 @@ class TestHardwareFetch(unittest.TestCase):
         """test"""
         hwf = HardwareFetch()
         self.assertEqual("HardwareFetch", str(hwf))
-
-
-if __name__ == "__main__":
-    unittest.main()

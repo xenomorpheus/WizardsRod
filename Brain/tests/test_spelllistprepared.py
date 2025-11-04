@@ -88,7 +88,3 @@ class TestSpellListPrepared(unittest.TestCase):
         slp = SpellListPrepared().spell_add_list([test_spell01, test_spell02])
         hwl = slp.get_hardware_hints()
         self.assertEqual(set(["Button01", "Button02", "Button03"]), set(hwl))
-
-
-if __name__ == "__main__":
-    unittest.main()

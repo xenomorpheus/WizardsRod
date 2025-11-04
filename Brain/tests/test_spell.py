@@ -60,7 +60,3 @@ class TestSpellTrigger(unittest.TestCase):
         spell.set_perform_action(self.spell_callback)
         cb_got = spell.get_perform_action()
         self.assertEqual(self.spell_callback, cb_got)
-
-
-if __name__ == "__main__":
-    unittest.main()
