@@ -21,16 +21,7 @@ test:
 	pytest
 
 cover:
-	coverage3 erase
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_hardwarefetch.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spell.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelllistprepared.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltrigger.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_spelltriggergesture.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rod.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rodevent.py
-	PYTHONPATH=. coverage3 run --branch --append --source=brain tests/test_rodeventbutton.py
-	coverage3 report -m --skip-covered
+	pytest --cov=brain --cov-report=term --cov-report=html:doc tests/
 
 docs:
 	@echo "===== Docs ====="
