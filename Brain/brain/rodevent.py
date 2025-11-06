@@ -53,4 +53,3 @@ class RodEvent:
     def get_event_type(self) -> str:
         """get event_type"""
         return self.event_type
-

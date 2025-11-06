@@ -13,4 +13,3 @@ class TestRodEventButton(unittest.TestCase):
         """test"""
         event = RodEventButton("TEST_01")
         self.assertTrue(isinstance(event, RodEventButton))
-

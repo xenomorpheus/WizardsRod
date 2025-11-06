@@ -72,4 +72,3 @@ class TestSpellTrigger(unittest.TestCase):
         trigger = SpellTrigger("TEST_01", trigger_type="foo")
         event = RodEvent("TEST_01", event_type="wrong")
         self.assertFalse(trigger.is_triggerd_by(event))
-

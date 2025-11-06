@@ -128,19 +128,16 @@ class SpellListPrepared:
         event_created_time = event.get_created()
         for spell, sequence_list in self.spell_trigger_sequence_all.items():
 
-            # Delete partially completed spell sequences if they have
-            # timed out.
+            # Delete partially completed spell sequences if they have timed out.
             sequence_list[:] = [sequence for sequence in sequence_list if event_created_time <= sequence["timeout"]]
 
-            # If spell is waiting for that trigger next, then progress the
-            # spell to the next event or mark as complete.
+            # If spell is waiting for that trigger next, then progress the spell to the next event or mark as complete.
             trigger_list = spell.get_trigger_sequence()
             for sequence in sequence_list:
                 trigger_wanted_idx = sequence["trigger_wanted_idx"]
                 if trigger_list[trigger_wanted_idx].is_triggerd_by(event):
                     if (len(trigger_list) - 1) < trigger_wanted_idx:
-                        # progress to waiting for next event in trigger
-                        # sequence
+                        # progress to waiting for next event in trigger sequence
                         trigger_wanted_idx += 1
                     else:
                         # all triggers matched
