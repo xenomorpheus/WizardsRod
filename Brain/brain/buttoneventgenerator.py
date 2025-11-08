@@ -23,10 +23,6 @@ class ButtonEventGenerator(Hardware):
     When hardware buttons are pressed send RodEvent objects to
     listeners that have been previously setup.
 
-    Example.  Each listener will be called with the following.
-
-    listener.recieve_event(RodEventButton(channel, now))
-
     """
 
     def __init__(self):
@@ -35,19 +31,9 @@ class ButtonEventGenerator(Hardware):
         self.active = False  # type: bool
         self.channels = set()  # type: Set
         """ a list of button integers for the buttons """
-        self.listeners = []  # type: List
-        """ a list of objects that have the recieve_event method """
 
     def __hash__(self):
         return hash((self.active, self.channels, self.listeners))
-
-    def listener_add(self, listener) -> None:
-        """add a listener for button events"""
-        self.listeners.append(listener)
-
-    def listener_remove(self, listener) -> None:
-        """remove a listener for button events"""
-        self.listeners.remove(listener)
 
     def channel_add(self, channel: int) -> None:
         """add a button to those being listened to"""

@@ -1,8 +1,5 @@
 """
-Used to fetch hardware interfaces using hardware hints.
-
-e.g. "BUTTON" for button event generator hardware.
-
+HardwareFetch
 """
 
 from typing import Dict
@@ -13,6 +10,15 @@ from brain.buttoneventgenerator import ButtonEventGenerator
 class HardwareFetch:
     """
     HardwareFetch
+
+    Used to fetch hardware interfaces using hardware hints.
+
+    e.g. "BUTTON" for button event generator hardware.
+
+    Example usage:
+    hardware_hint = "BUTTON"
+    hardware = hwf.get(hardware_hint)
+
     """
 
     generator = {}  # type: Dict[str, Hardware]
@@ -22,6 +28,7 @@ class HardwareFetch:
         Constructor
         """
         self.generator["BUTTON"] = ButtonEventGenerator()
+        """ map of hardware hint to hardware object """
 
     def __str__(self):
         return self.__class__.__name__
@@ -30,4 +37,8 @@ class HardwareFetch:
         """return hardware object using hint as selector"""
         if hint in self.generator:
             return self.generator[hint]
-        raise IOError("Hint " + hint + " not known")
+        raise IOError("Hardware generator not known for Hint: " + hint)
+
+    def set(self, hint: str, hardware: Hardware) -> None:
+        """set hardware object for hint"""
+        self.generator[hint] = hardware
