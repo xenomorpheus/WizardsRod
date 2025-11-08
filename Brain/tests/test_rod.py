@@ -3,7 +3,6 @@
 from __future__ import absolute_import
 import unittest
 import logging
-from unittest.mock import patch
 
 from brain.rod import Rod
 from brain.spell import Spell
@@ -74,38 +73,38 @@ class TestRod(unittest.TestCase):
         got = rod.spell_del(spell)
         self.assertEqual(rod, got, "return rod")
 
-    @staticmethod
-    def spell_activate_callback(spell: Spell, rod: Rod):
-        """test"""
-        print("callback spell=" + spell.get_name() + ", rod=" + rod.get_name())
-
     def test_spell_activate(self):
         """test that a spell is activated by events"""
 
-        with patch(f'{__name__}.TestRod.spell_activate_callback') as mock_activate_callback:
+        # keep track of last arguments passed to action
+        last_args = {}
 
-            rod = Rod(name=self.rod_name)
+        def action(spell, rod):
+            last_args.update({"spell": spell, "rod": rod})
 
-            # setup fake hardware and register it with the rod
-            hwf = rod.testing_get_hwf()
-            fake_hw = FakeHardware()
-            hwf.set(fake_hw.get_hardware_type(), fake_hw)
+        rod = Rod(name=self.rod_name)
 
-            # create a spell that is activated by events
-            test_spell01 = Spell(name="spell name 01")
-            test_spell01.set_perform_action(self.spell_activate_callback)
-            test_spell01.set_trigger_sequence([SpellTrigger("TEST_01"), SpellTrigger("TEST_02")])
+        # setup fake hardware and register it with the rod
+        hwf = rod.testing_get_hwf()
+        fake_hw = FakeHardware()
+        hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
-            rod.spell_add(test_spell01)
+        # create a spell that is activated by events
+        test_spell01 = Spell(name="spell name 01")
+        test_spell01.set_perform_action(action)
+        test_spell01.set_trigger_sequence([SpellTrigger("TEST_01"), SpellTrigger("TEST_02")])
 
-            # the rod will to listen for the events. Gesture TEST_03 will be ignored
-            new_events = [RodEvent("TEST_01", 4), RodEvent("TEST_02", 4), RodEvent("TEST_03", 4)]
+        rod.spell_add(test_spell01)
 
-            # Fake hardware sends the events to the rod
-            fake_hw.generate_events(new_events)
+        # the rod will to listen for the events. Gesture TEST_03 will be ignored
+        new_events = [RodEvent("TEST_01", 4), RodEvent("TEST_02", 4), RodEvent("TEST_03", 4)]
 
-            # check that the spell was activated
-            mock_activate_callback.assert_called_once_with(test_spell01, rod)
+        # Fake hardware sends the events to the rod
+        fake_hw.generate_events(new_events)
+
+        # check that the spell was activated
+        self.assertEqual(test_spell01, last_args.get("spell"))
+        self.assertEqual(rod, last_args.get("rod"))
 
     def test_end(self):
         """end"""

@@ -4,7 +4,6 @@ from __future__ import absolute_import
 import unittest
 
 from brain.spell import Spell
-from brain.rod import Rod
 from brain.const import ST_GESTURE
 
 
@@ -49,14 +48,10 @@ class TestSpellTrigger(unittest.TestCase):
         tt_got = spell.get_trigger_timeout()
         self.assertEqual(self.trigger_timeout, tt_got)
 
-    @staticmethod
-    def spell_callback(spell: Spell, rod: Rod):
-        """test"""
-        print("callback spell=" + spell.get_name() + ", rod=" + rod.get_name())
-
     def test_perform_action(self):
         """test"""
         spell = Spell(name=self.spell_name)
-        spell.set_perform_action(self.spell_callback)
-        cb_got = spell.get_perform_action()
-        self.assertEqual(self.spell_callback, cb_got)
+        # we just need a callable for this test. Don't define one as it won't be called and will reduce coverage.
+        spell.set_perform_action(self.test_perform_action)
+        action_got = spell.get_perform_action()
+        self.assertEqual(self.test_perform_action, action_got)
