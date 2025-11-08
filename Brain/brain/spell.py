@@ -1,12 +1,4 @@
-"""
-The definition of a spell.
-
-- Name
-- Trigger_Sequence
-- Trigger_Timeout
-- Hardware_Set
-
-"""
+"""Spell"""
 
 from typing import Callable, List, Optional, Set
 from brain.spelltrigger import SpellTrigger
@@ -15,7 +7,16 @@ SpellTriggerSequence = List[SpellTrigger]
 
 
 class Spell:
-    """Builder pattern."""
+    """
+    Spell - The definition of a spell.
+
+    - Name
+    - Trigger_Sequence
+    - Trigger_Timeout
+    - Hardware_Set
+
+    Builder pattern.
+    """
 
     def __init__(self, name: str) -> None:
         self.name = name

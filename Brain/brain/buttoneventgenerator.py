@@ -1,14 +1,12 @@
 """
-Created on 19 Sep. 2019
-
-@author: bruins
+ButtonEventGenerator
 """
 
-from typing import List, Set
+from typing import Set
 
 # Import Raspberry Pi GPIO library
 try:
-    import RPi.GPIO as GPIO
+    from RPi import GPIO
 except (RuntimeError, ModuleNotFoundError):
     import fake_rpigpio.utils
 

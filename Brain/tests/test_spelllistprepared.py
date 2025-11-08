@@ -10,6 +10,8 @@ from brain.spelltrigger import SpellTrigger
 from brain.rodevent import RodEvent
 import tests
 
+logging.basicConfig(level=logging.DEBUG)
+
 
 class TestSpellListPrepared(unittest.TestCase):
     """test"""
@@ -18,7 +20,6 @@ class TestSpellListPrepared(unittest.TestCase):
     def setUpClass(cls):
         """test"""
         cls.rod_name = "Test SpellListPrepared"
-        logging.basicConfig(level=logging.DEBUG)
 
     def test_constructor(self):
         """test"""

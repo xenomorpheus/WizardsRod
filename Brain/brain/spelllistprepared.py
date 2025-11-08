@@ -12,8 +12,6 @@ from brain.spell import Spell
 from brain.rodevent import RodEvent
 from brain.spelltrigger import SpellTrigger
 
-logger = logging.getLogger(__name__)
-
 
 class SpellListPrepared:
     """
@@ -55,6 +53,7 @@ class SpellListPrepared:
     """
 
     def __init__(self) -> None:
+        self.logger = logging.getLogger(__name__)
         self.spell_trigger_event_timeout = 0
         self.spell_list = []  # type: List[Spell]
         """ Prepared spells, keyed by spell name """
