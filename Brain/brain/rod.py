@@ -16,8 +16,8 @@ class Rod:
     The Rod listens for events from the hardware, and passes them to the prepared spell list.
     The prepared spell list reports which spells have the trigger sequence completed.
     Those spells have their actions performed by the Rod.
-    
-    The Rod needs to pass on events to the prepared spell list, rather than have the prepared spell list 
+
+    The Rod needs to pass on events to the prepared spell list, rather than have the prepared spell list
     listen to hardware directly, because the rod needs to know which spells have been activated, in order
     to perform their actions.
 
