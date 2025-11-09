@@ -13,7 +13,7 @@ from brain.rodevent import RodEvent
 class Rod:
     """The Rod brings together the prepared spells and the hardware.
 
-    The Rod listens for events from the hardware, and passes them to the prepared spell list.
+    The Rod listens for events from the hardware, and passes events to the prepared spell list.
     The prepared spell list reports which spells have the trigger sequence completed.
     Those spells have their actions performed by the Rod.
 

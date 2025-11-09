@@ -15,9 +15,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 class FakeHardware(Hardware):
     """
-    When hardware buttons are pressed send RodEvent objects to
-    listeners that have been previously setup.
-
+    Send RodEvent objects to listeners that have been previously setup.
     """
 
     def __init__(self):
@@ -73,6 +71,20 @@ class TestRod(unittest.TestCase):
         got = rod.spell_del(spell)
         self.assertEqual(rod, got, "return rod")
 
+    def test_spell_del_with_hardware(self):
+        """test"""
+        rod = Rod(name=self.rod_name)
+
+        # setup fake hardware and register it with the rod
+        hwf = rod.testing_get_hwf()
+        fake_hw = FakeHardware()
+        hwf.set(fake_hw.get_hardware_type(), fake_hw)
+
+        spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
+        rod.spell_add(spell)
+        got = rod.spell_del(spell)
+        self.assertEqual(rod, got, "return rod")
+
     def test_spell_activate(self):
         """test that a spell is activated by events"""
 
@@ -107,14 +119,19 @@ class TestRod(unittest.TestCase):
         self.assertEqual(rod, last_args.get("rod"))
 
     def test_end(self):
-        """end"""
+        """test"""
         rod = Rod(name=self.rod_name)
         rod.end()
 
     def test_end_with_hardware(self):
-        """end"""
+        """test"""
         rod = Rod(name=self.rod_name)
-        spell = Spell(name="spell name 01")
-        #        spell.set_hardware_set([const.HW_BUTTON])
+
+        # setup fake hardware and register it with the rod
+        hwf = rod.testing_get_hwf()
+        fake_hw = FakeHardware()
+        hwf.set(fake_hw.get_hardware_type(), fake_hw)
+
+        spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
         rod.spell_add(spell)
         rod.end()
