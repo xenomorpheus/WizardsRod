@@ -30,9 +30,6 @@ class HardwareFetch:
         self.generator["BUTTON"] = ButtonEventGenerator()
         """ map of hardware hint to hardware object """
 
-    def __str__(self):
-        return self.__class__.__name__
-
     def get(self, hint: str) -> Hardware:
         """return hardware object using hint as selector"""
         if hint in self.generator:
