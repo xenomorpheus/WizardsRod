@@ -9,7 +9,7 @@ from brain.hardware import Hardware
 
 class FakeHardware(Hardware):
     """
-    Send RodEvent objects to listeners that have been previously setup.
+    fake hardware class for testing
     """
 
     def __init__(self):

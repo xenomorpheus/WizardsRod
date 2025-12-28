@@ -63,11 +63,6 @@ class Rod:
     def receive_event(self, event: RodEvent) -> None:
         """receive an event"""
         for spell in self.spell_list_prepared.receive_event(event):
-            self.logger.info(
-                "Activating spell='%s' for rod='%s'",
-                spell.get_name(),
-                self.get_name(),
-            )
             callable = spell.get_perform_action()
             if callable is not None:
                 callable(spell, self)
