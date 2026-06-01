@@ -5,6 +5,7 @@ import unittest
 import RPi.GPIO as GPIO
 
 from brain.buttoneventgenerator import ButtonEventGenerator
+
 # from brain.const import ST_GESTURE
 
 
@@ -19,7 +20,7 @@ class TestButtonEventGenerator(unittest.TestCase):
     def test_constructor(self):
         """test"""
         generator = ButtonEventGenerator()
-        self.assertTrue(isinstance(generator,  ButtonEventGenerator))
+        self.assertTrue(isinstance(generator, ButtonEventGenerator))
 
     def test_hash(self):
         """test"""
@@ -61,4 +62,3 @@ class TestButtonEventGenerator(unittest.TestCase):
         self.assertIn(channel, generator.channels)
         generator.channel_remove(channel)
         self.assertNotIn(channel, generator.channels)
-

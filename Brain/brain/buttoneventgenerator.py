@@ -36,30 +36,50 @@ class ButtonEventGenerator(Hardware):
 
     @classmethod
     def get_valid_channels(cls) -> list[int]:
-        """ get the valid channels for testing based on the current GPIO mode """
+        """get the valid channels for testing based on the current GPIO mode"""
         mode = GPIO.getmode()
 
         if mode == GPIO.BCM:
             # GPIOs exposed on the Raspberry Pi 4 header
-            return [
-                2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-                12, 13, 14, 15, 16, 17, 18, 19,
-                20, 21, 22, 23, 24, 25, 26, 27
-            ]
+            return [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 
         elif mode == GPIO.BOARD:
             # Physical pin numbers corresponding to GPIOs
             return [
-                3, 5, 7, 8, 10, 11, 12, 13, 15, 16,
-                18, 19, 21, 22, 23, 24, 26, 27, 28,
-                29, 31, 32, 33, 35, 36, 37, 38, 40
+                3,
+                5,
+                7,
+                8,
+                10,
+                11,
+                12,
+                13,
+                15,
+                16,
+                18,
+                19,
+                21,
+                22,
+                23,
+                24,
+                26,
+                27,
+                28,
+                29,
+                31,
+                32,
+                33,
+                35,
+                36,
+                37,
+                38,
+                40,
             ]
 
         raise RuntimeError("GPIO mode not set or unsupported mode: {}".format(mode))
 
-
     def __hash__(self):
-        """ Hash based on active state, channels, and listeners. Note that the order of channels and listeners does not affect the hash. """
+        """Hash based on active state, channels, and listeners. Note that the order of channels and listeners does not affect the hash."""
         return hash((self.active, frozenset(self.channels), tuple(self.listeners)))
 
     def activate(self) -> None:
