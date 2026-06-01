@@ -79,7 +79,7 @@ class ButtonEventGenerator(Hardware):
         raise RuntimeError("GPIO mode not set or unsupported mode: {}".format(mode))
 
     def __hash__(self):
-        """Hash based on active state, channels, and listeners. Note that the order of channels and listeners does not affect the hash."""
+        """Hash based on active state, channels, and listeners."""
         return hash((self.active, frozenset(self.channels), tuple(self.listeners)))
 
     def activate(self) -> None:
