@@ -37,21 +37,21 @@ class Rod:
         """get the name"""
         return self.name
 
-    def spell_add(self, spell: Spell) -> "Rod":
+    def add_spell(self, spell: Spell) -> "Rod":
         """add a spell to the prepared list"""
-        self.spell_list_prepared.spell_add(spell)
+        self.spell_list_prepared.add_spell(spell)
         self.__recalculate_hardware()
         return self
 
-    def spell_add_list(self, spelllist) -> "Rod":
+    def add_spells(self, spelllist: List[Spell]) -> "Rod":
         """add a list of spells to the prepared list"""
-        self.spell_list_prepared.spell_add_list(spelllist)
+        self.spell_list_prepared.add_spells(spelllist)
         self.__recalculate_hardware()
         return self
 
-    def spell_del(self, spell: Spell) -> "Rod":
+    def remove_spell(self, spell: Spell) -> "Rod":
         """remove a spell from the prepared list"""
-        self.spell_list_prepared.spell_del(spell)
+        self.spell_list_prepared.remove_spell(spell)
         self.__recalculate_hardware()
         return self
 
@@ -63,9 +63,9 @@ class Rod:
     def receive_event(self, event: RodEvent) -> None:
         """receive an event"""
         for spell in self.spell_list_prepared.receive_event(event):
-            callable = spell.get_perform_action()
-            if callable is not None:
-                callable(spell, self)
+            action = spell.get_perform_action()
+            if action is not None:
+                action(spell, self)
 
     def testing_get_hwf(self) -> HardwareFetch:
         """get the hardware fetch object. Only used in testing."""

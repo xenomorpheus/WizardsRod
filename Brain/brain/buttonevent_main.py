@@ -30,7 +30,7 @@ class Main:  # pylint: disable=too-few-public-methods
             .set_trigger_timeout(6)
             .set_perform_action(Main.spell_perform_action)
         )
-        rod = Rod("MyRod").spell_add(fireball)
+        rod = Rod("MyRod").add_spell(fireball)
         input("> Waiting for BUTTON1 then BUTTON2. Press return to exit")
         rod.end()
 

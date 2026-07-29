@@ -2,7 +2,6 @@
 
 from __future__ import absolute_import
 import unittest
-import RPi.GPIO as GPIO
 
 from brain.buttoneventgenerator import ButtonEventGenerator
 
@@ -15,7 +14,6 @@ class TestButtonEventGenerator(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """test"""
-        pass
 
     def test_constructor(self):
         """test"""
@@ -41,24 +39,24 @@ class TestButtonEventGenerator(unittest.TestCase):
         generator = ButtonEventGenerator()
         generator.activate()
         channel = generator.get_valid_channels()[0]
-        generator.channel_add(channel)
+        generator.add_channel(channel)
         self.assertIn(channel, generator.channels)
         generator.deactivate()
         self.assertNotIn(channel, generator.channels)
 
-    def test_activate_channel_add_throws(self):
+    def test_activate_add_channel_throws(self):
         """test"""
         generator = ButtonEventGenerator()
         channel = generator.get_valid_channels()[0]
         with self.assertRaises(RuntimeError):
-            generator.channel_add(channel)
+            generator.add_channel(channel)
 
-    def test_channel_add_remove(self):
+    def test_add_and_remove_channel(self):
         """test"""
         generator = ButtonEventGenerator()
         generator.activate()
         channel = generator.get_valid_channels()[0]
-        generator.channel_add(channel)
+        generator.add_channel(channel)
         self.assertIn(channel, generator.channels)
         generator.channel_remove(channel)
         self.assertNotIn(channel, generator.channels)

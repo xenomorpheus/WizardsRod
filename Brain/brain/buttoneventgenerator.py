@@ -43,7 +43,7 @@ class ButtonEventGenerator(Hardware):
             # GPIOs exposed on the Raspberry Pi 4 header
             return [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 
-        elif mode == GPIO.BOARD:
+        if mode == GPIO.BOARD:
             # Physical pin numbers corresponding to GPIOs
             return [
                 3,
@@ -93,7 +93,7 @@ class ButtonEventGenerator(Hardware):
         GPIO.cleanup()  # Clean up
         self.active = False
 
-    def channel_add(self, channel: int) -> None:
+    def add_channel(self, channel: int) -> None:
         """add a button to those being listened to"""
         if not self.active:
             raise RuntimeError("ButtonEventGenerator not active")

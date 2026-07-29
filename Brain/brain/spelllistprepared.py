@@ -1,7 +1,7 @@
 """
 
 A set of Spells prepared and actively looking to be triggered by RodEvent
-objects.
+objects.  Prepared spells will automatically handle connections to any required hardware.
 
 
 """
@@ -90,14 +90,13 @@ class SpellListPrepared:
         """get the hardware hints"""
         return self.hardware_hints
 
-    def spell_add(self, spell: Spell) -> "SpellListPrepared":
-        """add a spell to the list of prepared spells. This will
-        automatically handle connections to any required hardware."""
+    def add_spell(self, spell: Spell) -> "SpellListPrepared":
+        """add a spell to the list of prepared spells."""
         self.spell_list.append(spell)
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_add_list(self, spell_list: List[Spell]) -> "SpellListPrepared":
+    def add_spells(self, spell_list: List[Spell]) -> "SpellListPrepared":
         """add a list of spells"""
         # TODO check spell has triggers
         for spell in spell_list:
@@ -105,7 +104,7 @@ class SpellListPrepared:
         self.__recalculate_spell_triggers()
         return self
 
-    def spell_del(self, spell: Spell) -> "SpellListPrepared":
+    def remove_spell(self, spell: Spell) -> "SpellListPrepared":
         """remove a spell"""
         if spell in self.spell_list:
             self.spell_list.remove(spell)

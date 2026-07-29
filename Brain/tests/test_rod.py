@@ -47,31 +47,31 @@ class TestRod(unittest.TestCase):
         rod = Rod(name=self.rod_name)
         self.assertEqual(self.rod_name, rod.get_name())
 
-    def test_spell_add(self):
+    def test_add_spell(self):
         """test"""
         rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
-        got = rod.spell_add(spell)
+        got = rod.add_spell(spell)
         self.assertEqual(rod, got, "return rod")
 
-    def test_spell_add_list(self):
+    def test_add_spells(self):
         """test"""
         rod = Rod(name=self.rod_name)
         spell1 = Spell(name="spell name 01")
         spell2 = Spell(name="spell name 02")
         spell_list = [spell1, spell2]
-        got = rod.spell_add_list(spell_list)
+        got = rod.add_spells(spell_list)
         self.assertEqual(rod, got, "return rod")
 
-    def test_spell_del(self):
+    def test_remove_spell(self):
         """test"""
         rod = Rod(name=self.rod_name)
         spell = Spell(name="spell name 01")
-        rod.spell_add(spell)
-        got = rod.spell_del(spell)
+        rod.add_spell(spell)
+        got = rod.remove_spell(spell)
         self.assertEqual(rod, got, "return rod")
 
-    def test_spell_del_with_hardware(self):
+    def test_remove_spell_with_hardware(self):
         """test"""
         rod = Rod(name=self.rod_name)
 
@@ -81,8 +81,8 @@ class TestRod(unittest.TestCase):
         hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
         spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
-        rod.spell_add(spell)
-        got = rod.spell_del(spell)
+        rod.add_spell(spell)
+        got = rod.remove_spell(spell)
         self.assertEqual(rod, got, "return rod")
 
     def test_spell_activate(self):
@@ -106,7 +106,7 @@ class TestRod(unittest.TestCase):
         test_spell01.set_perform_action(action)
         test_spell01.set_trigger_sequence([SpellTrigger("TEST_01"), SpellTrigger("TEST_02")])
 
-        rod.spell_add(test_spell01)
+        rod.add_spell(test_spell01)
 
         # the rod will to listen for the events. Gesture TEST_03 will be ignored
         new_events = [RodEvent("TEST_01", 4), RodEvent("TEST_02", 4), RodEvent("TEST_03", 4)]
@@ -133,5 +133,5 @@ class TestRod(unittest.TestCase):
         hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
         spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
-        rod.spell_add(spell)
+        rod.add_spell(spell)
         rod.end()
