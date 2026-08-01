@@ -23,11 +23,11 @@ class Rod:
     """
 
     def __init__(self, name: str) -> None:
-        self.name = name
-        self.logger = logging.getLogger(__name__)
-        self.spell_list_prepared = SpellListPrepared()
+        self.name: str = name
+        self.logger: logging.Logger = logging.getLogger(__name__)
+        self.spell_list_prepared: SpellListPrepared = SpellListPrepared()
         """ a list of spells we are waiting for events in order to activate """
-        self.hwf = HardwareFetch()
+        self.hwf: HardwareFetch = HardwareFetch()
         """ object for fetching hardware interfaces """
         self.hardware: dict[str, Hardware] = {}
         """ hardware interface objects. keyed by hardware hint string """
