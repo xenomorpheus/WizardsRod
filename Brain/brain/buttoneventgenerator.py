@@ -2,8 +2,6 @@
 ButtonEventGenerator
 """
 
-from typing import Set
-
 # Import Raspberry Pi GPIO library
 try:
     from RPi import GPIO
@@ -26,8 +24,8 @@ class ButtonEventGenerator(Hardware):
     def __init__(self):
         """Constructor"""
         super().__init__(self, "BUTTON")
-        self.active = False  # type: bool
-        self.channels = set()  # type: Set
+        self.active: bool = False
+        self.channels: set[int] = set()
         """ a set of button integers for the buttons actively being listened to """
         if GPIO.getmode() is None:
             GPIO.setmode(GPIO.BOARD)  # Default to physical pin numbering if not set

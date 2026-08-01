@@ -7,7 +7,6 @@ objects.  Prepared spells will automatically handle connections to any required 
 """
 
 import logging
-from typing import Any, Dict, List, Set
 from brain.spell import Spell
 from brain.rodevent import RodEvent
 from brain.spelltrigger import SpellTrigger
@@ -55,16 +54,16 @@ class SpellListPrepared:
     def __init__(self) -> None:
         self.logger = logging.getLogger(__name__)
         self.spell_trigger_event_timeout = 0
-        self.spell_list = []  # type: List[Spell]
+        self.spell_list: list[Spell] = []
         """ Prepared spells, keyed by spell name """
-        self.hardware_hints = set()  # type: Set[str]
+        self.hardware_hints: set[str] = set()
         """ special hardware requirements. e.g. generate triggers """
-        self.spell_triggers_permitted = set()  # type: Set[SpellTrigger]
+        self.spell_triggers_permitted: set[SpellTrigger] = set()
         """ Only the triggers of the prepared spells. keyed by trigger name """
-        self.event_pending_list = []  # type: List[RodEvent]
+        self.event_pending_list: list[RodEvent] = []
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all = {}  # type: Dict[Spell, List[Dict[str, Any]]]
+        self.spell_trigger_sequence_all: dict[Spell, list[dict[str, any]]] = {}
         """ For each prepared spell, a sequence of indexes to that spell's
         triggers. Each spell trigger sequence may have repeats of triggers.
         Analogy: entering a numeric security code needs to support
@@ -86,7 +85,7 @@ class SpellListPrepared:
                 self.hardware_hints.add(trigger.get_trigger_type())
         self.spell_trigger_event_timeout = timeout_max
 
-    def get_hardware_hints(self) -> set:
+    def get_hardware_hints(self) -> set[str]:
         """get the hardware hints"""
         return self.hardware_hints
 
@@ -96,7 +95,7 @@ class SpellListPrepared:
         self.__recalculate_spell_triggers()
         return self
 
-    def add_spells(self, spell_list: List[Spell]) -> "SpellListPrepared":
+    def add_spells(self, spell_list: list[Spell]) -> "SpellListPrepared":
         """add a list of spells"""
         # TODO check spell has triggers
         for spell in spell_list:
@@ -111,19 +110,19 @@ class SpellListPrepared:
             self.__recalculate_spell_triggers()
         return self
 
-    def receive_events(self, new_events: List[RodEvent]) -> Set[Spell]:
+    def receive_events(self, new_events: list[RodEvent]) -> set[Spell]:
         """accept events, return list of spells that have been triggered"""
-        spells_triggered = set()  # type: Set[Spell]
+        spells_triggered: set[Spell] = set()
         for event in new_events:
             for spell in self.receive_event(event):
                 spells_triggered.add(spell)
         return spells_triggered
 
-    def receive_event(self, event: RodEvent) -> Set[Spell]:
+    def receive_event(self, event: RodEvent) -> set[Spell]:
         """Consume rod events. Determine which spells, if any, have had all
         triggers in sequence, and within the timeout period.
         """
-        spells_triggered = set()  # type: Set[Spell]
+        spells_triggered: set[Spell] = set()
         if not any(trigger.is_triggerd_by(event) for trigger in self.spell_triggers_permitted):
             return spells_triggered
         event_created_time = event.get_created()

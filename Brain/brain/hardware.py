@@ -1,7 +1,5 @@
 """hardware base class"""
 
-from typing import List
-
 
 class Hardware:
     """
@@ -15,10 +13,9 @@ class Hardware:
 
     """
 
-    def __init__(self, name: str, hardware_type="none") -> None:
-        self.name = name  # type: str
+    def __init__(self, hardware_type: str) -> None:
         self.hardware_type = hardware_type  # type: str
-        self.listeners = []  # type: List
+        self.listeners: list = []
         """ a list of objects that have the recieve_event method """
 
     def get_hardware_type(self) -> str:

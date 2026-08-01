@@ -2,7 +2,6 @@
 
 import logging
 
-from typing import List, Dict
 from brain.spell import Spell
 from brain.spelllistprepared import SpellListPrepared
 from brain.hardware import Hardware
@@ -30,7 +29,7 @@ class Rod:
         """ a list of spells we are waiting for events in order to activate """
         self.hwf = HardwareFetch()
         """ object for fetching hardware interfaces """
-        self.hardware = {}  # type: Dict[str, Hardware]
+        self.hardware: dict[str, Hardware] = {}
         """ hardware interface objects. keyed by hardware hint string """
 
     def get_name(self) -> str:
@@ -43,7 +42,7 @@ class Rod:
         self.__recalculate_hardware()
         return self
 
-    def add_spells(self, spelllist: List[Spell]) -> "Rod":
+    def add_spells(self, spelllist: list[Spell]) -> "Rod":
         """add a list of spells to the prepared list"""
         self.spell_list_prepared.add_spells(spelllist)
         self.__recalculate_hardware()
@@ -55,7 +54,7 @@ class Rod:
         self.__recalculate_hardware()
         return self
 
-    def receive_events(self, new_events: List[RodEvent]) -> None:
+    def receive_events(self, new_events: list[RodEvent]) -> None:
         """receive events"""
         for event in new_events:
             self.receive_event(event)

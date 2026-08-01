@@ -1,6 +1,6 @@
 """Spell"""
 
-from typing import Callable, List, Optional, Set
+from typing import Callable, List, Optional
 from brain.spelltrigger import SpellTrigger
 
 SpellTriggerSequence = List[SpellTrigger]
@@ -23,13 +23,13 @@ class Spell:
         """ Name of the spell """
         self.trigger_sequence = []  # type: SpellTriggerSequence
         """ Ordered steps required to trigger the spell """
-        self.reset_trigger_set = set()  # type: Set[SpellTrigger]
+        self.reset_trigger_set: set[SpellTrigger] = set()
         """ TODO: Any of these spell triggers will abort every
              trigger sequence """
         self.trigger_timeout = 0  # type: int
         """ Maximum time to trigger the spell, from first trigger to last
         trigger. """
-        self.perform_action = None  # type: Optional[Callable]
+        self.perform_action: Optional[Callable] = None
         """ code to call when trigger sequence completed """
 
     def __hash__(self):

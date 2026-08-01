@@ -7,8 +7,8 @@ class SpellTrigger:
     """Base class for triggers. Each trigger looks at events and determines if the trigger condition
     is met."""
 
-    name = ""  # type: str
-    trigger_type = ""  # type: str
+    name: str = ""
+    trigger_type: str = ""
 
     def __init__(self, name: str, trigger_type="none") -> None:
         self.name = name

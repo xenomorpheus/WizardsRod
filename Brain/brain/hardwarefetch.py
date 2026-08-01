@@ -2,7 +2,6 @@
 HardwareFetch
 """
 
-from typing import Dict
 from brain.hardware import Hardware
 from brain.buttoneventgenerator import ButtonEventGenerator
 
@@ -21,7 +20,7 @@ class HardwareFetch:
 
     """
 
-    generator = {}  # type: Dict[str, Hardware]
+    generator: dict[str, Hardware] = {}
 
     def __init__(self):
         """
