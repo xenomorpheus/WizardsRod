@@ -26,6 +26,7 @@ class TestButtonEventGenerator(unittest.TestCase):
         self.mock_gpio.getmode.return_value = self.mock_gpio.BOARD
 
     def test_constructor(self):
+        """test"""
         generator = ButtonEventGenerator(self.mock_gpio)
         self.assertIsInstance(generator, ButtonEventGenerator)
 

@@ -44,7 +44,7 @@ class TestSpellTrigger(unittest.TestCase):
     def test_eq_not_implemented(self):
         """test"""
         spell_trigger1 = SpellTrigger("trigger 01", tests.TRIGGER_TYPE["TEST_01"])
-        result = spell_trigger1.__eq__("Non SpellTrigger")
+        result = spell_trigger1.__eq__("Non SpellTrigger")  # pylint: disable=unnecessary-dunder-call
         assert result is NotImplemented
 
     def test_hash(self):
