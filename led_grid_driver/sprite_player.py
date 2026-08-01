@@ -20,7 +20,7 @@ class SpritePlayer(LedGrid):
 
     def update(self, strip, num_led, num_steps_per_cycle, current_step,
                current_cycle):
-        # print("current_cycle={}".format(current_cycle))
+        # print(f"current_cycle={current_cycle}")
         width = self.get_x()
         height = self.get_y()
         sprite_offset = current_cycle * width

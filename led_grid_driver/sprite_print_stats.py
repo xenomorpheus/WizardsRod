@@ -33,13 +33,12 @@ class SpritePrint:
         rgb_img = im.convert('RGB')
         width, height = rgb_img.size
         sprite_count = int(width / SPRITE_WIDTH)
-        print("filename={}".format(filename))
-        print("width={},height={}, sprite_count={}".format(
-            width, height, sprite_count))
+        print(f"filename={filename}")
+        print(f"width={width},height={height}, sprite_count={sprite_count}")
 
         for sprite_idx in range(sprite_count):
             sprite_offset = sprite_idx * SPRITE_WIDTH
-            print("Sprite={}, offset={}".format(sprite_idx, sprite_offset))
+            print(f"Sprite={sprite_idx}, offset={sprite_offset}")
             red_max = 0
             green_max = 0
             blue_max = 0
@@ -49,7 +48,7 @@ class SpritePrint:
             for x in range(SPRITE_WIDTH):
                 for y in range(height):
                     rgb = rgb_img.getpixel((x + sprite_offset, y))
-                    # pprint("x={}, y={}, RGB={}".format(x, y, rgb))
+                    # pprint(f"x={x}, y={y}, RGB={rgb}")
                     red, blue, green = rgb
                     red_max = max(red, red_max)
                     green_max = max(green, green_max)
@@ -57,11 +56,8 @@ class SpritePrint:
                     red_min = min(red, red_min)
                     green_min = min(green, green_min)
                     blue_min = min(blue, blue_min)
-            pprint(" max RGB values r={}, g={}, b={}"
-                   .format(red_max, green_max, blue_max))
-            pprint(" min RGB values r={}, g={}, b={}"
-                   .format(red_min, green_min, blue_min))
-
+            pprint(f" max RGB values r={red_max}, g={green_max}, b={blue_max}")
+            pprint(f" min RGB values r={red_min}, g={green_min}, b={blue_min}")
 
 if __name__ == "__main__":
 
