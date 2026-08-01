@@ -74,7 +74,7 @@ class ButtonEventGenerator(Hardware):
                 40,
             ]
 
-        raise RuntimeError("GPIO mode not set or unsupported mode: {}".format(mode))
+        raise RuntimeError(f"GPIO mode not set or unsupported mode: {mode}")
 
     def __hash__(self):
         """Hash based on active state, channels, and listeners."""
