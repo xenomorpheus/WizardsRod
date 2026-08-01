@@ -21,10 +21,10 @@ TRIGGER_TYPE = {
 #  for in order to trigger spells.
 
 _SE_TEST_01 = RodEvent(_TT_TEST01, 0)
-_SE_TEST_01 = RodEvent(_TT_TEST02, 0)
+_SE_TEST_02 = RodEvent(_TT_TEST02, 0)
 _SE_TEST_03 = RodEvent(_TT_TEST03, 0)
 
-EVENT = {_TT_TEST01: _SE_TEST_01, _TT_TEST03: _SE_TEST_01, _TT_TEST02: _SE_TEST_03}
+EVENT = {_TT_TEST01: _SE_TEST_01, _TT_TEST02: _SE_TEST_02, _TT_TEST03: _SE_TEST_03}
 
 # TestSpells are only for unit tests
 
