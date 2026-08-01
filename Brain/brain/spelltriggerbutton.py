@@ -5,7 +5,7 @@ from brain.spelltrigger import SpellTrigger
 
 
 class SpellTriggerButton(SpellTrigger):
-    """A spell trigger that looks for button press"""
+    """A spell trigger that looks for a specific button press"""
 
-    def __init__(self, name: str, trigger_type="BUTTON") -> None:
-        SpellTrigger.__init__(self, name, trigger_type)
+    def __init__(self, name) -> None:
+        super().__init__(name, "BUTTON")
