@@ -18,9 +18,9 @@ class FakeHardware(Hardware):
     Send RodEvent objects to listeners that have been previously setup.
     """
 
-    def __init__(self):
+    def __init__(self, hardware_type: str = "none") -> None:
         """Constructor"""
-        super().__init__(self, "none")
+        super().__init__(hardware_type)
 
     def generate_events(self, events) -> None:
         """generate events to send to listeners"""
@@ -75,12 +75,15 @@ class TestRod(unittest.TestCase):
         """test"""
         rod = Rod(name=self.rod_name)
 
+        spell_trigger = SpellTrigger("TEST_01")
+
         # setup fake hardware and register it with the rod
         hwf = rod.testing_get_hwf()
-        fake_hw = FakeHardware()
+        # the FakeHardware hardware_type must match the trigger_type.
+        fake_hw = FakeHardware(spell_trigger.get_trigger_type())
         hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
-        spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
+        spell = Spell(name="spell name 01").set_trigger_sequence([spell_trigger])
         rod.add_spell(spell)
         got = rod.remove_spell(spell)
         self.assertEqual(rod, got, "return rod")
@@ -96,15 +99,18 @@ class TestRod(unittest.TestCase):
 
         rod = Rod(name=self.rod_name)
 
+        spell_trigger1 = SpellTrigger("TEST_01")
+
         # setup fake hardware and register it with the rod
         hwf = rod.testing_get_hwf()
-        fake_hw = FakeHardware()
+        # the FakeHardware hardware_type must match the trigger_type.
+        fake_hw = FakeHardware(spell_trigger1.get_trigger_type())
         hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
         # create a spell that is activated by events
         test_spell01 = Spell(name="spell name 01")
         test_spell01.set_perform_action(action)
-        test_spell01.set_trigger_sequence([SpellTrigger("TEST_01"), SpellTrigger("TEST_02")])
+        test_spell01.set_trigger_sequence([spell_trigger1, SpellTrigger("TEST_02")])
 
         rod.add_spell(test_spell01)
 
@@ -127,11 +133,14 @@ class TestRod(unittest.TestCase):
         """test"""
         rod = Rod(name=self.rod_name)
 
+        spell_trigger = SpellTrigger("TEST_01")
+
         # setup fake hardware and register it with the rod
         hwf = rod.testing_get_hwf()
-        fake_hw = FakeHardware()
+        # the FakeHardware hardware_type must match the trigger_type.
+        fake_hw = FakeHardware(spell_trigger.get_trigger_type())
         hwf.set(fake_hw.get_hardware_type(), fake_hw)
 
-        spell = Spell(name="spell name 01").set_trigger_sequence([SpellTrigger("TEST_01")])
+        spell = Spell(name="spell name 01").set_trigger_sequence([spell_trigger])
         rod.add_spell(spell)
         rod.end()

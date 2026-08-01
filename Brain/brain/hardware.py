@@ -7,14 +7,18 @@ class Hardware:
 
     Hardware events are sent to listeners when hardware events occur.
 
+    The hardware_type must match the trigger_type of the SpellTrigger that is used to activate a spell.
+
     Example.  Each listener will be called with the following.
 
     listener.recieve_event(RodEventButton(channel, now))
 
+
+
     """
 
     def __init__(self, hardware_type: str) -> None:
-        self.hardware_type = hardware_type  # type: str
+        self.hardware_type: str = hardware_type
         self.listeners: list = []
         """ a list of objects that have the recieve_event method """
 
