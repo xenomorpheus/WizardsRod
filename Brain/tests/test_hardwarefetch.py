@@ -14,7 +14,7 @@ class FakeHardware(Hardware):
 
     def __init__(self):
         """Constructor"""
-        super().__init__(self, "none")
+        super().__init__("FakeHardware")
 
 
 class TestHardwareFetch(unittest.TestCase):
