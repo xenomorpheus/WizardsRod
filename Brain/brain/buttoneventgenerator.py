@@ -21,27 +21,27 @@ class ButtonEventGenerator(Hardware):
 
     """
 
-    def __init__(self):
+    def __init__(self, gpio=None):
         """Constructor"""
-        super().__init__(self, "BUTTON")
+        super().__init__("BUTTON")
+        self.gpio = gpio or GPIO
         self.active: bool = False
         self.channels: set[int] = set()
         """ a set of button integers for the buttons actively being listened to """
-        if GPIO.getmode() is None:
-            GPIO.setmode(GPIO.BOARD)  # Default to physical pin numbering if not set
-        self.valid_channels = self.get_valid_channels()  # type: list[int]
+        if self.gpio.getmode() is None:
+            self.gpio.setmode(self.gpio.BOARD)  # Default to physical pin numbering if not set
+        self.valid_channels: list[int] = self.get_valid_channels()
         """ a list of valid button integers that can be listened to based on the current GPIO mode """
 
-    @classmethod
-    def get_valid_channels(cls) -> list[int]:
+    def get_valid_channels(self) -> list[int]:
         """get the valid channels for testing based on the current GPIO mode"""
-        mode = GPIO.getmode()
+        mode = self.gpio.getmode()
 
-        if mode == GPIO.BCM:
+        if mode == self.gpio.BCM:
             # GPIOs exposed on the Raspberry Pi 4 header
             return [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 
-        if mode == GPIO.BOARD:
+        if mode == self.gpio.BOARD:
             # Physical pin numbers corresponding to GPIOs
             return [
                 3,
@@ -81,33 +81,33 @@ class ButtonEventGenerator(Hardware):
         return hash((self.active, frozenset(self.channels), tuple(self.listeners)))
 
     def activate(self) -> None:
-        GPIO.setwarnings(False)  # Ignore warning for now
-        GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
+        self.gpio.setwarnings(False)  # Ignore warning for now
+        self.gpio.setmode(self.gpio.BOARD)  # Use physical pin numbering
         self.active = True
 
     def deactivate(self) -> None:
         for channel in set(self.channels):  # Create a copy to avoid modification during iteration
             self.channel_remove(channel)
-        GPIO.cleanup()  # Clean up
+        self.gpio.cleanup()  # Clean up
         self.active = False
 
     def add_channel(self, channel: int) -> None:
         """add a button to those being listened to"""
+
         if not self.active:
             raise RuntimeError("ButtonEventGenerator not active")
-        self.channels.add(channel)
-        GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         # Set pin channel to be an input pin and set initial value to be
         # pulled low (off).
         # Setup event on pin channel rising edge. Ignore further edges for
         # 200ms for switch bounce handling.
         # Multiple callback handlers can be added
-        GPIO.add_event_detect(channel, GPIO.RISING, callback=self._button_callback, bouncetime=200)
+        self.gpio.add_event_detect(channel, self.gpio.RISING, callback=self._button_callback, bouncetime=200)
+        self.channels.add(channel)
 
     def channel_remove(self, channel: int) -> None:
         """remove a button from those being listened to"""
+        self.gpio.remove_event_detect(channel)
         self.channels.remove(channel)
-        GPIO.remove_event_detect(channel)
 
     def _button_callback(self, channel: int) -> None:
         print(f"Button {channel} was pushed!")
