@@ -7,6 +7,7 @@ objects.  Prepared spells will automatically handle connections to any required 
 """
 
 import logging
+from typing import Any
 from brain.spell import Spell
 from brain.rodevent import RodEvent
 from brain.spelltrigger import SpellTrigger
@@ -63,7 +64,7 @@ class SpellListPrepared:
         self.event_pending_list: list[RodEvent] = []
         """ The events in the buffer.
         Only events that trigger prepared spells will be kept. """
-        self.spell_trigger_sequence_all: dict[Spell, list[dict[str, any]]] = {}
+        self.spell_trigger_sequence_all: dict[Spell, list[dict[str, Any]]] = {}
         """ For each prepared spell, a sequence of indexes to that spell's
         triggers. Each spell trigger sequence may have repeats of triggers.
         Analogy: entering a numeric security code needs to support

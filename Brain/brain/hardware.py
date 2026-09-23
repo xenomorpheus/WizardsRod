@@ -11,7 +11,7 @@ class Hardware:
 
     Example.  Each listener will be called with the following.
 
-    listener.recieve_event(RodEventButton(channel, now))
+    listener.receive_event(RodEventButton(channel, now))
 
 
 
@@ -20,7 +20,7 @@ class Hardware:
     def __init__(self, hardware_type: str) -> None:
         self.hardware_type: str = hardware_type
         self.listeners: list = []
-        """ a list of objects that have the recieve_event method """
+        """ a list of objects that have the receive_event method """
 
     def get_hardware_type(self) -> str:
         """get the hardware_type"""
