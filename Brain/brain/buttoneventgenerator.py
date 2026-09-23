@@ -1,51 +1,36 @@
-"""
-ButtonEventGenerator
-"""
+"""ButtonEventGenerator: turn hardware button presses into RodEvents."""
 
-# Import Raspberry Pi GPIO library
-try:
-    from RPi import GPIO
-except (RuntimeError, ModuleNotFoundError):
-    import fake_rpigpio.utils
+from __future__ import annotations
 
-    fake_rpigpio.utils.install()
+import logging
+import time
+from enum import Enum
+
+from gpiozero import Button
+from gpiozero.pins import Factory
 
 from brain.hardware import Hardware
 from brain.rodeventbutton import RodEventButton
 
+log = logging.getLogger(__name__)
+
+
+class PinNumbering(Enum):
+    BOARD = "BOARD"  # physical header pin numbers
+    BCM = "GPIO"  # Broadcom GPIO numbers
+
 
 class ButtonEventGenerator(Hardware):
-    """
-    When hardware buttons are pressed send RodEvent objects to
-    listeners that have been previously setup.
+    """Send a RodEventButton to every listener when a hardware button is pressed."""
 
-    """
+    BOUNCE_TIME = 0.2  # seconds
 
-    def __init__(self, gpio=None):
-        """Constructor"""
-        super().__init__("BUTTON")
-        self.gpio = gpio or GPIO
-        self.active: bool = False
-        self.channels: set[int] = set()
-        """ a set of button integers for the buttons actively being listened to """
-        if self.gpio.getmode() is None:
-            self.gpio.setmode(self.gpio.BOARD)  # Default to physical pin numbering if not set
-        self.valid_channels: list[int] = self.get_valid_channels()
-        """ a list of valid button integers that can be listened to based on the current GPIO mode """
-
-    def get_valid_channels(self) -> list[int]:
-        """get the valid channels for testing based on the current GPIO mode"""
-        mode = self.gpio.getmode()
-
-        if mode == self.gpio.BCM:
-            # GPIOs exposed on the Raspberry Pi 4 header
-            return [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
-
-        if mode == self.gpio.BOARD:
-            # Physical pin numbers corresponding to GPIOs
-            return [
-                3,
-                5,
+    VALID_CHANNELS: dict[PinNumbering, frozenset[int]] = {
+        # GPIO2/3 (BOARD 3/5) are left out: their fixed I2C pull-ups
+        # stop pulled-low buttons from working.
+        PinNumbering.BCM: frozenset(range(4, 28)),
+        PinNumbering.BOARD: frozenset(
+            {
                 7,
                 8,
                 10,
@@ -72,46 +57,63 @@ class ButtonEventGenerator(Hardware):
                 37,
                 38,
                 40,
-            ]
+            }
+        ),
+    }
 
-        raise RuntimeError(f"GPIO mode not set or unsupported mode: {mode}")
+    def __init__(
+        self,
+        numbering: PinNumbering = PinNumbering.BOARD,
+        pin_factory: Factory | None = None,
+    ) -> None:
+        super().__init__("BUTTON")
+        self.numbering = numbering
+        self._pin_factory = pin_factory  # None = gpiozero's default (lgpio on a Pi)
+        self._buttons: dict[int, Button] = {}
+        self.active = False
 
-    def __hash__(self):
-        """Hash based on active state, channels, and listeners."""
-        return hash((self.active, frozenset(self.channels), tuple(self.listeners)))
+    @property
+    def valid_channels(self) -> frozenset[int]:
+        """Channels that can be listened to under the current numbering scheme."""
+        return self.VALID_CHANNELS[self.numbering]
+
+    @property
+    def channels(self) -> set[int]:
+        """Channels currently being listened to."""
+        return set(self._buttons)
 
     def activate(self) -> None:
-        self.gpio.setwarnings(False)  # Ignore warning for now
-        self.gpio.setmode(self.gpio.BOARD)  # Use physical pin numbering
         self.active = True
 
     def deactivate(self) -> None:
-        for channel in set(self.channels):  # Create a copy to avoid modification during iteration
-            self.channel_remove(channel)
-        self.gpio.cleanup()  # Clean up
+        for channel in list(self._buttons):
+            self.remove_channel(channel)
         self.active = False
 
     def add_channel(self, channel: int) -> None:
-        """add a button to those being listened to"""
-
+        """Start listening to a button."""
         if not self.active:
             raise RuntimeError("ButtonEventGenerator not active")
-        # Set pin channel to be an input pin and set initial value to be
-        # pulled low (off).
-        # Setup event on pin channel rising edge. Ignore further edges for
-        # 200ms for switch bounce handling.
-        # Multiple callback handlers can be added
-        self.gpio.add_event_detect(channel, self.gpio.RISING, callback=self._button_callback, bouncetime=200)
-        self.channels.add(channel)
+        if channel not in self.valid_channels:
+            raise ValueError(f"{channel} is not a valid {self.numbering.name} channel")
+        if channel in self._buttons:
+            return
+        button = Button(
+            f"{self.numbering.value}{channel}",  # e.g. "BOARD11" or "GPIO17"
+            pull_up=False,  # pulled low, press = rising edge
+            bounce_time=self.BOUNCE_TIME,
+            pin_factory=self._pin_factory,
+        )
+        button.when_pressed = lambda: self._on_press(channel)
+        self._buttons[channel] = button
 
-    def channel_remove(self, channel: int) -> None:
-        """remove a button from those being listened to"""
-        self.gpio.remove_event_detect(channel)
-        self.channels.remove(channel)
+    def remove_channel(self, channel: int) -> None:
+        """Stop listening to a button and release its pin."""
+        if button := self._buttons.pop(channel, None):
+            button.close()
 
-    def _button_callback(self, channel: int) -> None:
-        print(f"Button {channel} was pushed!")
-        now = 0  # TODO
-        event = RodEventButton(str(channel), now)
+    def _on_press(self, channel: int) -> None:
+        log.info("Button %s pressed", channel)
+        event = RodEventButton(str(channel), time.monotonic())
         for listener in self.listeners:
-            listener.recieve_event(event)
+            listener.receive_event(event)
