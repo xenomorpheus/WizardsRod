@@ -108,7 +108,12 @@ class TestButtonEventGenerator(unittest.TestCase):
 
     def test_invalid_channel_raises(self):
         """Channels outside the valid set raise ValueError in both numbering schemes."""
-        cases = [(PinNumbering.BOARD, 1), (PinNumbering.BOARD, 41), (PinNumbering.BCM, 1), (PinNumbering.BCM, 28)]
+        cases = [
+            (PinNumbering.BOARD, 1),
+            (PinNumbering.BOARD, 41),
+            (PinNumbering.BCM, 1),
+            (PinNumbering.BCM, 28),
+        ]
         for numbering, channel in cases:
             with self.subTest(numbering=numbering, channel=channel):
                 generator = self.make_generator(numbering)

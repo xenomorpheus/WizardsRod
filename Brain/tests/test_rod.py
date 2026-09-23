@@ -115,7 +115,11 @@ class TestRod(unittest.TestCase):
         rod.add_spell(test_spell01)
 
         # the rod will to listen for the events. Gesture TEST_03 will be ignored
-        new_events = [RodEvent("TEST_01", 4), RodEvent("TEST_02", 4), RodEvent("TEST_03", 4)]
+        new_events = [
+            RodEvent("TEST_01", 4),
+            RodEvent("TEST_02", 4),
+            RodEvent("TEST_03", 4),
+        ]
 
         # Fake hardware sends the events to the rod
         fake_hw.generate_events(new_events)

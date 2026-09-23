@@ -150,7 +150,10 @@ class SpellListPrepared:
                 if spell not in self.spell_trigger_sequence_all:
                     self.spell_trigger_sequence_all[spell] = []
                 self.spell_trigger_sequence_all[spell].append(
-                    {"trigger_wanted_idx": 1, "timeout": event_created_time + spell.get_trigger_timeout()}
+                    {
+                        "trigger_wanted_idx": 1,
+                        "timeout": event_created_time + spell.get_trigger_timeout(),
+                    }
                 )
 
         return spells_triggered
