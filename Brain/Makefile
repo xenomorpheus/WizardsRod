@@ -11,11 +11,11 @@ pycodestyle:
 
 lint:
 	@echo "===== Lint ====="
-	pylint --exit-zero brain/ tests/ || true
+	pylint --exit-zero brain/ tests/
 
 mypy:
 	@echo "===== MyPy ====="
-	mypy brain/ tests/ || true
+	mypy brain/ tests/
 
 test:
 	pytest
